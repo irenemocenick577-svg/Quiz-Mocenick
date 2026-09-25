@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Mocenick - Ultime</title>
+    <title>Quiz Mocenick - Ultime avec Menu & Son</title>
     <style>
         :root {
             --bg-color: #0d1117;
@@ -22,9 +22,46 @@
             margin: 0;
             padding: 0;
             display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Meni Anlè */
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .menu-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .menu-btn:hover {
+            background-color: #30363d;
+        }
+
+        /* Kò Kontinè */
+        .main-container {
+            flex: 1;
+            display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            padding: 1rem;
         }
 
         .container {
@@ -36,7 +73,6 @@
             max-width: 600px;
             box-shadow: 0 8px 24px rgba(0,0,0,0.5);
             box-sizing: border-box;
-            margin: 1rem;
         }
 
         h1 {
@@ -67,10 +103,6 @@
 
         .btn:hover {
             opacity: 0.9;
-        }
-
-        .btn-danger {
-            background-color: var(--danger-color);
         }
 
         .stats-box {
@@ -127,54 +159,64 @@
 </head>
 <body>
 
-<div class="container">
-    <h1>Quiz Mocenick</h1>
-    <p class="subtitle">Mòn an, Tès ak Klasman Global</p>
+    <!-- Meni -->
+    <header>
+        <div class="logo">Quiz Mocenick</div>
+        <button class="menu-btn" onclick="toggleStats()">Statistik & Klasman</button>
+    </header>
 
-    <!-- Akèy / Enskripsyon -->
-    <div id="welcome-screen">
-        <p>Byenveni! Tanpri antre non ou pou w kòmanse jwe epi antre nan klasman an.</p>
-        <button class="btn" onclick="askUsername()">Kòmanse Jwe</button>
-        
-        <div class="stats-box">
-            <h3>Estatistik Vizitè & Jwè</h3>
-            <p id="visitor-count">Chaje estatistik yo...</p>
+    <div class="main-container">
+        <div class="container">
+            <h1>Byenveni</h1>
+            <p class="subtitle">Tès konesans ak Klasman an Dirèk</p>
+
+            <!-- Akèy / Enskripsyon -->
+            <div id="welcome-screen">
+                <p id="welcome-msg">Tanpri antre non ou pou w kòmanse jwe epi parèt nan klasman an.</p>
+                <button class="btn" onclick="askUsername()">Kòmanse Jwe</button>
+                
+                <div class="stats-box">
+                    <h3>Total Vizitè & Jwè</h3>
+                    <p id="visitor-count">Chaje estatistik yo...</p>
+                </div>
+            </div>
+
+            <!-- Ekran Jwèt la -->
+            <div id="quiz-screen" class="hidden">
+                <p id="question-counter" style="color: #8b949e; font-size: 0.85rem;"></p>
+                <p class="question-text" id="question-text"></p>
+                <div id="options-container"></div>
+            </div>
+
+            <!-- Ekran Rezilta & Klasman -->
+            <div id="result-screen" class="hidden">
+                <h2>Partie Fini!</h2>
+                <p id="final-score-text" style="font-size: 1.2rem; text-align: center; margin: 1rem 0;"></p>
+                
+                <div class="stats-box" style="text-align: left;">
+                    <h3 style="text-align: center; color: var(--accent-color);">Klasman Global</h3>
+                    <table id="leaderboard-table">
+                        <thead>
+                            <tr>
+                                <th>Non</th>
+                                <th>Score</th>
+                                <th>Nivo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboard-body">
+                            <tr><td colspan="3" style="text-align: center;">Chaje klasman an...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <button class="btn" onclick="location.reload()">Jwe Ankò</button>
+            </div>
         </div>
     </div>
 
-    <!-- Ekran Jwèt la -->
-    <div id="quiz-screen" class="hidden">
-        <div id="question-container">
-            <p id="question-counter" style="color: #8b949e; font-size: 0.85rem;"></p>
-            <p class="question-text" id="question-text"></p>
-            <div id="options-container"></div>
-        </div>
-    </div>
-
-    <!-- Ekran Rezilta & Klasman -->
-    <div id="result-screen" class="hidden">
-        <h2>Partie fini!</h2>
-        <p id="final-score-text" style="font-size: 1.2rem; text-align: center; margin: 1rem 0;"></p>
-        
-        <div class="stats-box" style="text-align: left;">
-            <h3 style="text-align: center; color: var(--accent-color);">Classement Général (Global)</h3>
-            <table id="leaderboard-table">
-                <thead>
-                    <tr>
-                        <th>Non</th>
-                        <th>Score</th>
-                        <th>Nivo</th>
-                    </tr>
-                </thead>
-                <tbody id="leaderboard-body">
-                    <tr><td colspan="3" style="text-align: center;">Chaje klasman an...</td></tr>
-                </tbody>
-            </table>
-        </div>
-
-        <button class="btn" onclick="location.reload()">Jwe Ankò</button>
-    </div>
-</div>
+    <!-- Audio pou Ti Son -->
+    <audio id="click-sound" src="https://www.myinstants.com/media/sounds/click_1.mp3"></audio>
+    <audio id="success-sound" src="https://www.myinstants.com/media/sounds/success-1-6287.mp3"></audio>
 
 <script>
     const API_URL = "https://sheetdb.io/api/v1/0f9hmos4ofob1";
@@ -200,7 +242,7 @@
             answer: 2
         },
         {
-            q: "Ki vil kote itilizatè a ap viv dapre enfòmasyon yo?",
+            q: "Ki vil kote w ap viv la?",
             options: ["Pòtoprens", "Fort-Liberté", "St. Domingue", "Milot"],
             answer: 1
         }
@@ -209,11 +251,20 @@
     window.onload = function() {
         fetchVisitorStats();
         if (playerName) {
-            document.querySelector("#welcome-screen p").innerText = `Byenveni tounen, ${playerName}!`;
+            document.getElementById("welcome-msg").innerText = `Byenveni tounen, ${playerName}!`;
         }
     };
 
+    function playSound(type) {
+        let sound = document.getElementById(type === 'success' ? 'success-sound' : 'click-sound');
+        if (sound) {
+            sound.currentTime = 0;
+            sound.play().catch(e => console.log("Son an pa jwe otomatikman"));
+        }
+    }
+
     function askUsername() {
+        playSound('click');
         if (!playerName) {
             let nameInput = prompt("Tanpri antre non ou oswa ti non ou:");
             if (nameInput && nameInput.trim() !== "") {
@@ -250,7 +301,10 @@
             let btn = document.createElement("button");
             btn.className = "option-btn";
             btn.innerText = opt;
-            btn.onclick = () => checkAnswer(index);
+            btn.onclick = () => {
+                playSound('click');
+                checkAnswer(index);
+            };
             optionsContainer.appendChild(btn);
         });
     }
@@ -265,11 +319,11 @@
     }
 
     function endQuiz() {
+        playSound('success');
         document.getElementById("quiz-screen").classList.add("hidden");
         document.getElementById("result-screen").classList.remove("hidden");
         document.getElementById("final-score-text").innerText = `${playerName}, ou fè ${score} pwen!`;
 
-        // Voye rezilta a sou Google Sheet atravè SheetDB
         let data = {
             data: {
                 nom: playerName,
@@ -280,29 +334,20 @@
 
         fetch(API_URL, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         })
-        .then(response => response.json())
-        .then(data => {
-            fetchLeaderboard();
-        })
-        .catch(error => {
-            console.error("Erè pandan y ap voye score a:", error);
-            fetchLeaderboard();
-        });
+        .then(() => fetchLeaderboard())
+        .catch(() => fetchLeaderboard());
     }
 
     function fetchVisitorStats() {
         fetch(API_URL)
         .then(response => response.json())
         .then(data => {
-            let totalPlayers = data.length;
-            document.getElementById("visitor-count").innerText = `Total moun ki jwe / anrejistre: ${totalPlayers} jwè`;
+            document.getElementById("visitor-count").innerText = `Total moun ki jwe: ${data.length} jwè`;
         })
-        .catch(error => {
+        .catch(() => {
             document.getElementById("visitor-count").innerText = "Estatistik disponib byento.";
         });
     }
@@ -313,19 +358,22 @@
         .then(data => {
             let tbody = document.getElementById("leaderboard-body");
             tbody.innerHTML = "";
-
-            // Triye dapre score pi wo a
             data.sort((a, b) => parseInt(b.score) - parseInt(a.score));
-
             data.forEach(row => {
                 let tr = document.createElement("tr");
                 tr.innerHTML = `<td>${row.nom || 'Enkoni'}</td><td>${row.score || 0}</td><td>${row.niveau || 'N/A'}</td>`;
                 tbody.appendChild(tr);
             });
         })
-        .catch(error => {
+        .catch(() => {
             document.getElementById("leaderboard-body").innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--danger-color);">Erè pou chaje klasman an.</td></tr>`;
         });
+    }
+
+    function toggleStats() {
+        playSound('click');
+        fetchLeaderboard();
+        alert("Klasman ak estatistik yo ap mete ajou an dirèk nan baz done a!");
     }
 </script>
 
