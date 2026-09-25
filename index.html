@@ -3,224 +3,369 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Mocenick - Ultime</title>
+    <title>Quiz Mocenick PRO</title>
     <style>
         :root {
-            --bg-color: #0d1117;
-            --card-bg: #161b22;
-            --text-color: #c9d1d9;
-            --accent-color: #58a6ff;
-            --danger-color: #f85149;
-            --success-color: #238636;
-            --border-color: #30363d;
+            --primary-bg: #1a1b35;
+            --card-bg: #2b2d5c;
+            --accent-color: #f39c12;
+            --text-color: #ffffff;
+            --text-muted: #b0b3c6;
+            --green-btn: #27ae60;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
+            background-color: var(--primary-bg);
             color: var(--text-color);
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
+            align-items: center;
             min-height: 100vh;
         }
 
+        /* Header PRO */
         header {
-            background-color: var(--card-bg);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 2rem;
+            background-color: #1e1f3a;
+            width: 100%;
+            padding: 1rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .logo {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--accent-color);
-        }
-
-        .menu-btn {
-            background: none;
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-
-        .menu-btn:hover {
-            background-color: #30363d;
-        }
-
-        .main-container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-        }
-
-        .container {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 2rem;
-            width: 100%;
-            max-width: 600px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            border-bottom: 2px solid #3a3d75;
             box-sizing: border-box;
         }
 
-        h1 {
-            color: var(--accent-color);
-            text-align: center;
-            margin-bottom: 0.5rem;
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .subtitle {
+        .logo-icon {
+            background: var(--accent-color);
+            color: #000;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+        }
+
+        .logo-text h2 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #fff;
+        }
+
+        .logo-text span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .badge-pro {
+            background: var(--accent-color);
+            color: #000;
+            font-size: 0.65rem;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 5px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* Container Main */
+        .main-container {
+            width: 100%;
+            max-width: 450px;
+            padding: 1.5rem;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        /* Hero Card */
+        .hero-card {
+            background: linear-gradient(135deg, #3f428c, #2b2d5c);
+            border-radius: 16px;
+            padding: 1.8rem 1.2rem;
             text-align: center;
-            font-size: 0.9rem;
-            color: #8b949e;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nouveau-mode-tag {
+            background-color: var(--accent-color);
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .hero-card h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.5rem;
+        }
+
+        .hero-card p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
             margin-bottom: 1.5rem;
         }
 
-        .btn {
-            background-color: var(--success-color);
-            color: white;
+        .mode-btn {
+            background-color: var(--accent-color);
+            color: #000;
             border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            font-size: 1rem;
-            cursor: pointer;
+            padding: 0.9rem;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 0.9rem;
             width: 100%;
-            margin-top: 1rem;
-            transition: background 0.2s;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
-        .btn:hover {
+        .mode-btn:hover {
             opacity: 0.9;
         }
 
-        .stats-box {
-            background: #21262d;
-            border-radius: 8px;
+        /* User Profile Card */
+        .profile-card {
+            background-color: #ffffff;
+            color: #333;
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .profile-avatar {
+            background: #dbeafe;
+            color: #2563eb;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3rem;
+        }
+
+        .profile-details h3 {
+            margin: 0;
+            font-size: 1rem;
+            color: #1f2937;
+        }
+
+        .profile-details span {
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+        .profile-score {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #1f2937;
+        }
+
+        /* Service Client / WhatsApp Button */
+        .whatsapp-btn {
+            background-color: var(--green-btn);
+            color: white;
+            border: none;
             padding: 1rem;
-            margin-top: 1.5rem;
-            text-align: center;
-            border: 1px solid var(--border-color);
-        }
-
-        table {
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 0.95rem;
             width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+            text-decoration: none;
         }
 
-        th, td {
-            padding: 0.75rem;
+        /* Quiz Active Screen Styles */
+        .quiz-box {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .option-btn {
+            background-color: #3a3d75;
+            color: white;
+            border: none;
+            padding: 0.85rem;
+            border-radius: 8px;
+            width: 100%;
             text-align: left;
-            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 0.6rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: background 0.2s;
         }
 
-        th {
-            color: var(--accent-color);
+        .option-btn:hover {
+            background-color: #4c5096;
         }
 
         .hidden {
             display: none !important;
         }
 
-        .question-text {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-
-        .option-btn {
-            background-color: #21262d;
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 0.75rem;
-            border-radius: 6px;
+        /* Klasman Table */
+        table {
             width: 100%;
-            text-align: left;
-            margin-bottom: 0.5rem;
-            cursor: pointer;
-            transition: background 0.2s;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.9rem;
         }
 
-        .option-btn:hover {
-            background-color: #30363d;
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #3a3d75;
+        }
+
+        th {
+            color: var(--accent-color);
         }
     </style>
 </head>
 <body>
 
+    <!-- Header PRO -->
     <header>
-        <div class="logo">Quiz Mocenick</div>
-        <button class="menu-btn" onclick="openLeaderboard()">Klasman Global</button>
+        <div class="header-logo">
+            <div class="logo-icon">🎓</div>
+            <div class="logo-text">
+                <h2>Quiz Mocenick <span class="badge-pro">PRO</span></h2>
+                <span>Défis & Culture Générale 🇭🇹 Haïti</span>
+            </div>
+        </div>
+        <div class="header-actions">
+            <span onclick="toggleSound()">🔊</span>
+            <span onclick="openLeaderboard()">📊</span>
+        </div>
     </header>
 
     <div class="main-container">
-        <div class="container">
-            <h1>Quiz Mocenick</h1>
-            <p class="subtitle">Mòn an, Tès ak Klasman Global</p>
-
-            <!-- Ekran Akèy (Fòk li parèt an premye) -->
-            <div id="welcome-screen">
-                <p id="welcome-msg" style="text-align: center; margin-bottom: 1rem;">Byenveni! Tanpri antre non ou pou w kòmanse jwe epi antre nan klasman an.</p>
-                <button class="btn" onclick="askUsername()">Kòmanse Jwe</button>
+        
+        <!-- Ekran Akèy -->
+        <div id="home-screen">
+            <div class="hero-card">
+                <div class="nouveau-mode-tag">Nouveau Mode</div>
+                <h1>Bienvenue sur Quiz Mocenick !</h1>
+                <p>Sélectionnez votre mode de jeu ci-dessous :</p>
                 
-                <div class="stats-box">
-                    <h3>Total Vizitè & Jwè</h3>
-                    <p id="visitor-count">Chaje estatistik yo...</p>
+                <button class="mode-btn" onclick="startQuiz('classique')">
+                    📖 MODE MATIÈRES CLASSIQUES
+                </button>
+                <button class="mode-btn" onclick="startQuiz('rapide')">
+                    ⚖️ MODE À PRENDRE OU À LAISSER ⚡
+                </button>
+            </div>
+
+            <div class="profile-card">
+                <div class="profile-info">
+                    <div class="profile-avatar">🎓</div>
+                    <div class="profile-details">
+                        <h3 id="display-name">irene mocenick</h3>
+                        <span>Niveau : <b>Université</b></span>
+                    </div>
                 </div>
+                <div class="profile-score" id="display-score">0 pts</div>
             </div>
 
-            <!-- Ekran Jwèt la -->
-            <div id="quiz-screen" class="hidden">
-                <p id="question-counter" style="color: #8b949e; font-size: 0.85rem;"></p>
-                <p class="question-text" id="question-text"></p>
-                <div id="options-container"></div>
-            </div>
-
-            <!-- Ekran Rezilta & Klasman -->
-            <div id="result-screen" class="hidden">
-                <h2>Partie Fini!</h2>
-                <p id="final-score-text" style="font-size: 1.2rem; text-align: center; margin: 1rem 0;"></p>
-                
-                <div class="stats-box" style="text-align: left;">
-                    <h3 style="text-align: center; color: var(--accent-color);">Klasman Global</h3>
-                    <table id="leaderboard-table">
-                        <thead>
-                            <tr>
-                                <th>Non</th>
-                                <th>Score</th>
-                                <th>Nivo</th>
-                            </tr>
-                        </thead>
-                        <tbody id="leaderboard-body">
-                            <tr><td colspan="3" style="text-align: center;">Chaje klasman an...</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <button class="btn" onclick="location.reload()">Jwe Ankò</button>
-            </div>
+            <a href="https://wa.me/50933270330" target="_blank" class="whatsapp-btn">
+                💬 Service Client (33270330)
+            </a>
         </div>
+
+        <!-- Ekran Kesyon yo -->
+        <div id="quiz-screen" class="quiz-box hidden">
+            <p id="question-counter" style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0;"></p>
+            <p class="question-text" id="question-text"></p>
+            <div id="options-container"></div>
+        </div>
+
+        <!-- Ekran Rezilta & Klasman -->
+        <div id="result-screen" class="quiz-box hidden">
+            <h2 style="color: var(--accent-color); text-align: center; margin-top: 0;">Partie Terminée !</h2>
+            <p id="final-score-text" style="font-size: 1.1rem; text-align: center; margin: 1rem 0;"></p>
+            
+            <h3 style="color: var(--accent-color); font-size: 1rem; border-bottom: 1px solid #3a3d75; padding-bottom: 5px;">Klasman Global</h3>
+            <div style="max-height: 200px; overflow-y: auto;">
+                <table id="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>Non</th>
+                            <th>Score</th>
+                            <th>Nivo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboard-body">
+                        <tr><td colspan="3" style="text-align: center;">Chaje klasman an...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <button class="mode-btn" style="margin-top: 1.5rem;" onclick="location.reload()">Jwe Ankò</button>
+        </div>
+
     </div>
 
-    <!-- Audio pou Ti Son -->
+    <!-- Audio -->
     <audio id="click-sound" src="https://www.myinstants.com/media/sounds/click_1.mp3"></audio>
     <audio id="success-sound" src="https://www.myinstants.com/media/sounds/success-1-6287.mp3"></audio>
 
 <script>
     const API_URL = "https://sheetdb.io/api/v1/0f9hmos4ofob1";
     
-    let playerName = localStorage.getItem("mocenick_quiz_user") || "";
+    let playerName = localStorage.getItem("mocenick_quiz_user") || "irene mocenick";
     let currentQuestionIndex = 0;
     let score = 0;
+    let soundEnabled = true;
 
     const questions = [
         {
@@ -246,41 +391,29 @@
     ];
 
     window.onload = function() {
+        document.getElementById("display-name").innerText = playerName;
         fetchVisitorStats();
-        // Asire w ke ekran akèy la parèt lè paj la chaje
-        document.getElementById("welcome-screen").classList.remove("hidden");
-        document.getElementById("quiz-screen").classList.add("hidden");
-        document.getElementById("result-screen").classList.add("hidden");
-
-        if (playerName) {
-            document.getElementById("welcome-msg").innerText = `Byenveni tounen, ${playerName}! Klike anba a pou w jwe.`;
-        }
     };
 
+    function toggleSound() {
+        soundEnabled = !soundEnabled;
+        alert(soundEnabled ? "Son aktive 🔊" : "Son koupe 🔇");
+    }
+
     function playSound(type) {
+        if (!soundEnabled) return;
         let sound = document.getElementById(type === 'success' ? 'success-sound' : 'click-sound');
         if (sound) {
             sound.currentTime = 0;
-            sound.play().catch(e => console.log("Son an pa jwe otomatikman"));
+            sound.play().catch(e => console.log("Audio play blocked"));
         }
     }
 
-    function askUsername() {
+    function startQuiz(mode) {
         playSound('click');
-        let nameInput = prompt("Tanpri antre non ou oswa ti non ou:", playerName);
-        if (nameInput && nameInput.trim() !== "") {
-            playerName = nameInput.trim();
-            localStorage.setItem("mocenick_quiz_user", playerName);
-            startQuiz();
-        } else {
-            alert("Ou dwe antre yon non pou w ka jwe!");
-        }
-    }
-
-    function startQuiz() {
         currentQuestionIndex = 0;
         score = 0;
-        document.getElementById("welcome-screen").classList.add("hidden");
+        document.getElementById("home-screen").classList.add("hidden");
         document.getElementById("result-screen").classList.add("hidden");
         document.getElementById("quiz-screen").classList.remove("hidden");
         loadQuestion();
@@ -325,12 +458,13 @@
         document.getElementById("quiz-screen").classList.add("hidden");
         document.getElementById("result-screen").classList.remove("hidden");
         document.getElementById("final-score-text").innerText = `${playerName}, ou fè ${score} pwen!`;
+        document.getElementById("display-score").innerText = `${score} pts`;
 
         let data = {
             data: {
                 nom: playerName,
                 score: score,
-                niveau: "Nivo 1"
+                niveau: "Université"
             }
         };
 
@@ -347,11 +481,9 @@
         fetch(API_URL)
         .then(response => response.json())
         .then(data => {
-            document.getElementById("visitor-count").innerText = `Total moun ki jwe: ${data.length} jwè`;
+            console.log("Total jwè:", data.length);
         })
-        .catch(() => {
-            document.getElementById("visitor-count").innerText = "Estatistik disponib byento.";
-        });
+        .catch(err => console.log(err));
     }
 
     function fetchLeaderboard() {
@@ -368,17 +500,17 @@
             });
         })
         .catch(() => {
-            document.getElementById("leaderboard-body").innerHTML = `<tr><td colspan="3" style="text-align: center; color: var(--danger-color);">Erè pou chaje klasman an.</td></tr>`;
+            document.getElementById("leaderboard-body").innerHTML = `<tr><td colspan="3" style="text-align: center; color: #ff6b6b;">Erè pou chaje klasman an.</td></tr>`;
         });
     }
 
     function openLeaderboard() {
         playSound('click');
         fetchLeaderboard();
-        document.getElementById("welcome-screen").classList.add("hidden");
+        document.getElementById("home-screen").classList.add("hidden");
         document.getElementById("quiz-screen").classList.add("hidden");
         document.getElementById("result-screen").classList.remove("hidden");
-        document.getElementById("final-score-text").innerText = "Men klasman aktyèl tout jwè yo:";
+        document.getElementById("final-score-text").innerText = "Klasman jwè yo nan baz done a:";
     }
 </script>
 
