@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Mocenick - Ultime avec Menu & Son</title>
+    <title>Quiz Mocenick - Ultime</title>
     <style>
         :root {
             --bg-color: #0d1117;
@@ -26,7 +26,6 @@
             min-height: 100vh;
         }
 
-        /* Meni Anlè */
         header {
             background-color: var(--card-bg);
             border-bottom: 1px solid var(--border-color);
@@ -55,7 +54,6 @@
             background-color: #30363d;
         }
 
-        /* Kò Kontinè */
         .main-container {
             flex: 1;
             display: flex;
@@ -159,20 +157,19 @@
 </head>
 <body>
 
-    <!-- Meni -->
     <header>
         <div class="logo">Quiz Mocenick</div>
-        <button class="menu-btn" onclick="toggleStats()">Statistik & Klasman</button>
+        <button class="menu-btn" onclick="openLeaderboard()">Klasman Global</button>
     </header>
 
     <div class="main-container">
         <div class="container">
-            <h1>Byenveni</h1>
-            <p class="subtitle">Tès konesans ak Klasman an Dirèk</p>
+            <h1>Quiz Mocenick</h1>
+            <p class="subtitle">Mòn an, Tès ak Klasman Global</p>
 
-            <!-- Akèy / Enskripsyon -->
+            <!-- Ekran Akèy (Fòk li parèt an premye) -->
             <div id="welcome-screen">
-                <p id="welcome-msg">Tanpri antre non ou pou w kòmanse jwe epi parèt nan klasman an.</p>
+                <p id="welcome-msg" style="text-align: center; margin-bottom: 1rem;">Byenveni! Tanpri antre non ou pou w kòmanse jwe epi antre nan klasman an.</p>
                 <button class="btn" onclick="askUsername()">Kòmanse Jwe</button>
                 
                 <div class="stats-box">
@@ -250,8 +247,13 @@
 
     window.onload = function() {
         fetchVisitorStats();
+        // Asire w ke ekran akèy la parèt lè paj la chaje
+        document.getElementById("welcome-screen").classList.remove("hidden");
+        document.getElementById("quiz-screen").classList.add("hidden");
+        document.getElementById("result-screen").classList.add("hidden");
+
         if (playerName) {
-            document.getElementById("welcome-msg").innerText = `Byenveni tounen, ${playerName}!`;
+            document.getElementById("welcome-msg").innerText = `Byenveni tounen, ${playerName}! Klike anba a pou w jwe.`;
         }
     };
 
@@ -265,21 +267,21 @@
 
     function askUsername() {
         playSound('click');
-        if (!playerName) {
-            let nameInput = prompt("Tanpri antre non ou oswa ti non ou:");
-            if (nameInput && nameInput.trim() !== "") {
-                playerName = nameInput.trim();
-                localStorage.setItem("mocenick_quiz_user", playerName);
-            } else {
-                alert("Ou dwe antre yon non pou w ka jwe!");
-                return;
-            }
+        let nameInput = prompt("Tanpri antre non ou oswa ti non ou:", playerName);
+        if (nameInput && nameInput.trim() !== "") {
+            playerName = nameInput.trim();
+            localStorage.setItem("mocenick_quiz_user", playerName);
+            startQuiz();
+        } else {
+            alert("Ou dwe antre yon non pou w ka jwe!");
         }
-        startQuiz();
     }
 
     function startQuiz() {
+        currentQuestionIndex = 0;
+        score = 0;
         document.getElementById("welcome-screen").classList.add("hidden");
+        document.getElementById("result-screen").classList.add("hidden");
         document.getElementById("quiz-screen").classList.remove("hidden");
         loadQuestion();
     }
@@ -370,10 +372,13 @@
         });
     }
 
-    function toggleStats() {
+    function openLeaderboard() {
         playSound('click');
         fetchLeaderboard();
-        alert("Klasman ak estatistik yo ap mete ajou an dirèk nan baz done a!");
+        document.getElementById("welcome-screen").classList.add("hidden");
+        document.getElementById("quiz-screen").classList.add("hidden");
+        document.getElementById("result-screen").classList.remove("hidden");
+        document.getElementById("final-score-text").innerText = "Men klasman aktyèl tout jwè yo:";
     }
 </script>
 
