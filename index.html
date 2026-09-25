@@ -3,516 +3,649 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Mocenick PRO</title>
+    <title>Quiz Mocenick - Culture & Examens</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary-bg: #1a1b35;
-            --card-bg: #2b2d5c;
-            --accent-color: #f39c12;
-            --text-color: #ffffff;
-            --text-muted: #b0b3c6;
-            --green-btn: #27ae60;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--primary-bg);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        /* Header PRO */
-        header {
-            background-color: #1e1f3a;
-            width: 100%;
-            padding: 1rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #3a3d75;
-            box-sizing: border-box;
-        }
-
-        .header-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo-icon {
-            background: var(--accent-color);
-            color: #000;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.2rem;
-        }
-
-        .logo-text h2 {
-            margin: 0;
-            font-size: 1.1rem;
-            color: #fff;
-        }
-
-        .logo-text span {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .badge-pro {
-            background: var(--accent-color);
-            color: #000;
-            font-size: 0.65rem;
-            font-weight: bold;
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin-left: 5px;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-
-        /* Container Main */
-        .main-container {
-            width: 100%;
-            max-width: 450px;
-            padding: 1.5rem;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-
-        /* Hero Card */
-        .hero-card {
-            background: linear-gradient(135deg, #3f428c, #2b2d5c);
-            border-radius: 16px;
-            padding: 1.8rem 1.2rem;
-            text-align: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nouveau-mode-tag {
-            background-color: var(--accent-color);
-            color: #000;
-            font-size: 0.7rem;
-            font-weight: bold;
-            padding: 4px 12px;
-            border-radius: 20px;
-            text-transform: uppercase;
-            display: inline-block;
-            margin-bottom: 1rem;
-        }
-
-        .hero-card h1 {
-            margin: 0 0 0.5rem 0;
-            font-size: 1.5rem;
-        }
-
-        .hero-card p {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .mode-btn {
-            background-color: var(--accent-color);
-            color: #000;
-            border: none;
-            padding: 0.9rem;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            width: 100%;
-            margin-bottom: 0.8rem;
-            cursor: pointer;
-            transition: opacity 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .mode-btn:hover {
-            opacity: 0.9;
-        }
-
-        /* User Profile Card */
-        .profile-card {
-            background-color: #ffffff;
-            color: #333;
-            border-radius: 12px;
-            padding: 1rem 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-
-        .profile-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .profile-avatar {
-            background: #dbeafe;
-            color: #2563eb;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.3rem;
-        }
-
-        .profile-details h3 {
-            margin: 0;
-            font-size: 1rem;
-            color: #1f2937;
-        }
-
-        .profile-details span {
-            font-size: 0.75rem;
-            color: #6b7280;
-        }
-
-        .profile-score {
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: #1f2937;
-        }
-
-        /* Service Client / WhatsApp Button */
-        .whatsapp-btn {
-            background-color: var(--green-btn);
-            color: white;
-            border: none;
-            padding: 1rem;
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 0.95rem;
-            width: 100%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
-            text-decoration: none;
-        }
-
-        /* Quiz Active Screen Styles */
-        .quiz-box {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 1.5rem;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-        }
-
-        .question-text {
-            font-size: 1.1rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .option-btn {
-            background-color: #3a3d75;
-            color: white;
-            border: none;
-            padding: 0.85rem;
-            border-radius: 8px;
-            width: 100%;
-            text-align: left;
-            margin-bottom: 0.6rem;
-            cursor: pointer;
-            font-size: 0.95rem;
-            transition: background 0.2s;
-        }
-
-        .option-btn:hover {
-            background-color: #4c5096;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        /* Klasman Table */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-        }
-
-        th, td {
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid #3a3d75;
-        }
-
-        th {
-            color: var(--accent-color);
-        }
+        .gold-bg { background-color: #D4AF37; }
+        .gold-text { color: #D4AF37; }
+        .avatar-option { transition: all 0.2s ease; }
+        .avatar-option:hover, .avatar-option.selected { transform: scale(1.15); border-color: #4f46e5; }
     </style>
 </head>
-<body>
+<body class="bg-slate-100 font-sans min-h-screen pb-12" onclick="startAudioSystem()">
 
-    <!-- Header PRO -->
-    <header>
-        <div class="header-logo">
-            <div class="logo-icon">🎓</div>
-            <div class="logo-text">
-                <h2>Quiz Mocenick <span class="badge-pro">PRO</span></h2>
-                <span>Défis & Culture Générale 🇭🇹 Haïti</span>
+    <!-- En-tête avec Menu et Contrôle Audio -->
+    <header class="bg-indigo-900 text-white p-4 shadow-md flex justify-between items-center sticky top-0 z-50">
+        <div class="flex items-center space-x-3 cursor-pointer" onclick="showPage('page-accueil')">
+            <div id="user-avatar-header" class="w-10 h-10 bg-yellow-400 text-indigo-950 rounded-full flex items-center justify-center text-xl font-bold shadow border-2 border-white">
+                <i class="fas fa-user-graduate"></i>
+            </div>
+            <div>
+                <h1 class="font-extrabold text-xl tracking-wide flex items-center gap-1">Quiz Mocenick <span class="text-xs bg-yellow-500 text-indigo-950 px-2 py-0.5 rounded-full">PRO</span></h1>
+                <p class="text-xs text-yellow-300">Défis & Culture Générale 🇭🇹 Haïti</p>
             </div>
         </div>
-        <div class="header-actions">
-            <span onclick="toggleSound()">🔊</span>
-            <span onclick="openLeaderboard()">📊</span>
+        
+        <div class="flex items-center space-x-2">
+            <button id="audio-toggle-btn" onclick="toggleAudio(event)" class="text-white text-xl p-2 hover:text-yellow-400 focus:outline-none" title="Activer/Désactiver le son">
+                <i class="fas fa-volume-up"></i>
+            </button>
+            <button onclick="toggleMenu(event)" class="text-white text-2xl px-2 py-1 focus:outline-none hover:text-yellow-400">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
 
-    <div class="main-container">
-        
-        <!-- Ekran Akèy -->
-        <div id="home-screen">
-            <div class="hero-card">
-                <div class="nouveau-mode-tag">Nouveau Mode</div>
-                <h1>Bienvenue sur Quiz Mocenick !</h1>
-                <p>Sélectionnez votre mode de jeu ci-dessous :</p>
-                
-                <button class="mode-btn" onclick="startQuiz('classique')">
-                    📖 MODE MATIÈRES CLASSIQUES
-                </button>
-                <button class="mode-btn" onclick="startQuiz('rapide')">
-                    ⚖️ MODE À PRENDRE OU À LAISSER ⚡
-                </button>
-            </div>
-
-            <div class="profile-card">
-                <div class="profile-info">
-                    <div class="profile-avatar">🎓</div>
-                    <div class="profile-details">
-                        <h3 id="display-name">irene mocenick</h3>
-                        <span>Niveau : <b>Université</b></span>
-                    </div>
-                </div>
-                <div class="profile-score" id="display-score">0 pts</div>
-            </div>
-
-            <a href="https://wa.me/50933270330" target="_blank" class="whatsapp-btn">
-                💬 Service Client (33270330)
-            </a>
-        </div>
-
-        <!-- Ekran Kesyon yo -->
-        <div id="quiz-screen" class="quiz-box hidden">
-            <p id="question-counter" style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0;"></p>
-            <p class="question-text" id="question-text"></p>
-            <div id="options-container"></div>
-        </div>
-
-        <!-- Ekran Rezilta & Klasman -->
-        <div id="result-screen" class="quiz-box hidden">
-            <h2 style="color: var(--accent-color); text-align: center; margin-top: 0;">Partie Terminée !</h2>
-            <p id="final-score-text" style="font-size: 1.1rem; text-align: center; margin: 1rem 0;"></p>
-            
-            <h3 style="color: var(--accent-color); font-size: 1rem; border-bottom: 1px solid #3a3d75; padding-bottom: 5px;">Klasman Global</h3>
-            <div style="max-height: 200px; overflow-y: auto;">
-                <table id="leaderboard-table">
-                    <thead>
-                        <tr>
-                            <th>Non</th>
-                            <th>Score</th>
-                            <th>Nivo</th>
-                        </tr>
-                    </thead>
-                    <tbody id="leaderboard-body">
-                        <tr><td colspan="3" style="text-align: center;">Chaje klasman an...</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <button class="mode-btn" style="margin-top: 1.5rem;" onclick="location.reload()">Jwe Ankò</button>
-        </div>
-
+    <!-- Menu Déroulant -->
+    <div id="dropdown-menu" class="hidden bg-indigo-950 text-white flex-col space-y-2 p-4 shadow-lg border-b border-indigo-800 sticky top-16 z-40">
+        <button onclick="showPage('page-accueil'); closeMenu();" class="text-left font-semibold py-2 hover:text-yellow-400 flex items-center gap-2"><i class="fas fa-gamepad"></i> Accueil</button>
+        <button onclick="showPage('page-matieres'); closeMenu();" class="text-left font-semibold py-2 hover:text-yellow-400 flex items-center gap-2"><i class="fas fa-book-open"></i> Matières Classiques</button>
+        <button onclick="showPage('page-aprendre'); closeMenu();" class="text-left font-extrabold py-2 text-yellow-400 hover:text-yellow-300 flex items-center gap-2"><i class="fas fa-balance-scale"></i> Mode : À prendre ou à laisser ⚡</button>
+        <button onclick="showPage('page-classement'); closeMenu();" class="text-left font-semibold py-2 hover:text-yellow-400 flex items-center gap-2"><i class="fas fa-trophy"></i> Classement Général</button>
+        <button onclick="showPage('page-avatar'); closeMenu();" class="text-left font-semibold py-2 hover:text-yellow-400 flex items-center gap-2"><i class="fas fa-user-ninja"></i> Mon Profil & Avatar</button>
+        <a href="https://wa.me/50933270330?text=Bonjour%20Quiz%20Mocenick,%20j'ai%20besoin%20d'aide!" target="_blank" class="text-left font-bold py-2 text-green-400 hover:text-green-300 flex items-center gap-2 border-t border-indigo-900 mt-2 pt-3">
+            <i class="fab fa-whatsapp text-lg"></i> Contactez-nous (WhatsApp)
+        </a>
     </div>
 
-    <!-- Audio -->
-    <audio id="click-sound" src="https://www.myinstants.com/media/sounds/click_1.mp3"></audio>
-    <audio id="success-sound" src="https://www.myinstants.com/media/sounds/success-1-6287.mp3"></audio>
+    <main class="max-w-md mx-auto p-4">
 
-<script>
-    const API_URL = "https://sheetdb.io/api/v1/0f9hmos4ofob1";
-    
-    let playerName = localStorage.getItem("mocenick_quiz_user") || "irene mocenick";
-    let currentQuestionIndex = 0;
-    let score = 0;
-    let soundEnabled = true;
+        <!-- Page d'accueil -->
+        <section id="page-accueil" class="space-y-5">
+            <div class="bg-gradient-to-br from-indigo-800 via-indigo-900 to-purple-900 text-white rounded-3xl p-6 shadow-xl text-center relative overflow-hidden">
+                <div class="absolute -right-4 -bottom-4 opacity-20 text-8xl"><i class="fas fa-brain"></i></div>
+                <span class="bg-yellow-400 text-indigo-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">Nouveau Mode</span>
+                <h2 class="text-2xl font-black mb-2">Bienvenue sur Quiz Mocenick !</h2>
+                <p class="text-indigo-200 text-xs mb-5">Sélectionnez votre mode de jeu ci-dessous :</p>
+                
+                <div class="space-y-3">
+                    <button onclick="showPage('page-matieres')" class="w-full bg-yellow-400 text-indigo-950 font-black px-6 py-3.5 rounded-2xl shadow-lg hover:bg-yellow-300 transition transform active:scale-95 text-xs uppercase flex items-center justify-center gap-2">
+                        <i class="fas fa-book-open"></i> Mode Matières Classiques
+                    </button>
+                    <button onclick="showPage('page-aprendre')" class="w-full bg-amber-500 text-indigo-950 font-black px-6 py-3.5 rounded-2xl shadow-lg hover:bg-amber-400 transition transform active:scale-95 text-xs uppercase flex items-center justify-center gap-2">
+                        <i class="fas fa-balance-scale"></i> Mode À prendre ou à laisser ⚡
+                    </button>
+                </div>
+            </div>
 
-    const questions = [
-        {
-            q: "Kisa ki kapital peyi Ayiti?",
-            options: ["Cap-Haïtien", "Pòtoprens", "Les Cayes", "Gonaïves"],
-            answer: 1
-        },
-        {
-            q: "Nan ki ane Ayiti te vin endepandan?",
-            options: ["1804", "1802", "1820", "1789"],
-            answer: 0
-        },
-        {
-            q: "Ki pi gwo domèn etid Irene Mocenick?",
-            options: ["Medsin", "Dwa", "Ekonomi ak Génie Informatique", "Agronomi"],
-            answer: 2
-        },
-        {
-            q: "Ki vil kote w ap viv la?",
-            options: ["Pòtoprens", "Fort-Liberté", "St. Domingue", "Milot"],
-            answer: 1
-        }
-    ];
+            <!-- Profil Joueur -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div id="card-avatar" class="w-12 h-12 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center text-2xl border-2 border-indigo-500">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div>
+                        <h4 id="card-username" class="font-bold text-slate-800 text-sm">Nom du Joueur</h4>
+                        <p class="text-xs text-slate-500">Niveau : <span id="user-level-display" class="font-bold text-indigo-600">Université</span></p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span id="user-score-display" class="text-xl font-black text-indigo-900">0 pts</span>
+                </div>
+            </div>
 
-    window.onload = function() {
-        document.getElementById("display-name").innerText = playerName;
-        fetchVisitorStats();
-    };
+            <a href="https://wa.me/50933270330?text=Bonjour%20Quiz%20Mocenick,%20j'ai%20besoin%20d'aide!" target="_blank" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-2xl shadow flex items-center justify-center gap-2 text-xs transition">
+                <i class="fab fa-whatsapp text-lg"></i> Service Client (33270330)
+            </a>
+        </section>
 
-    function toggleSound() {
-        soundEnabled = !soundEnabled;
-        alert(soundEnabled ? "Son aktive 🔊" : "Son koupe 🔇");
-    }
+        <!-- Mode à part : À prendre ou à laisser -->
+        <section id="page-aprendre" class="hidden space-y-4">
+            <div class="bg-indigo-900 text-white p-6 rounded-3xl shadow-xl border border-indigo-700 space-y-4 text-center">
+                <div class="w-16 h-16 mx-auto bg-yellow-400 text-indigo-950 rounded-full flex items-center justify-center text-3xl shadow-lg">
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+                <h3 class="font-black text-2xl">À prendre ou à laisser ⚡</h3>
+                <p class="text-xs text-indigo-200 leading-relaxed text-left bg-indigo-950/50 p-4 rounded-2xl border border-indigo-800">
+                    Un mode indépendant axé sur la prise de risque et la culture générale :<br><br>
+                    • <b>Bonne réponse :</b> <span class="text-green-400 font-bold">+40 Points</span><br>
+                    • <b>Mauvaise réponse :</b> <span class="text-red-400 font-bold">-20 Points</span><br>
+                    • <b>Passer la question :</b> <span class="text-yellow-300 font-bold">-10 Points</span>
+                </p>
+                <button onclick="startSession('AprendreOuLaisser', true)" class="w-full bg-yellow-400 hover:bg-yellow-300 text-indigo-950 font-black py-4 rounded-2xl shadow-lg text-xs uppercase tracking-wider transition transform active:scale-95">
+                    🚀 Démarrer une partie Risque
+                </button>
+            </div>
+        </section>
 
-    function playSound(type) {
-        if (!soundEnabled) return;
-        let sound = document.getElementById(type === 'success' ? 'success-sound' : 'click-sound');
-        if (sound) {
-            sound.currentTime = 0;
-            sound.play().catch(e => console.log("Audio play blocked"));
-        }
-    }
+        <!-- Page Matières Classiques -->
+        <section id="page-matieres" class="hidden space-y-4">
+            <h2 class="text-lg font-black text-slate-800 border-b pb-2 flex justify-between items-center">
+                <span>Matières d'Examens</span>
+                <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full font-normal">5 Questions 🎯</span>
+            </h2>
+            
+            <div class="grid grid-cols-2 gap-3">
+                <button onclick="startSession('Chimie', false)" class="bg-white p-4 rounded-2xl shadow-sm border hover:border-indigo-600 text-center transition flex flex-col items-center justify-center gap-2">
+                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xl"><i class="fas fa-flask"></i></div>
+                    <span class="font-bold text-xs text-slate-800">Chimie</span>
+                </button>
 
-    function startQuiz(mode) {
-        playSound('click');
-        currentQuestionIndex = 0;
-        score = 0;
-        document.getElementById("home-screen").classList.add("hidden");
-        document.getElementById("result-screen").classList.add("hidden");
-        document.getElementById("quiz-screen").classList.remove("hidden");
-        loadQuestion();
-    }
+                <button onclick="startSession('Sciences Sociales', false)" class="bg-white p-4 rounded-2xl shadow-sm border hover:border-indigo-600 text-center transition flex flex-col items-center justify-center gap-2">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xl"><i class="fas fa-landmark"></i></div>
+                    <span class="font-bold text-xs text-slate-800">Sciences Sociales</span>
+                </button>
 
-    function loadQuestion() {
-        if (currentQuestionIndex >= questions.length) {
-            endQuiz();
-            return;
-        }
+                <button onclick="startSession('Mathématiques', false)" class="bg-white p-4 rounded-2xl shadow-sm border hover:border-indigo-600 text-center transition flex flex-col items-center justify-center gap-2">
+                    <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-xl"><i class="fas fa-calculator"></i></div>
+                    <span class="font-bold text-xs text-slate-800">Mathématiques</span>
+                </button>
 
-        let q = questions[currentQuestionIndex];
-        document.getElementById("question-counter").innerText = `Kesyon ${currentQuestionIndex + 1} sou ${questions.length}`;
-        document.getElementById("question-text").innerText = q.q;
+                <button onclick="startSession('Physique', false)" class="bg-white p-4 rounded-2xl shadow-sm border hover:border-indigo-600 text-center transition flex flex-col items-center justify-center gap-2">
+                    <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-xl"><i class="fas fa-atom"></i></div>
+                    <span class="font-bold text-xs text-slate-800">Physique</span>
+                </button>
+            </div>
+        </section>
 
-        let optionsContainer = document.getElementById("options-container");
-        optionsContainer.innerHTML = "";
+        <!-- Page Avatar et Niveau -->
+        <section id="page-avatar" class="hidden space-y-4">
+            <div class="bg-white p-5 rounded-2xl shadow border text-center space-y-4">
+                <h3 class="font-extrabold text-slate-800 text-lg">Profil & Avatar</h3>
+                
+                <div class="text-left space-y-1">
+                    <label class="text-xs font-bold text-slate-700">Votre Nom :</label>
+                    <input type="text" id="username-input" onchange="updateUserName()" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:border-indigo-600">
+                </div>
 
-        q.options.forEach((opt, index) => {
-            let btn = document.createElement("button");
-            btn.className = "option-btn";
-            btn.innerText = opt;
-            btn.onclick = () => {
-                playSound('click');
-                checkAnswer(index);
-            };
-            optionsContainer.appendChild(btn);
-        });
-    }
+                <div class="text-left space-y-1">
+                    <label class="text-xs font-bold text-slate-700">Votre Niveau d'étude :</label>
+                    <select id="user-level-select" onchange="updateUserLevel()" class="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:border-indigo-600">
+                        <option value="8ème AF">8ème Année Fondamentale</option>
+                        <option value="9ème AF">9ème Année Fondamentale</option>
+                        <option value="NS1">NS1 (Seconde)</option>
+                        <option value="NS2">NS2 (Première)</option>
+                        <option value="NS3">NS3 (Rhéto)</option>
+                        <option value="NS4">NS4 (Philo)</option>
+                        <option value="Université">Université / Supérieur</option>
+                        <option value="Autre / Passionné">Autre / Passionné</option>
+                    </select>
+                </div>
 
-    function checkAnswer(selectedIndex) {
-        let q = questions[currentQuestionIndex];
-        if (selectedIndex === q.answer) {
-            score += 10;
-        }
-        currentQuestionIndex++;
-        loadQuestion();
-    }
+                <p class="text-xs text-slate-500 pt-2">Choisissez votre Avatar :</p>
+                
+                <div class="grid grid-cols-4 gap-3 py-2" id="avatar-picker">
+                    <button onclick="selectAvatar('fa-user-graduate')" class="avatar-option p-3 bg-indigo-50 rounded-xl border-2 border-indigo-200 text-2xl text-indigo-700"><i class="fas fa-user-graduate"></i></button>
+                    <button onclick="selectAvatar('fa-user-ninja')" class="avatar-option p-3 bg-indigo-50 rounded-xl border-2 border-transparent text-2xl text-slate-700"><i class="fas fa-user-ninja"></i></button>
+                    <button onclick="selectAvatar('fa-user-astronaut')" class="avatar-option p-3 bg-indigo-50 rounded-xl border-2 border-transparent text-2xl text-purple-600"><i class="fas fa-user-astronaut"></i></button>
+                    <button onclick="selectAvatar('fa-crown')" class="avatar-option p-3 bg-indigo-50 rounded-xl border-2 border-transparent text-2xl text-yellow-500"><i class="fas fa-crown"></i></button>
+                    <button onclick="selectAvatar('fa-brain')" class="avatar-option p-3 bg-indigo-50 rounded-xl border-2 border-transparent text-2xl text-pink-500"><i class="fas fa-brain"></i></button>
+                    <button onclick="selectAvatar('fa-flask')" class="avatar-option p-3 bg-indigo-50 rounded-xl border-2 border-transparent text-2xl text-green-600"><i class="fas fa-flask"></i></button>
+                    <button onclick="selectAvatar('fa-fire')" class="avatar-option p-3 bg-indigo-50 rounded-xl border-2 border-transparent text-2xl text-orange-500"><i class="fas fa-fire"></i></button>
+                    <button onclick="selectAvatar('fa-lightbulb')" class="avatar-option p-3 bg-indigo-50 rounded-xl border-2 border-transparent text-2xl text-amber-500"><i class="fas fa-lightbulb"></i></button>
+                </div>
 
-    function endQuiz() {
-        playSound('success');
-        document.getElementById("quiz-screen").classList.add("hidden");
-        document.getElementById("result-screen").classList.remove("hidden");
-        document.getElementById("final-score-text").innerText = `${playerName}, ou fè ${score} pwen!`;
-        document.getElementById("display-score").innerText = `${score} pts`;
+                <button onclick="showPage('page-accueil')" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl shadow hover:bg-indigo-700 text-xs">Enregistrer</button>
+            </div>
+        </section>
 
-        let data = {
-            data: {
-                nom: playerName,
-                score: score,
-                niveau: "Université"
+        <!-- Interface de Jeu -->
+        <section id="page-quiz" class="hidden space-y-4">
+            <div class="flex justify-between items-center bg-white p-3.5 rounded-xl shadow-sm border">
+                <div class="flex items-center gap-2">
+                    <span id="quiz-subject" class="font-black text-indigo-900 text-xs uppercase tracking-wider">Matière</span>
+                    <span id="session-progress" class="text-[10px] bg-slate-100 text-slate-600 font-bold px-2 py-0.5 rounded-full">1/5</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-red-600 font-black text-base bg-red-50 px-3 py-1 rounded-full border border-red-200">
+                    <i class="fas fa-stopwatch animate-pulse"></i> <span id="timer">15</span>s
+                </div>
+            </div>
+
+            <div id="feedback-message" class="hidden p-3 rounded-xl font-extrabold text-xs text-center border"></div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-200 space-y-5">
+                <p id="question-text" class="font-extrabold text-slate-800 text-base leading-snug">Question...</p>
+                
+                <div id="options-container" class="space-y-2.5"></div>
+
+                <button onclick="skipAnswer()" class="w-full mt-3 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold py-3 px-4 rounded-xl border border-slate-300 text-xs flex items-center justify-center gap-2 transition">
+                    <i class="fas fa-question-circle text-amber-500"></i> Passer cette question (-10 pts)
+                </button>
+            </div>
+        </section>
+
+        <!-- Résultats de la Session -->
+        <section id="page-resultats" class="hidden space-y-4">
+            <div class="bg-white p-6 rounded-3xl shadow-lg border text-center space-y-4">
+                <div id="result-icon" class="w-20 h-20 mx-auto bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center text-4xl border-4 border-yellow-300">
+                    🏆
+                </div>
+                <h3 class="text-2xl font-black text-slate-800">Partie Terminée !</h3>
+                <p id="result-text" class="text-xs text-slate-600 font-medium">Score calculé avec succès.</p>
+                
+                <div class="bg-slate-50 p-4 rounded-2xl border flex justify-around items-center">
+                    <div>
+                        <span class="text-[10px] uppercase font-bold text-slate-400 block">Score Total</span>
+                        <span id="result-total-score" class="text-xl font-black text-indigo-900">0 pts</span>
+                    </div>
+                    <div class="h-8 w-px bg-slate-200"></div>
+                    <div>
+                        <span class="text-[10px] uppercase font-bold text-slate-400 block">Précision</span>
+                        <span id="result-accuracy" class="text-xl font-black text-green-600">0%</span>
+                    </div>
+                </div>
+
+                <div class="space-y-2 pt-2">
+                    <button onclick="shareScoreWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-xl shadow flex items-center justify-center gap-2 text-xs transition">
+                        <i class="fab fa-whatsapp text-lg"></i> Partager le score sur WhatsApp
+                    </button>
+                    <button onclick="showPage('page-accueil')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl shadow text-xs transition">
+                        Retour au Menu Principal
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Classement Général Dynamique -->
+        <section id="page-classement" class="hidden space-y-4">
+            <div class="flex justify-between items-center border-b pb-2">
+                <h2 class="text-lg font-black text-slate-800 flex items-center gap-2">
+                    <i class="fas fa-trophy text-yellow-500"></i> Classement Général Haïti
+                </h2>
+                <span class="text-xs bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full">● En Direct</span>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow border overflow-hidden">
+                <div id="leaderboard-list" class="divide-y divide-slate-100 max-h-96 overflow-y-auto"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        let audioCtx = null;
+        let isMuted = false;
+        let bgInterval = null;
+        let audioActive = false;
+
+        function startAudioSystem() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            if (!audioActive) {
+                audioActive = true;
+                playIntroJingle();
+                startBackgroundLoop();
+            }
+        }
+
+        function toggleAudio(e) {
+            e.stopPropagation();
+            isMuted = !isMuted;
+            const btn = document.getElementById('audio-toggle-btn');
+            if (isMuted) {
+                btn.innerHTML = '<i class="fas fa-volume-mute text-red-400"></i>';
+                if (bgInterval) clearInterval(bgInterval);
+            } else {
+                btn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                startAudioSystem();
+            }
+        }
+
+        function playIntroJingle() {
+            if (isMuted || !audioCtx) return;
+            const freqs = [261.63, 329.63, 392.00, 523.25];
+            freqs.forEach((f, i) => {
+                let osc = audioCtx.createOscillator();
+                let g = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.value = f;
+                osc.connect(g);
+                g.connect(audioCtx.destination);
+                g.gain.setValueAtTime(0.06, audioCtx.currentTime + i * 0.1);
+                g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + i * 0.1 + 0.3);
+                osc.start(audioCtx.currentTime + i * 0.1);
+                osc.stop(audioCtx.currentTime + i * 0.1 + 0.3);
+            });
+        }
+
+        function startBackgroundLoop() {
+            if (bgInterval) clearInterval(bgInterval);
+            if (isMuted) return;
+
+            const notes = [261.63, 329.63, 392.00, 329.63, 293.66, 349.23, 440.00, 349.23];
+            let step = 0;
+
+            bgInterval = setInterval(() => {
+                if (isMuted || !audioCtx) return;
+                let osc = audioCtx.createOscillator();
+                let g = audioCtx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.value = notes[step % notes.length];
+                osc.connect(g);
+                g.connect(audioCtx.destination);
+                g.gain.setValueAtTime(0.015, audioCtx.currentTime); 
+                g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.4);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.4);
+                step++;
+            }, 600);
+        }
+
+        function playSound(type) {
+            startAudioSystem();
+            if (isMuted || !audioCtx) return;
+
+            let osc = audioCtx.createOscillator();
+            let g = audioCtx.createGain();
+            osc.connect(g);
+            g.connect(audioCtx.destination);
+
+            if (type === 'correct') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1);
+                g.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.25);
+            } else if (type === 'wrong') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(180, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(110, audioCtx.currentTime + 0.1);
+                g.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.25);
+            } else if (type === 'skip') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(350, audioCtx.currentTime);
+                g.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.12);
+            }
+        }
+
+        // Gestion dynamique de l'utilisateur (demande le nom si absent)
+        let userName = localStorage.getItem('qm_name');
+        if (!userName) {
+            userName = prompt("Antre non ou pou w kòmanse jwe a:") || "Jwè";
+            localStorage.setItem('qm_name', userName);
+            localStorage.setItem('qm_score', '0');
+        }
+        let currentAvatar = localStorage.getItem('qm_avatar') || 'fa-user-graduate';
+        let userScore = parseInt(localStorage.getItem('qm_score')) || 0;
+        let userLevel = localStorage.getItem('qm_level') || 'Université';
+
+        let allUsers = JSON.parse(localStorage.getItem('qm_all_users')) || [
+            { name: "Jean-Baptiste K.", score: 460, level: "NS4", avatar: "fa-user-ninja" },
+            { name: "Marie-Claire D.", score: 440, level: "Université", avatar: "fa-brain" },
+            { name: "Ezekiel Joseph", score: 420, level: "9ème AF", avatar: "fa-flask" }
+        ];
+
+        let currentTimer = null;
+        let timeLeft = 15;
+        let askedQuestions = [];
+        let currentSubject = '';
+        let sessionCount = 0;
+        let sessionCorrectCount = 0;
+        let isRiskMode = false;
+
+        const questionsData = {
+            'AprendreOuLaisser': [
+                { q: "⚡ RISQUE : Quel monument haïtien est reconnu comme Patrimoine Mondial de l'UNESCO ?", options: ["Le Palais Sans-Souci & La Citadelle", "Le Fort Jacques", "Le Palais National", "La Cathédrale de Cap-Haïtien"], answer: 0 },
+                { q: "⚡ RISQUE : Quel empereur a proclamé l'Indépendance d'Haïti le 1er janvier 1804 ?", options: ["Toussaint Louverture", "Jean-Jacques Dessalines", "Henri Christophe", "Alexandre Pétion"], answer: 1 },
+                { q: "⚡ RISQUE : Quelle ville haïtienne est surnommée 'La Cité de l'Indépendance' ?", options: ["Cap-Haïtien", "Les Cayes", "Gonaïves", "Jacmel"], answer: 2 },
+                { q: "⚡ RISQUE : La bataille décisive pour l'indépendance d'Haïti du 18 novembre 1803 est :", options: ["La Bataille de la Crête-à-Pierrot", "La Bataille de Vertières", "La Cérémonie du Bois-Caïman", "Le Traité de Ryswick"], answer: 1 }
+            ],
+            'Chimie': [
+                { q: "Quel est le pH d'une solution neutre à 25°C ?", options: ["pH = 0", "pH = 7", "pH = 14", "pH = 1"], answer: 1 },
+                { q: "La formule chimique du sel de table ordinaire est :", options: ["KCl", "NaCl", "NaOH", "CaCl2"], answer: 1 }
+            ],
+            'Sciences Sociales': [
+                { q: "En quelle année s'est déroulée la Cérémonie du Bois-Caïman ?", options: ["1804", "1791", "1802", "1789"], answer: 1 },
+                { q: "En quelle année l'Indépendance d'Haïti a-t-elle été proclamée ?", options: ["1804", "1806", "1791", "1825"], answer: 0 }
+            ],
+            'Mathématiques': [
+                { q: "Que vaut la dérivée d'une constante ?", options: ["1", "0", "x", "Infinie"], answer: 1 },
+                { q: "Résoudre l'équation : log₂(x) = 4", options: ["x = 8", "x = 16", "x = 2", "x = 64"], answer: 1 }
+            ],
+            'Physique': [
+                { q: "L'accélération de la pesanteur (g) sur Terre est environ :", options: ["9,8 m/s²", "100 m/s²", "3 x 10⁸ m/s²", "1 m/s²"], answer: 0 },
+                { q: "L'unité SI de mesure de la force est :", options: ["Joule", "Watt", "Newton", "Pascal"], answer: 2 }
+            ]
         };
 
-        fetch(API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        })
-        .then(() => fetchLeaderboard())
-        .catch(() => fetchLeaderboard());
-    }
-
-    function fetchVisitorStats() {
-        fetch(API_URL)
-        .then(response => response.json())
-        .then(data => {
-            console.log("Total jwè:", data.length);
-        })
-        .catch(err => console.log(err));
-    }
-
-    function fetchLeaderboard() {
-        fetch(API_URL)
-        .then(response => response.json())
-        .then(data => {
-            let tbody = document.getElementById("leaderboard-body");
-            tbody.innerHTML = "";
-            data.sort((a, b) => parseInt(b.score) - parseInt(a.score));
-            data.forEach(row => {
-                let tr = document.createElement("tr");
-                tr.innerHTML = `<td>${row.nom || 'Enkoni'}</td><td>${row.score || 0}</td><td>${row.niveau || 'N/A'}</td>`;
-                tbody.appendChild(tr);
-            });
-        })
-        .catch(() => {
-            document.getElementById("leaderboard-body").innerHTML = `<tr><td colspan="3" style="text-align: center; color: #ff6b6b;">Erè pou chaje klasman an.</td></tr>`;
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById('user-score-display').innerText = userScore + " pts";
+            document.getElementById('user-level-display').innerText = userLevel;
+            document.getElementById('user-level-select').value = userLevel;
+            document.getElementById('username-input').value = userName;
+            document.getElementById('card-username').innerText = userName;
+            document.getElementById('card-avatar').innerHTML = `<i class="fas ${currentAvatar}"></i>`;
+            document.getElementById('user-avatar-header').innerHTML = `<i class="fas ${currentAvatar}"></i>`;
+            updateDatabase();
         });
-    }
 
-    function openLeaderboard() {
-        playSound('click');
-        fetchLeaderboard();
-        document.getElementById("home-screen").classList.add("hidden");
-        document.getElementById("quiz-screen").classList.add("hidden");
-        document.getElementById("result-screen").classList.remove("hidden");
-        document.getElementById("final-score-text").innerText = "Klasman jwè yo nan baz done a:";
-    }
-</script>
+        function toggleMenu(e) {
+            if(e) e.stopPropagation();
+            const menu = document.getElementById('dropdown-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        }
 
+        function closeMenu() {
+            const menu = document.getElementById('dropdown-menu');
+            menu.classList.add('hidden');
+            menu.classList.remove('flex');
+        }
+
+        function showPage(pageId) {
+            startAudioSystem();
+            ['page-accueil', 'page-matieres', 'page-quiz', 'page-classement', 'page-avatar', 'page-aprendre', 'page-resultats'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById(pageId).classList.remove('hidden');
+            clearInterval(currentTimer);
+            if (pageId === 'page-classement') renderLeaderboard();
+        }
+
+        function updateUserName() {
+            userName = document.getElementById('username-input').value || 'Jwè';
+            localStorage.setItem('qm_name', userName);
+            document.getElementById('card-username').innerText = userName;
+            updateDatabase();
+        }
+
+        function updateUserLevel() {
+            userLevel = document.getElementById('user-level-select').value;
+            localStorage.setItem('qm_level', userLevel);
+            document.getElementById('user-level-display').innerText = userLevel;
+            updateDatabase();
+        }
+
+        function selectAvatar(iconClass) {
+            currentAvatar = iconClass;
+            localStorage.setItem('qm_avatar', iconClass);
+            document.getElementById('card-avatar').innerHTML = `<i class="fas ${iconClass}"></i>`;
+            document.getElementById('user-avatar-header').innerHTML = `<i class="fas ${iconClass}"></i>`;
+            updateDatabase();
+        }
+
+        function updateDatabase() {
+            let existingIndex = allUsers.findIndex(u => u.name === userName);
+            if (existingIndex >= 0) {
+                allUsers[existingIndex].score = userScore;
+                allUsers[existingIndex].level = userLevel;
+                allUsers[existingIndex].avatar = currentAvatar;
+                allUsers[existingIndex].isUser = true;
+            } else {
+                allUsers.push({ name: userName, score: userScore, level: userLevel, avatar: currentAvatar, isUser: true });
+            }
+            localStorage.setItem('qm_all_users', JSON.stringify(allUsers));
+        }
+
+        function startSession(subject, riskMode = false) {
+            sessionCount = 0;
+            sessionCorrectCount = 0;
+            isRiskMode = riskMode;
+            startQuiz(subject);
+        }
+
+        function startQuiz(subject) {
+            if (sessionCount >= 5) {
+                showResults();
+                return;
+            }
+
+            sessionCount++;
+            document.getElementById('session-progress').innerText = `${sessionCount}/5`;
+
+            currentSubject = subject;
+            const list = questionsData[subject] || questionsData['AprendreOuLaisser'];
+            
+            let availableQuestions = list.filter(q => !askedQuestions.includes(q.q));
+            if (availableQuestions.length === 0) {
+                askedQuestions = [];
+                availableQuestions = list;
+            }
+            
+            const currentQ = availableQuestions[Math.floor(Math.random() * availableQuestions.length)];
+            askedQuestions.push(currentQ.q);
+            
+            document.getElementById('quiz-subject').innerText = isRiskMode ? "À PRENDRE OU LAISSER" : subject;
+            document.getElementById('question-text').innerText = currentQ.q;
+            
+            const fb = document.getElementById('feedback-message');
+            fb.classList.add('hidden');
+
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            
+            currentQ.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-3.5 rounded-xl border-2 border-slate-200 hover:border-indigo-600 hover:bg-indigo-50 font-semibold text-slate-700 text-xs transition";
+                btn.innerText = opt;
+                btn.onclick = () => selectAnswer(idx === currentQ.answer, btn);
+                container.appendChild(btn);
+            });
+
+            showPage('page-quiz');
+            startTimer();
+        }
+
+        function startTimer() {
+            timeLeft = 15;
+            document.getElementById('timer').innerText = timeLeft;
+            clearInterval(currentTimer);
+            currentTimer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer').innerText = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(currentTimer);
+                    playSound('wrong');
+                    userScore = Math.max(0, userScore - 20);
+                    updateScoreDisplay();
+                    showFeedback("⏱ Temps écoulé ! (-20 pts)", false);
+                    setTimeout(() => startQuiz(currentSubject), 1500);
+                }
+            }, 1000);
+        }
+
+        function selectAnswer(isCorrect, btnElement) {
+            clearInterval(currentTimer);
+            
+            const buttons = document.querySelectorAll('#options-container button');
+            buttons.forEach(b => b.disabled = true);
+
+            const points = isRiskMode ? 40 : 20;
+
+            if (isCorrect) {
+                playSound('correct');
+                btnElement.className = "w-full text-left p-3.5 rounded-xl border-2 border-green-500 bg-green-100 font-bold text-green-900 text-xs";
+                userScore += points;
+                sessionCorrectCount++;
+                showFeedback(`🎉 Excellente réponse ! (+${points} pts)`, true);
+            } else {
+                playSound('wrong');
+                btnElement.className = "w-full text-left p-3.5 rounded-xl border-2 border-red-500 bg-red-100 font-bold text-red-900 text-xs";
+                userScore = Math.max(0, userScore - 20);
+                showFeedback("❌ Mauvaise réponse. (-20 pts)", false);
+            }
+
+            updateScoreDisplay();
+
+            setTimeout(() => {
+                startQuiz(currentSubject);
+            }, 1600);
+        }
+
+        function skipAnswer() {
+            clearInterval(currentTimer);
+            playSound('skip');
+            userScore = Math.max(0, userScore - 10);
+            updateScoreDisplay();
+            showFeedback("⚠️ Question passée (-10 pts)", false);
+            
+            setTimeout(() => {
+                startQuiz(currentSubject);
+            }, 1200);
+        }
+
+        function updateScoreDisplay() {
+            localStorage.setItem('qm_score', userScore);
+            document.getElementById('user-score-display').innerText = userScore + " pts";
+            updateDatabase();
+        }
+
+        function showFeedback(text, isSuccess) {
+            const fb = document.getElementById('feedback-message');
+            fb.innerText = text;
+            fb.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'border-green-300', 'bg-red-100', 'text-red-800', 'border-red-300');
+            
+            if (isSuccess) {
+                fb.classList.add('bg-green-100', 'text-green-800', 'border-green-300');
+            } else {
+                fb.classList.add('bg-red-100', 'text-red-800', 'border-red-300');
+            }
+        }
+
+        function showResults() {
+            showPage('page-resultats');
+            const accuracy = Math.round((sessionCorrectCount / 5) * 100);
+            document.getElementById('result-text').innerText = `Vous avez obtenu ${sessionCorrectCount} bonne(s) réponse(s) sur 5.`;
+            document.getElementById('result-total-score').innerText = `${userScore} pts`;
+            document.getElementById('result-accuracy').innerText = `${accuracy}%`;
+        }
+
+        function shareScoreWhatsApp() {
+            const text = encodeURIComponent(`🔥 Je viens de marquer ${userScore} points sur Quiz Mocenick ! Peux-tu faire mieux ? Teste tes connaissances dès maintenant !`);
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+        }
+
+        function renderLeaderboard() {
+            const container = document.getElementById('leaderboard-list');
+            container.innerHTML = '';
+            
+            let storedUsers = JSON.parse(localStorage.getItem('qm_all_users')) || allUsers;
+            storedUsers.sort((a, b) => b.score - a.score);
+
+            storedUsers.forEach((item, index) => {
+                let rankBadge = `<span class="font-extrabold text-slate-400 w-6 text-center text-xs">#${index + 1}</span>`;
+                if (index === 0) rankBadge = `<span class="text-base w-6 text-center">🥇</span>`;
+                if (index === 1) rankBadge = `<span class="text-base w-6 text-center">🥈</span>`;
+                if (index === 2) rankBadge = `<span class="text-base w-6 text-center">🥉</span>`;
+
+                const div = document.createElement('div');
+                div.className = `flex items-center justify-between p-3 text-xs ${item.name === userName ? 'bg-indigo-50 border-l-4 border-indigo-600 font-bold' : ''}`;
+                div.innerHTML = `
+                    <div class="flex items-center gap-2.5">
+                        ${rankBadge}
+                        <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-800 flex items-center justify-center text-sm">
+                            <i class="fas ${item.avatar}"></i>
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-800 block">${item.name} ${item.name === userName ? '(Vous)' : ''}</span>
+                            <span class="text-[10px] text-indigo-600 font-semibold">${item.level}</span>
+                        </div>
+                    </div>
+                    <span class="font-black text-indigo-900">${item.score} pts</span>
+                `;
+                container.appendChild(div);
+            });
+        }
+    </script>
 </body>
 </html>
