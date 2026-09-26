@@ -358,7 +358,7 @@
             }
         }
 
-        // Gestion dynamique de l'utilisateur (demande le nom si absent)
+        // Itilizatè ak Baz Done lokal
         let userName = localStorage.getItem('qm_name');
         if (!userName) {
             userName = prompt("Antre non ou pou w kòmanse jwe a:") || "Jwè";
@@ -369,6 +369,7 @@
         let userScore = parseInt(localStorage.getItem('qm_score')) || 0;
         let userLevel = localStorage.getItem('qm_level') || 'Université';
 
+        // Lis itilizatè default pou klasman an
         let allUsers = JSON.parse(localStorage.getItem('qm_all_users')) || [
             { name: "Jean-Baptiste K.", score: 460, level: "NS4", avatar: "fa-user-ninja" },
             { name: "Marie-Claire D.", score: 440, level: "Université", avatar: "fa-brain" },
@@ -377,34 +378,45 @@
 
         let currentTimer = null;
         let timeLeft = 15;
-        let askedQuestions = [];
         let currentSubject = '';
         let sessionCount = 0;
         let sessionCorrectCount = 0;
         let isRiskMode = false;
+        let sessionQuestions = []; // Kesyon ki chwazi owaza pou sesyon aktyèl la
 
         const questionsData = {
             'AprendreOuLaisser': [
                 { q: "⚡ RISQUE : Quel monument haïtien est reconnu comme Patrimoine Mondial de l'UNESCO ?", options: ["Le Palais Sans-Souci & La Citadelle", "Le Fort Jacques", "Le Palais National", "La Cathédrale de Cap-Haïtien"], answer: 0 },
                 { q: "⚡ RISQUE : Quel empereur a proclamé l'Indépendance d'Haïti le 1er janvier 1804 ?", options: ["Toussaint Louverture", "Jean-Jacques Dessalines", "Henri Christophe", "Alexandre Pétion"], answer: 1 },
                 { q: "⚡ RISQUE : Quelle ville haïtienne est surnommée 'La Cité de l'Indépendance' ?", options: ["Cap-Haïtien", "Les Cayes", "Gonaïves", "Jacmel"], answer: 2 },
-                { q: "⚡ RISQUE : La bataille décisive pour l'indépendance d'Haïti du 18 novembre 1803 est :", options: ["La Bataille de la Crête-à-Pierrot", "La Bataille de Vertières", "La Cérémonie du Bois-Caïman", "Le Traité de Ryswick"], answer: 1 }
+                { q: "⚡ RISQUE : La bataille décisive pour l'indépendance d'Haïti du 18 novembre 1803 est :", options: ["La Bataille de la Crête-à-Pierrot", "La Bataille de Vertières", "La Cérémonie du Bois-Caïman", "Le Traité de Ryswick"], answer: 1 },
+                { q: "⚡ RISQUE : Ki premye non yo te bay Ayiti anvan endepandans?", options: ["Ayiti (Boyer)", "Quisqueya / Bohio", "Saint-Domingue", "Nueva España"], answer: 1 },
+                { q: "⚡ RISQUE : Nan ki ane twoup anperè Jean-Jacques Dessalines te bat franse yo nèt?", options: ["1803", "1804", "1793", "1820"], answer: 1 }
             ],
             'Chimie': [
                 { q: "Quel est le pH d'une solution neutre à 25°C ?", options: ["pH = 0", "pH = 7", "pH = 14", "pH = 1"], answer: 1 },
-                { q: "La formule chimique du sel de table ordinaire est :", options: ["KCl", "NaCl", "NaOH", "CaCl2"], answer: 1 }
+                { q: "La formule chimique du sel de table ordinaire est :", options: ["KCl", "NaCl", "NaOH", "CaCl2"], answer: 1 },
+                { q: "Ki non gaz ki pi abondan nan atmosfè Latè a?", options: ["Oksijèn", "Azòt (Nitwojèn)", "Idwojèn", "Kabòn"], answer: 1 },
+                { q: "Ki senbòl chimik pou eleman Lò a?", options: ["Ag", "Fe", "Au", "Cu"], answer: 2 },
+                { q: "Ki non lyezon chimik kote elèktron yo pataje ant atòm yo?", options: ["Lyezon kovalant", "Lyezon iyonik", "Lyezon idwojèn", "Fòs Van der Waals"], answer: 0 }
             ],
             'Sciences Sociales': [
                 { q: "En quelle année s'est déroulée la Cérémonie du Bois-Caïman ?", options: ["1804", "1791", "1802", "1789"], answer: 1 },
-                { q: "En quelle année l'Indépendance d'Haïti a-t-elle été proclamée ?", options: ["1804", "1806", "1791", "1825"], answer: 0 }
+                { q: "En quelle année l'Indépendance d'Haïti a-t-elle été proclamée ?", options: ["1804", "1806", "1791", "1825"], answer: 0 },
+                { q: "Ki kote batay vètè a te dewoule?", options: ["Pòtoprens", "Kap-Ayisyen", "Okap (nan zòn Vètè)", "Gonayiv"], answer: 2 },
+                { q: "Kilè yo te siyen akò endepandans lan ofisyèlman nan anivèsè 1804 la?", options: ["1ye Janvye 1804", "18 Novanm 1803", "14 Jiyè 1789", "25 Desanm 1805"], answer: 0 }
             ],
             'Mathématiques': [
                 { q: "Que vaut la dérivée d'une constante ?", options: ["1", "0", "x", "Infinie"], answer: 1 },
-                { q: "Résoudre l'équation : log₂(x) = 4", options: ["x = 8", "x = 16", "x = 2", "x = 64"], answer: 1 }
+                { q: "Résoudre l'équation : log₂(x) = 4", options: ["x = 8", "x = 16", "x = 2", "x = 64"], answer: 1 },
+                { q: "Kijan yo rele yon triyang ki gen twa kote ki egal yo?", options: ["Izosèl", " Eskalèn", "Ekilatè", "Rektang"], answer: 2 },
+                { q: "Ki valè PI (π) apwoksimatif nou konn itilize souvan?", options: ["3.14", "2.71", "1.41", "9.81"], answer: 0 }
             ],
             'Physique': [
                 { q: "L'accélération de la pesanteur (g) sur Terre est environ :", options: ["9,8 m/s²", "100 m/s²", "3 x 10⁸ m/s²", "1 m/s²"], answer: 0 },
-                { q: "L'unité SI de mesure de la force est :", options: ["Joule", "Watt", "Newton", "Pascal"], answer: 2 }
+                { q: "L'unité SI de mesure de la force est :", options: ["Joule", "Watt", "Newton", "Pascal"], answer: 2 },
+                { q: "Kilès nan lwa sa yo ki reprezante dezyèm lwa Newton an?", options: ["F = m × a", "E = mc²", "P = U × I", "V = R × I"], answer: 0 },
+                { q: "Ki kalite kouran ki chanje sans peryodikman?", options: ["Kouran dirèk (DC)", "Kouran altènatif (AC)", "Kouran estatik", "Kouran mayetik"], answer: 1 }
             ]
         };
 
@@ -465,15 +477,18 @@
         }
 
         function updateDatabase() {
-            let existingIndex = allUsers.findIndex(u => u.name === userName);
+            let storedUsers = JSON.parse(localStorage.getItem('qm_all_users')) || allUsers;
+            let existingIndex = storedUsers.findIndex(u => u.name === userName);
+            
             if (existingIndex >= 0) {
-                allUsers[existingIndex].score = userScore;
-                allUsers[existingIndex].level = userLevel;
-                allUsers[existingIndex].avatar = currentAvatar;
-                allUsers[existingIndex].isUser = true;
+                storedUsers[existingIndex].score = userScore;
+                storedUsers[existingIndex].level = userLevel;
+                storedUsers[existingIndex].avatar = currentAvatar;
             } else {
-                allUsers.push({ name: userName, score: userScore, level: userLevel, avatar: currentAvatar, isUser: true });
+                storedUsers.push({ name: userName, score: userScore, level: userLevel, avatar: currentAvatar });
             }
+            
+            allUsers = storedUsers;
             localStorage.setItem('qm_all_users', JSON.stringify(allUsers));
         }
 
@@ -481,31 +496,27 @@
             sessionCount = 0;
             sessionCorrectCount = 0;
             isRiskMode = riskMode;
-            startQuiz(subject);
+            currentSubject = subject;
+
+            // FÒMIL ALEATWA INIK: Chak fwa yon jwè kòmanse yon sesyon, nou melanje kesyon yo nan matyè a owaza nèt
+            let pool = [...(questionsData[subject] || questionsData['AprendreOuLaisser'])];
+            pool.sort(() => Math.random() - 0.5); // Melanje lis la nèt owaza
+            sessionQuestions = pool.slice(0, 5); // Pran 5 premye yo apre melanj lan
+
+            startQuiz();
         }
 
-        function startQuiz(subject) {
-            if (sessionCount >= 5) {
+        function startQuiz() {
+            if (sessionCount >= sessionQuestions.length) {
                 showResults();
                 return;
             }
 
+            let currentQ = sessionQuestions[sessionCount];
             sessionCount++;
             document.getElementById('session-progress').innerText = `${sessionCount}/5`;
 
-            currentSubject = subject;
-            const list = questionsData[subject] || questionsData['AprendreOuLaisser'];
-            
-            let availableQuestions = list.filter(q => !askedQuestions.includes(q.q));
-            if (availableQuestions.length === 0) {
-                askedQuestions = [];
-                availableQuestions = list;
-            }
-            
-            const currentQ = availableQuestions[Math.floor(Math.random() * availableQuestions.length)];
-            askedQuestions.push(currentQ.q);
-            
-            document.getElementById('quiz-subject').innerText = isRiskMode ? "À PRENDRE OU LAISSER" : subject;
+            document.getElementById('quiz-subject').innerText = isRiskMode ? "À PRENDRE OU LAISSER" : currentSubject;
             document.getElementById('question-text').innerText = currentQ.q;
             
             const fb = document.getElementById('feedback-message');
@@ -539,7 +550,7 @@
                     userScore = Math.max(0, userScore - 20);
                     updateScoreDisplay();
                     showFeedback("⏱ Temps écoulé ! (-20 pts)", false);
-                    setTimeout(() => startQuiz(currentSubject), 1500);
+                    setTimeout(() => startQuiz(), 1500);
                 }
             }, 1000);
         }
@@ -568,7 +579,7 @@
             updateScoreDisplay();
 
             setTimeout(() => {
-                startQuiz(currentSubject);
+                startQuiz();
             }, 1600);
         }
 
@@ -580,7 +591,7 @@
             showFeedback("⚠️ Question passée (-10 pts)", false);
             
             setTimeout(() => {
-                startQuiz(currentSubject);
+                startQuiz();
             }, 1200);
         }
 
@@ -619,7 +630,11 @@
             const container = document.getElementById('leaderboard-list');
             container.innerHTML = '';
             
+            // Asire nou mete baz done an a jou anvan nou afiche l
+            updateDatabase();
             let storedUsers = JSON.parse(localStorage.getItem('qm_all_users')) || allUsers;
+            
+            // Triye itilizatè yo selon pi gwo score yo (Soti nan pi wo pou ale nan pi ba)
             storedUsers.sort((a, b) => b.score - a.score);
 
             storedUsers.forEach((item, index) => {
