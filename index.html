@@ -12,8 +12,6 @@
             --bg-dark: #0f172a;
             --card-bg: #1e293b;
             --text-color: #f8fafc;
-            --success: #22c55e;
-            --error: #ef4444;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
         body { background: var(--bg-dark); color: var(--text-color); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
@@ -25,13 +23,9 @@
         button { width: 100%; padding: 12px; margin-top: 15px; border: none; border-radius: 8px; background: var(--primary); color: white; font-weight: bold; font-size: 1rem; cursor: pointer; transition: 0.3s; }
         button:hover { opacity: 0.9; transform: translateY(-2px); }
         .btn-whatsapp { background: #25d366; margin-top: 10px; display: inline-block; text-align: center; text-decoration: none; color: white; padding: 12px; border-radius: 8px; font-weight: bold; }
-        .option-btn { background: #334155; margin: 8px 0; text-align: left; color: #fff; border: 2px solid transparent; }
-        .option-btn:hover:not(:disabled) { background: #475569; }
-        .option-btn.correct { background-color: rgba(34, 197, 94, 0.2); border-color: var(--success); color: #86efac; }
-        .option-btn.incorrect { background-color: rgba(239, 68, 68, 0.2); border-color: var(--error); color: #fca5a5; }
+        .option-btn { background: #334155; margin: 8px 0; text-align: left; }
+        .option-btn:hover { background: #475569; }
         .score-board { text-align: center; font-size: 1.5rem; margin: 20px 0; }
-        .category-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 15px; }
-        .stats-box { background: #0f172a; padding: 10px; border-radius: 8px; text-align: center; margin-bottom: 15px; font-size: 0.95rem; color: #38bdf8; border: 1px solid #334155; }
     </style>
 </head>
 <body>
@@ -42,39 +36,24 @@
     <!-- EKRAN AKÈY & PWOFIL -->
     <div id="home-screen" class="screen active">
         <h3>Byenveni nan Mòd Pwofil ou</h3>
-        
-        <div class="stats-box" id="user-count-display">
-            Moun ki deja enskri / jwe: 0
-        </div>
-
-        <input type="text" id="username" placeholder="Antre non ou (pa egzanp: Irene Mocenick)" value="Irene Mocenick">
+        <input type="text" id="username" placeholder="Antre non ou (pa egz. Irene Mocenick)">
         <select id="user-level">
             <option value="9e Fondamantal">9e Année Fondamentale</option>
             <option value="Economie / Inivèsite">Économie / Université</option>
-            <option value="Génie Informatique" selected>Génie Informatique</option>
+            <option value="Génie Informatique">Génie Informatique</option>
         </select>
-        
-        <label style="margin-top:15px; display:block;">Chwazi Matyè / Domèn:</label>
-        <div class="category-grid">
-            <button onclick="startQuiz('Chimie')">🧪 Chimie</button>
-            <button onclick="startQuiz('Konesans Jeneral')">🌍 Connaissances Générales</button>
-            <button onclick="startQuiz('Matematik')">📐 Mathématiques</button>
-            <button onclick="startQuiz('Fizik')">⚡ Physique</button>
-            <button onclick="startQuiz('Franse')">📚 Français</button>
-        </div>
+        <label style="margin-top:15px; display:block;">Chwazi Mòd Jwèt:</label>
+        <button onclick="startGame('classique')">Matières Classiques</button>
+        <button onclick="startGame('laisser')" style="background: var(--secondary);">À prendre ou à laisser</button>
         
         <a href="https://wa.me/50933270330" target="_blank" class="btn-whatsapp">Kontakte Sèvis Kliyan (WhatsApp)</a>
     </div>
 
     <!-- EKRAN JWÈT -->
     <div id="game-screen" class="screen">
-        <div style="display: flex; justify-content: space-between; margin-bottom: 15px; color: #94a3b8; font-size: 0.9rem;">
-            <span id="category-display">Domèn</span>
-            <span id="progress-display">Kesyon 1 / 10</span>
-        </div>
-        <h3 id="question-title" style="margin-bottom: 15px; font-size: 1.2rem;">Kesyon an ap parèt...</h3>
+        <h3 id="question-title" style="margin-bottom: 15px;">Kesyon an ap parèt...</h3>
         <div id="options-container"></div>
-        <button id="next-btn" style="display: none;" onclick="nextQuestion()">Kesyon Suivante</button>
+        <p id="timer" style="text-align: right; margin-top: 10px; color: #facc15;"></p>
     </div>
 
     <!-- EKRAN REZILTA -->
@@ -87,96 +66,20 @@
 </div>
 
 <script>
+    // METE URL GOOGLE APPS SCRIPT OU A LA A:
     const GOOGLE_SHEET_URL = "APOTE_GOOGLE_APPS_SCRIPT_URL_IS_LA";
 
-    let currentUser = { name: "", level: "", score: 0, category: "" };
+    let currentUser = { name: "", level: "", score: 0, mode: "" };
     let currentQuestionIndex = 0;
     let score = 0;
-    let activeQuestions = [];
 
-    function updateRegisteredCount() {
-        let leaderboard = JSON.parse(localStorage.getItem("mocenick_scores") || "[]");
-        document.getElementById("user-count-display").innerText = `Moun ki deja jwe / anrejistre: ${leaderboard.length}`;
-    }
+    const questions = [
+        { q: "Ki kapital peyi Ayiti?", options: ["Pòtoprens", "Kap Ayisyen", "Fort-Liberté", "Gonayiv"], correct: 0 },
+        { q: "Nan ki depatman vil Fort-Liberté ye?", options: ["Nò", "Nòdès", "Artibonite", "Nòdwès"], correct: 1 },
+        { q: "Ki espesyalite etid Irene Mocenick gen rapò avè l?", options: ["Medsin", "Économie & Génie Informatique", "Agronomi", "Dwa"], correct: 1 }
+    ];
 
-    window.onload = function() {
-        updateRegisteredCount();
-    };
-
-    const dbQuestions = {
-        "Chimie": [
-            { q: "Quelle est la formule chimique de l'eau ?", options: ["CO2", "H2O", "NaCl", "O2"], answer: 1 },
-            { q: "Quel est le gaz le plus abondant dans l'atmosphère terrestre ?", options: ["Oxygène", "Azote (Nitrogène)", "Hydrogène", "Carbone"], answer: 1 },
-            { q: "Quel est le symbole chimique du fer ?", options: ["Fe", "F", "Fr", "Fa"], answer: 0 },
-            { q: "Quelle est la valeur du pH d'une solution neutre à température ambiante ?", options: ["0", "7", "14", "5"], answer: 1 },
-            { q: "Lequel de ces gaz est un gaz noble (gaz rare) ?", options: ["Oxygène", "Azote", "Hélium", "Hydrogène"], answer: 2 },
-            { q: "Quel est le nom chimique du sel de cuisine ?", options: ["Chlorure de sodium", "Carbonate de sodium", "Nitrate de sodium", "Hydroxyde de sodium"], answer: 0 },
-            { q: "Quel métal est liquide à température ambiante ?", options: ["Fer", "Or", "Mercure", "Cuivre"], answer: 2 },
-            { q: "Quel gaz les plantes absorbent-elles pendant la photosynthèse ?", options: ["Oxygène", "Dioxyde de carbone", "Hydrogène", "Azote"], answer: 1 },
-            { q: "Quel est le numéro atomique de l'hydrogène ?", options: ["1", "2", "6", "8"], answer: 0 },
-            { q: "Comment appelle-t-on les atomes qui ont le même nombre de protons mais un nombre de neutrons différent ?", options: ["Isotopes", "Isomères", "Isobares", "Allotropes"], answer: 0 }
-        ],
-        "Konesans Jeneral": [
-            { q: "Quelle est la capitale d'Haïti ?", options: ["Cap-Haïtien", "Port-au-Prince", "Jacmel", "Fort-Liberté"], answer: 1 },
-            { q: "Dans quel département se trouve la ville de Fort-Liberté ?", options: ["Nord", "Nord-Est", "Artibonite", "Nord-Ouest"], answer: 1 },
-            { q: "Quels domaines d'études concernent Irene Mocenick ?", options: ["Médecine", "Économie & Génie Informatique", "Agronomie", "Droit"], answer: 1 },
-            { q: "Combien y a-t-il de continents sur Terre ?", options: ["5", "6", "7", "8"], answer: 2 },
-            { q: "Quel est le plus grand océan du monde ?", options: ["Océan Atlantique", "Océan Indien", "Océan Pacifique", "Océan Antarctique"], answer: 2 },
-            { q: "Quel pays a la plus grande population au monde ?", options: ["États-Unis", "Chine", "Inde", "Russie"], answer: 1 },
-            { q: "En quelle année a eu lieu l'indépendance d'Haïti ?", options: ["1802", "1803", "1804", "1815"], answer: 2 },
-            { q: "Quel est le nom du plus grand désert chaud du monde ?", options: ["Désert de Gobi", "Désert du Sahara", "Désert d'Atacama", "Désert des Mojaves"], answer: 1 },
-            { q: "Quel grand fleuve traverse l'Égypte ?", options: ["Amazone", "Nil", "Mississippi", "Danube"], answer: 1 },
-            { q: "Quel est le plus grand animal vivant sur Terre (dans les océans) ?", options: ["Cachalot", "Baleine bleue", "Requin blanc", "Orque"], answer: 1 }
-        ],
-        "Matematik": [
-            { q: "Quelle est la racine carrée de 144 ?", options: ["10", "11", "12", "14"], answer: 2 },
-            { q: "Si un triangle a pour angles 60° et 60°, quelle est la valeur du 3e angle ?", options: ["30°", "60°", "90°", "120°"], answer: 1 },
-            { q: "Combien font 7 multiplié par 8 ?", options: ["54", "56", "64", "72"], answer: 1 },
-            { q: "Quelle est approximativement la valeur de Pi ($\pi$) à deux décimales ?", options: ["3.12", "3.14", "3.16", "3.41"], answer: 1 },
-            { q: "Comment appelle-t-on un angle qui mesure exactement 90 degrés ?", options: ["Angle aigu", "Angle droit", "Angle obtus", "Angle plat"], answer: 1 },
-            { q: "Quel est le résultat de $5 + 3 \times 2$ ?", options: ["16", "11", "13", "10"], answer: 1 },
-            { q: "Combien de degrés font la somme de tous les angles intérieurs d'un triangle ?", options: ["90°", "180°", "270°", "360°"], answer: 1 },
-            { q: "Comment appelle-t-on un polygone à 4 côtés égaux et 4 angles droits ?", options: ["Triangle", "Losange", "Carré", "Trapèze"], answer: 2 },
-            { q: "Quelle est la formule de l'aire d'un rectangle de longueur L et de largeur l ?", options: ["L + l", "2(L + l)", "L \\times l", "L \\times l / 2"], answer: 2 },
-            { q: "Quel est le plus petit commun multiple (PPCM) de 4 et 6 ?", options: ["10", "12", "24", "2"], answer: 1 }
-        ],
-        "Fizik": [
-            { q: "Quelle est l'unité de mesure de la force dans le Système International ?", options: ["Joule", "Watt", "Newton", "Pascal"], answer: 2 },
-            { q: "Lequel de ces matériaux est un bon conducteur d'électricité ?", options: ["Bois", "Plastique", "Cuivre", "Verre"], answer: 2 },
-            { q: "Quelle est approximativement la vitesse de la lumière dans le vide ?", options: ["300 000 km/s", "150 000 km/s", "3 000 km/s", "1 080 km/s"], answer: 0 },
-            { q: "Quelle loi exprime la relation entre force, masse et accélération ($F = m \\times a$) ?", options: ["Première loi de Newton", "Deuxième loi de Newton", "Troisième loi de Newton", "Principe d'Archimède"], answer: 1 },
-            { q: "Quelle est l'unité de puissance dans le Système International ?", options: ["Joule", "Volt", "Watt", "Ampère"], answer: 2 },
-            { q: "Comment appelle-t-on l'énergie qu'un objet possède en raison de son mouvement ?", options: ["Énergie potentielle", "Énergie cinétique", "Énergie thermique", "Énergie chimique"], answer: 1 },
-            { q: "Quel appareil mesure l'intensité du courant électrique dans un circuit ?", options: ["Voltmètre", "Ampèremètre", "Ohmètre", "Wattmètre"], answer: 1 },
-            { q: "Quelle force attire les objets vers le centre de la Terre ?", options: ["Frottement", "Gravitation", "Magnétisme", "Tension"], answer: 1 },
-            { q: "Quelle est l'unité de pression dans le Système International ?", options: ["Newton", "Joule", "Pascal", "Tesla"], answer: 2 },
-            { q: "Laquelle de ces couleurs a la plus courte longueur d'onde dans le spectre visible ?", options: ["Rouge", "Vert", "Jaune", "Violet"], answer: 3 }
-        ],
-        "Franse": [
-            { q: "Quelle est la nature du mot souligné dans la phrase : 'Il court <u>rapidement</u>' ?", options: ["Nom", "Adjectif", "Adverbe", "Verbe"], answer: 2 },
-            { q: "Comment écrit-on le pluriel du mot 'cheval' en français ?", options: ["Chevals", "Chevaux", "Chevaus", "Cheva"], answer: 1 },
-            { q: "Lequel est un synonyme du mot 'joyeux' ?", options: ["Triste", "Content", "Fatigué", "Fâché"], answer: 1 },
-            { q: "Comment appelle-t-on des mots qui ont un sens identique ou très proche ?", options: ["Homonymes", "Synonymes", "Antonymes", "Paronymes"], answer: 1 },
-            { q: "Dans la phrase : 'Le chat mange le poisson', quel est le sujet ?", options: ["Le poisson", "Mange", "Le chat", "Aucun"], answer: 2 },
-            { q: "Comment appelle-t-on des mots de sens opposés ?", options: ["Synonymes", "Antonymes", "Homonymes", "Acronymes"], answer: 1 },
-            { q: "À quel groupe de verbes appartient le verbe 'finir' ?", options: ["1er groupe", "2e groupe", "3e groupe", "Hors groupe"], answer: 1 },
-            { q: "Lequel de ces noms est un nom féminin ?", options: ["Crayon", "Table", "Livre", "Cahier"], answer: 1 },
-            { q: "Comment se conjugue le verbe 'être' au présent de l'indicatif avec le pronom 'nous' ?", options: ["sommes", "êtes", "sont", "sommes"], answer: 0 },
-            { q: "Quel est l'antonyme du mot 'grand' ?", options: ["Petit", "Gros", "Haut", "Long"], answer: 0 }
-        ]
-    };
-
-    function playWelcomeVoice(userName) {
-        if ('speechSynthesis' in window) {
-            let message = `Bienvenue ${userName} dans le quiz Mocenick.`;
-            let speech = new SpeechSynthesisUtterance(message);
-            speech.lang = 'fr-FR';
-            speech.rate = 1.0;
-            window.speechSynthesis.speak(speech);
-        }
-    }
-
-    function startQuiz(category) {
+    function startGame(mode) {
         const nameInput = document.getElementById("username").value.trim();
         if (!nameInput) {
             alert("Tanpri antre non ou anvan ou kòmanse!");
@@ -184,60 +87,39 @@
         }
         currentUser.name = nameInput;
         currentUser.level = document.getElementById("user-level").value;
-        currentUser.category = category;
+        currentUser.mode = mode;
         currentUser.score = 0;
         score = 0;
         currentQuestionIndex = 0;
 
-        playWelcomeVoice(currentUser.name);
-
-        activeQuestions = dbQuestions[category] || [];
-
-        document.getElementById("category-display").innerText = `Domèn: ${category}`;
         document.getElementById("home-screen").classList.remove("active");
         document.getElementById("game-screen").classList.add("active");
         loadQuestion();
     }
 
     function loadQuestion() {
-        if (currentQuestionIndex >= activeQuestions.length) {
+        if (currentQuestionIndex >= questions.length) {
             endGame();
             return;
         }
-        let qData = activeQuestions[currentQuestionIndex];
-        document.getElementById("progress-display").innerText = `Kesyon ${currentQuestionIndex + 1} / ${activeQuestions.length}`;
-        document.getElementById("question-title").innerText = qData.q;
-        
+        let qData = questions[currentQuestionIndex];
+        document.getElementById("question-title").innerText = `Kesyon ${currentQuestionIndex + 1}: ${qData.q}`;
         let optContainer = document.getElementById("options-container");
         optContainer.innerHTML = "";
 
         qData.options.forEach((opt, index) => {
             let btn = document.createElement("button");
             btn.className = "option-btn";
-            btn.innerHTML = opt; 
-            btn.onclick = () => checkAnswer(index, qData.answer, btn);
+            btn.innerText = opt;
+            btn.onclick = () => checkAnswer(index, qData.correct);
             optContainer.appendChild(btn);
         });
-
-        document.getElementById("next-btn").style.display = "none";
     }
 
-    function checkAnswer(selected, correct, buttonElement) {
-        const optionsButtons = document.querySelectorAll('.option-btn');
-        optionsButtons.forEach(btn => btn.disabled = true);
-
+    function checkAnswer(selected, correct) {
         if (selected === correct) {
-            buttonElement.classList.add('correct');
             score += 10;
-        } else {
-            buttonElement.classList.add('incorrect');
-            optionsButtons[correct].classList.add('correct');
         }
-
-        document.getElementById("next-btn").style.display = "block";
-    }
-
-    function nextQuestion() {
         currentQuestionIndex++;
         loadQuestion();
     }
@@ -246,12 +128,14 @@
         currentUser.score = score;
         document.getElementById("game-screen").classList.remove("active");
         document.getElementById("result-screen").classList.add("active");
-        document.getElementById("final-score").innerText = `Pwen ou: ${score} / ${activeQuestions.length * 10}`;
+        document.getElementById("final-score").innerText = `Pwen ou: ${score} / ${questions.length * 10}`;
 
+        // Sovve sou localStorage tou
         let leaderboard = JSON.parse(localStorage.getItem("mocenick_scores") || "[]");
         leaderboard.push(currentUser);
         localStorage.setItem("mocenick_scores", JSON.stringify(leaderboard));
 
+        // Voye done yo nan Google Sheets otomatikman
         sendDataToGoogleSheet(currentUser);
     }
 
@@ -266,7 +150,7 @@
                 nom: data.name,
                 nivo: data.level,
                 pwen: data.score,
-                domèn: data.category
+                mod: data.mode
             })
         }).then(() => {
             console.log("Done yo voye nan Google Sheet avèk siksè!");
