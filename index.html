@@ -55,7 +55,7 @@
         <section id="page-accueil" class="space-y-5">
             <div class="bg-gradient-to-br from-indigo-800 via-indigo-900 to-purple-900 text-white rounded-3xl p-6 shadow-xl text-center relative overflow-hidden">
                 <div class="absolute -right-4 -bottom-4 opacity-20 text-8xl"><i class="fas fa-brain"></i></div>
-                <span class="bg-yellow-400 text-indigo-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">Nouveau Mode</span>
+                <span class="bg-yellow-400 text-indigo-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">Anti-Repetisyon Active</span>
                 <h2 class="text-2xl font-black mb-2">Bienvenue sur Quiz Mocenick !</h2>
                 <p class="text-indigo-200 text-xs mb-5">Sélectionnez votre mode de jeu ci-dessous :</p>
                 
@@ -382,7 +382,7 @@
         let isRiskMode = false;
         let sessionQuestions = [];
 
-        // 35 kesyon nan chak matyè (30 nouvo + 5 orijinal yo)
+        // Gwo baz done rich ak anpil kesyon pou chak matyè (pou pa janm repete)
         const questionsData = {
             'AprendreOuLaisser': [
                 { q: "⚡ RISQUE : Quel monument haïtien est reconnu comme Patrimoine Mondial de l'UNESCO ?", options: ["Le Palais Sans-Souci & La Citadelle", "Le Fort Jacques", "Le Palais National", "La Cathédrale de Cap-Haïtien"], answer: 0 },
@@ -390,16 +390,38 @@
                 { q: "⚡ RISQUE : Quelle ville haïtienne est surnommée 'La Cité de l'Indépendance' ?", options: ["Cap-Haïtien", "Les Cayes", "Gonaïves", "Jacmel"], answer: 2 },
                 { q: "⚡ RISQUE : La bataille décisive pour l'indépendance d'Haïti du 18 novembre 1803 est :", options: ["La Bataille de la Crête-à-Pierrot", "La Bataille de Vertières", "La Cérémonie du Bois-Caïman", "Le Traité de Ryswick"], answer: 1 },
                 { q: "⚡ RISQUE : Ki premye non yo te bay Ayiti anvan endepandans?", options: ["Ayiti (Boyer)", "Quisqueya / Bohio", "Saint-Domingue", "Nueva España"], answer: 1 },
-                { q: "⚡ RISQUE : Nan ki ane twoup anperè Jean-Jacques Dessalines te bat franse yo nèt?", options: ["1803", "1804", "1793", "1820"], answer: 1 }
+                { q: "⚡ RISQUE : Nan ki ane twoup anperè Jean-Jacques Dessalines te bat franse yo nèt?", options: ["1803", "1804", "1793", "1820"], answer: 1 },
+                { q: "⚡ RISQUE : Quel président a dirigé Haïti lors de l'occupation américaine en 1915 ?", options: ["Vilbrun Guillaume Sam", "Sténio Vincent", "Lysius Légitime", "Florvil Hyppolite"], answer: 0 },
+                { q: "⚡ RISQUE : Quel est le plus haut sommet d'Haïti ?", options: ["Morne La Selle", "Morne Macaya", "Morne Hôpital", "Trou d'Eau"], answer: 0 },
+                { q: "⚡ RISQUE : En quelle année a été adoptée la constitution actuelle d'Haïti ?", options: ["1987", "1957", "1964", "1990"], answer: 0 },
+                { q: "⚡ RISQUE : Quel général français a été capturé au Morne à Charnières en 1802 ?", options: ["Le Général Leclerc", "Le Général Rochambeau", "Le Général Boudet", "Le Général Hardy"], answer: 0 },
+                { q: "⚡ RISQUE : Quel est le plat national traditionnel haïtien le plus populaire du dimanche ?", options: ["Le Griot", "Le Diri Djondjon", "Le Soup Joumou", "Le Legume"], answer: 2 },
+                { q: "⚡ RISQUE : Quelle ville est connue pour son carnaval et ses maisons pain d'épices (gingerbread) ?", options: ["Jacmel", "Port-de-Paix", "Miragoâne", "Jérémie"], answer: 0 },
+                { q: "⚡ RISQUE : Quel écrivain haïtien a écrit 'Gouverneurs de la rosée' ?", options: ["Jacques Roumain", "René Depestre", "Frankétienne", "Éric Sauray"], answer: 0 },
+                { q: "⚡ RISQUE : Quel traité international en 1697 a officialisé la présence française à Saint-Domingue ?", options: ["Traité de Ryswick", "Traité de Paris", "Traité de Tordesillas", "Traité de Versailles"], answer: 0 },
+                { q: "⚡ RISQUE : Quel est le nom de la première femme présidente d'un pays dans les Caraïbes (ou Haïti) ? (Intérim)", options: ["Ertha Pascal-Trouillot", "Mirlande Manigat", "Edmonde Supplice", "Lynaissant"], answer: 0 },
+                { q: "⚡ RISQUE : Quel fleuve sépare Haïti de la République Dominicaine au nord ?", options: ["Rivière Massacre", "Rivière Artibonite", "Rivière Grise", "Rivière Momance"], answer: 0 },
+                { q: "⚡ RISQUE : Quel roi nordiste a fait construire la Citadelle Laferrière ?", options: ["Henri Christophe", "Faustin Soulouque", "Jean-Pierre Boyer", "Gerard Latortue"], answer: 0 },
+                { q: "⚡ RISQUE : Quel est le symbole de l'oiseau national d'Haïti ?", options: ["Le Trogon couronné (Taleko)", "Le Colibri", "La Colombe", "Le Flamant rose"], answer: 0 },
+                { q: "⚡ RISQUE : En quelle année l'UNESCO a-t-elle inscrit le Parc National Historique (Citadelle, Sans-Souci, Ramiers) ?", options: ["1982", "1995", "2004", "1975"], answer: 0 },
+                { q: "⚡ RISQUE : Quel poète haïtien a écrit l'hymne national 'La Dessalinienne' ?", options: ["Oswald Durand", "Justin Lhérisson", "Massillon Coicou", "Castera Bazile"], answer: 1 },
+                { q: "⚡ RISQUE : Quelle ville est le chef-lieu du département du Sud en Haïti ?", options: ["Les Cayes", "Jeremie", "Aquin", "Port-Salut"], answer: 0 },
+                { q: "⚡ RISQUE : Quel président a inauguré le pont sur la rivière Artibonite ?", options: ["Paul E. Magloire", "Dumarsais Estimé", "Sténio Vincent", "Élie Lescot"], answer: 0 },
+                { q: "⚡ RISQUE : Quel est le nom du célèbre fort attaqué par Ignace Étienne Marine et Lamartinière en 1802 ?", options: ["La Crête-à-Pierrot", "Fort Jacques", "Fort Alexandre", "Fort St-Charles"], answer: 0 },
+                { q: "⚡ RISQUE : Quelle danse traditionnelle haïtienne est liée au vodou et au tambour ?", options: ["Le Yanvalou", "Le Compas direct", "Le Zouk", "La Bachata"], answer: 0 },
+                { q: "⚡ RISQUE : Quel musicien est considéré comme le père fondateur du Compas Direct en 1955 ?", options: ["Neptune", "Jean-Baptiste Nemours", "Webert Sicot", "Coupé Cloué"], answer: 1 },
+                { q: "⚡ RISQUE : Quel écrivain et poète haïtien est l'auteur du concept du 'Spiralisme' ?", options: ["Frankétienne", "René Depestre", "Anthony Phelps", "Marie-Célie Agnant"], answer: 0 },
+                { q: "⚡ RISQUE : Quel département géographique haïtien a pour chef-lieu la ville de Hinche ?", options: ["Centre", "Artibonite", "Nord-Est", "Grand'Anse"], answer: 0 },
+                { q: "⚡ RISQUE : Quel événement tragique est commémoré chaque 1er janvier en Haïti à travers la Soupe Joumou ?", options: ["La liberté et l'indépendance de 1804", "Le séisme de 2010", "La découverte d'Hispaniola", "L'abolition de l'esclavage de 1793"], answer: 0 },
+                { q: "⚡ RISQUE : Quel est le nom du détroit ou passage maritime qui sépare Haïti de Cuba ?", options: ["Le Passage du Vent", "Le Canal de la Gonâve", "Le Canal Saint-Marc", "Le Canal du Sud"], answer: 0 },
+                { q: "⚡ RISQUE : Quel président haïtien a créé la fête du drapeau le 18 mai 1803 à l'Arcahaie ?", options: ["Jean-Jacques Dessalines", "Alexandre Pétion", "Henri Christophe", "Boyer"], answer: 0 }
             ],
             'Chimie': [
-                // Orijinal yo
                 { q: "Quel est le pH d'une solution neutre à 25°C ?", options: ["pH = 0", "pH = 7", "pH = 14", "pH = 1"], answer: 1 },
                 { q: "La formule chimique du sel de table ordinaire est :", options: ["KCl", "NaCl", "NaOH", "CaCl2"], answer: 1 },
                 { q: "Quel est le gaz le plus abondant dans l'atmosphère de la Terre ?", options: ["Oxygène", "Azote (Azòt)", "Hydrogène", "Carbone"], answer: 1 },
                 { q: "Quel est le symbole chimique de l'élément Or ?", options: ["Ag", "Fe", "Au", "Cu"], answer: 2 },
                 { q: "Comment appelle-t-on une liaison chimique où les électrons sont partagés ?", options: ["Liaison covalente", "Liaison ionique", "Liaison hydrogène", "Forces de Van der Waals"], answer: 0 },
-                // 30 nouvo kesyon an franse
                 { q: "Quel est le symbole chimique de l'eau ?", options: ["CO2", "H2O", "O2", "NaCl"], answer: 1 },
                 { q: "Quel élément chimique a pour symbole 'C' ?", options: ["Calcium", "Cuivre", "Carbone", "Chlore"], answer: 2 },
                 { q: "Combien d'états de la matière principaux existe-t-il ?", options: ["2", "3", "4", "5"], answer: 1 },
@@ -415,7 +437,7 @@
                 { q: "Quel est le symbole chimique du fer ?", options: ["F", "Fe", "Fr", "Fi"], answer: 1 },
                 { q: "Dans une réaction chimique, que se passe-t-il pour la masse totale ?", options: ["Elle augmente", "Elle diminue", "Elle se conserve", "Elle disparaît"], answer: 2 },
                 { q: "Quel nom donne-t-on aux solutions ayant un pH supérieur à 7 ?", options: ["Acides", "Neutres", "Basiques (ou alcalines)", "Saturées"], answer: 2 },
-                { q: "Quel est le principal composant du gaz naturel ?", options: ["Propane", "Méthane",ane, "Butane"], answer: 1 },
+                { q: "Quel est le principal composant du gaz naturel ?", options: ["Propane", "Méthane", "Éthane", "Butane"], answer: 1 },
                 { q: "Quel non-métal est solide à température ambiante et de couleur jaune ?", options: ["Soufre", "Phosphore", "Iode", "Carbone"], answer: 0 },
                 { q: "Quel est le symbole chimique de l'argent ?", options: ["Or", "Ag", "As", "Al"], answer: 1 },
                 { q: "Quelle est la formule de l'ammoniac ?", options: ["NH3", "CH4", "H2SO4", "HNO3"], answer: 0 },
@@ -424,7 +446,7 @@
                 { q: "Quel est le symbole chimique du potassium ?", options: ["P", "Po", "K", "Pt"], answer: 2 },
                 { q: "Quelle est la formule de l'acide sulfurique ?", options: ["HCl", "H2SO4", "HNO3", "NaOH"], answer: 1 },
                 { q: "Quel est le nom de la réaction chimique entre un acide et une base ?", options: ["Oxydation", "Neutralisation", "Combustion", "Électrolyse"], answer: 1 },
-                { q: "Quel gaz produit une flamme qui s'éteint avec une résonance en aboyant (test de l'hydrogène) ?", options: ["Oxygène", "Hydrogène", "Azote", "Chlore"], answer: 1 },
+                { q: "Quel gaz produit une flamme qui s'éteint avec une résonance en aboyant ?", options: ["Oxygène", "Hydrogène", "Azote", "Chlore"], answer: 1 },
                 { q: "Quel est le symbole chimique du sodium ?", options: ["So", "Sd", "Na", "N"], answer: 2 },
                 { q: "Quelle est la charge électrique d'un électron ?", options: ["Positive", "Neutre", "Négative", "Variable"], answer: 2 },
                 { q: "Quel est le principal minerai d'aluminium ?", options: ["Hématite", "Bauxite", "Galène", "Pyrite"], answer: 1 },
@@ -432,12 +454,10 @@
                 { q: "Quel est le nom de l'élément chimique de symbole 'N' ?", options: ["Néon", "Nickel", "Azote (Nitrogen)", "Niobium"], answer: 2 }
             ],
             'Sciences Sociales': [
-                // Orijinal yo
                 { q: "En quelle année s'est déroulée la Cérémonie du Bois-Caïman ?", options: ["1804", "1791", "1802", "1789"], answer: 1 },
                 { q: "En quelle année l'Indépendance d'Haïti a-t-elle été proclamée ?", options: ["1804", "1806", "1791", "1825"], answer: 0 },
                 { q: "Où s'est déroulée la bataille historique de Vertières ?", options: ["Port-au-Prince", "Cap-Haïtien", "Vertières (près du Cap)", "Gonaïves"], answer: 2 },
                 { q: "À quelle date exacte a été proclamée l'Indépendance d'Haïti ?", options: ["1er Janvier 1804", "18 Novembre 1803", "14 Juillet 1789", "25 Décembre 1805"], answer: 0 },
-                // 30 nouvo kesyon an franse
                 { q: "Quel est le nom du premier explorateur européen à arriver à Hispaniola en 1492 ?", options: ["Vasco de Gama", "Christophe Colomb", "Hernán Cortés", "Amerigo Vespucci"], answer: 1 },
                 { q: "Quel traité de 1697 a cédé la partie ouest de Saint-Domingue à la France ?", options: ["Traité de Tordesillas", "Traité de Ryswick", "Traité de Paris", "Traité de Versailles"], answer: 1 },
                 { q: "Qui était le chef de l'Expédition de Saint-Domingue envoyée par Napoléon Bonaparte ?", options: ["Le Général Leclerc", "Rochambeau", "Toussaint Louverture", "Brune"], answer: 0 },
@@ -470,12 +490,10 @@
                 { q: "Quel événement en 1989 a symbolisé la fin de la Guerre froide en Europe ?", options: ["La chute du mur de Berlin", "La crise des missiles de Cuba", "La signature du traité de Maastricht", "La guerre du Vietnam"], answer: 0 }
             ],
             'Mathématiques': [
-                // Orijinal yo
                 { q: "Que vaut la dérivée d'une constante ?", options: ["1", "0", "x", "Infinie"], answer: 1 },
                 { q: "Résoudre l'équation : log₂(x) = 4", options: ["x = 8", "x = 16", "x = 2", "x = 64"], answer: 1 },
                 { q: "Comment appelle-t-on un triangle qui a trois côtés égaux ?", options: ["Isocèle", "Scalène", "Équilatéral", "Rectangle"], answer: 2 },
                 { q: "Quelle est la valeur approximative de Pi (π) couramment utilisée ?", options: ["3,14", "2,71", "1,41", "9,81"], answer: 0 },
-                // 30 nouvo kesyon an franse
                 { q: "Quel est le résultat de l'opération : 7 x 8 ?", options: ["54", "56", "62", "48"], answer: 1 },
                 { q: "Combien font 15 pour cent de 200 ?", options: ["20", "25", "30", "35"], answer: 2 },
                 { q: "Quelle est la racine carrée de 144 ?", options: ["10", "11", "12", "14"], answer: 2 },
@@ -508,12 +526,10 @@
                 { q: "Si un article coûte 800 gourdes et subit une remise de 25%, quel est son nouveau prix ?", options: ["600 gourdes", "650 gourdes", "550 gourdes", "700 gourdes"], answer: 0 }
             ],
             'Physique': [
-                // Orijinal yo
                 { q: "L'accélération de la pesanteur (g) sur Terre est environ :", options: ["9,8 m/s²", "100 m/s²", "3 x 10⁸ m/s²", "1 m/s²"], answer: 0 },
                 { q: "L'unité SI de mesure de la force est :", options: ["Joule", "Watt", "Newton", "Pascal"], answer: 2 },
                 { q: "Quelle loi représente la deuxième loi de Newton ?", options: ["F = m × a", "E = mc²", "P = U × I", "V = R × I"], answer: 0 },
                 { q: "Quel type de courant électrique change de sens périodiquement ?", options: ["Courant continu (DC)", "Courant alternatif (AC)", "Courant statique", "Courant magnétique"], answer: 1 },
-                // 30 nouvo kesyon an franse
                 { q: "Quelle est l'unité internationale de mesure de la vitesse ?", options: ["km/h", "m/s", "cm/s", "mph"], answer: 1 },
                 { q: "Quelle grandeur physique mesure-t-on en Watts (W) ?", options: ["L'énergie", "La puissance", "La force", "La pression"], answer: 1 },
                 { q: "Quelle est la vitesse de la lumière dans le vide (environ) ?", options: ["300 000 km/s", "340 m/s", "1500 m/s", "3 x 10⁶ km/s"], answer: 0 },
@@ -534,10 +550,10 @@
                 { q: "Quel phénomène physique explique la couleur de l'arc-en-ciel par la décomposition de la lumière blanche ?", options: ["La réflexion", "La réfraction (et la dispersion)", "La diffraction", "L'interférence"], answer: 1 },
                 { q: "Quelle est l'unité de mesure de l'énergie thermique ou du travail ?", options: ["Le Joule", "Le Watt", "Le degré Celsius", "Le Kelvin"], answer: 0 },
                 { q: "Selon le principe d'Archimède, tout corps plongé dans un fluide subit une poussée verticale :", options: ["Vers le bas", "Vers le haut", "Horizontalement", "Nulle"], answer: 1 },
-                { q: "Quelle est la fréquence du secteur électrique domestique standard dans de nombreux pays (comme en Europe) ?", options: ["50 Hz", "60 Hz", "100 Hz", "0 Hz"], answer: 0 },
+                { q: "Quelle est la fréquence du secteur électrique domestique standard dans de nombreux pays ?", options: ["50 Hz", "60 Hz", "100 Hz", "0 Hz"], answer: 0 },
                 { q: "Quel type de lentille fait converger les rayons lumineux ?", options: ["Lentille divergente", "Lentille convergente (ou biconvexe)", "Miroir plan", "Lentille concave"], answer: 1 },
                 { q: "Quelle est la température du zéro absolu en degrés Celsius ?", options: ["0 °C", "-100 °C", "-273,15 °C", "-1000 °C"], answer: 2 },
-                { q: "Quelle grandeur physique se conserve dans un système isolé (principe de conservation) ?", options: ["La vitesse", "L'énergie totale", "La température", "La force"], answer: 1 },
+                { q: "Quelle grandeur physique se conserve dans un système isolé ?", options: ["La vitesse", "L'énergie totale", "La température", "La force"], answer: 1 },
                 { q: "Comment appelle-t-on le passage direct de l'état solide à l'état gazeux ?", options: ["La fusion", "La sublimation", "La vaporisation", "La liquéfaction"], answer: 1 },
                 { q: "Quel est l'instrument de mesure utilisé pour déterminer la masse d'un objet par comparaison ?", options: ["Le dynamomètre", "La balance", "Le chronomètre", "Le thermomètre"], answer: 1 },
                 { q: "Quelle est la valeur de la pression atmosphérique normale au niveau de la mer ?", options: ["1 atm (ou environ 101 325 Pa)", "10 Pa", "1000 Pa", "10 Pa"], answer: 0 },
@@ -626,7 +642,7 @@
             isRiskMode = riskMode;
             currentSubject = subject;
 
-            // Melanje kesyon yo epi pran 5 nan gwo baz done a owaza
+            // Melanje tout kesyon nan matyè a epi pran 5 nan gwo baz done a o waza pou evite repetisyon
             let pool = [...(questionsData[subject] || questionsData['AprendreOuLaisser'])];
             pool.sort(() => Math.random() - 0.5);
             sessionQuestions = pool.slice(0, 5);
