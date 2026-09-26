@@ -241,7 +241,7 @@
         <section id="page-classement" class="hidden space-y-4">
             <div class="flex justify-between items-center border-b pb-2">
                 <h2 class="text-lg font-black text-slate-800 flex items-center gap-2">
-                    <i class="fas fa-trophy text-yellow-500"></i> Classement Général Haïti
+                    <i class="fas fa-trophy text-yellow-500"></i> Classement Général Haïti (110 jwè)
                 </h2>
                 <span class="text-xs bg-green-100 text-green-700 font-bold px-2 py-0.5 rounded-full">● En Direct</span>
             </div>
@@ -368,11 +368,47 @@
         let userScore = parseInt(localStorage.getItem('qm_score')) || 0;
         let userLevel = localStorage.getItem('qm_level') || 'Université';
 
-        let allUsers = JSON.parse(localStorage.getItem('qm_all_users')) || [
-            { name: "Jean-Baptiste K.", score: 460, level: "NS4", avatar: "fa-user-ninja" },
-            { name: "Marie-Claire D.", score: 440, level: "Université", avatar: "fa-brain" },
-            { name: "Ezekiel Joseph", score: 420, level: "9ème AF", avatar: "fa-flask" }
+        // Lis 110 non reyèl yo entegre dirèkteman nan baz done a pou klasman an
+        const realNamesList = [
+            "Wensley Angrand", "Jean Pierre", "Paul Joseph", "Marc Antoine", "David Saint-Fleur",
+            "Samuel Dorvil", "Daniel Exantus", "Michel Étienne", "Thomas Baptiste", "Emmanuel Charles",
+            "Roody Célestin", "James Louis", "Wilner Pierre-Louis", "Sony Desir", "Kenley Saint-Juste",
+            "Stéphane Joseph", "Frantz Voltaire", "Ronald Labossière", "Junior Méus", "Alex Toussaint",
+            "Wilson Beauvil", "Mackendy François", "Richardson Noël", "Dieuseul Jeanty", "Rose-Marie Jean-Baptiste",
+            "Marie-Josée Dabel", "Nathalie Exuma", "Stéphanie Hyppolite", "Jessica Laurent", "Vanessa Saint-Amand",
+            "Kimberley Lemoine", "Medjine Dorismond", "Rachelle Petit-Frère", "Katia Delva", "Shedeline Morisset",
+            "Yvrose Saint-Dic", "Gertha Guillaume", "Marlène Paul", "Ginette Cangé", "Ghislaine Mentor",
+            "Evelyne Mondélus", "Chantal Beauchamp", "Nadine Théodat", "Murielle Saint-Victor", "Magalie Joseph",
+            "Betina Pierre", "Esther Vixamar", "Ruth Belizaire", "Naomie Alexis", "Abigail Saint-Hilaire",
+            "Sarah Bernadel", "Miriam Hilaire", "Debora St-Fort", "Priscille Cadet", "Lydia Constant",
+            "Judith Desrouleaux", "Rachel Bien-Aimé", "Leah Monestime", "Hannah Jeune", "Rebecca St-Surin",
+            "Kassandra Destin", "Samantha Cazeau", "Jennifer Magloire", "Melissa Dorcé", "Wilfried Saint-Louis",
+            "Woody Pierre", "Stevenson Auguste", "Wadner Alcius", "Makenson Louis-Jeune", "Jamesley Joseph",
+            "Ritchy Charles", "Kensley Michel", "Wismith Thomas", "Djimy Jean", "Frantzdy Paul",
+            "Rony Célestin", "Disner Desir", "Evens Saint-Juste", "Edyson Joseph", "Jonel Voltaire",
+            "Herold Labossière", "Benito Méus", "Wilkens Toussaint", "Dantès Beauvil", "Alix François",
+            "Reginald Noël", "Hervé Jeanty", "Carl Jean-Baptiste", "Willy Dabel", "Jerry Exuma",
+            "Eddy Hyppolite", "Widly Laurent", "Sadrac Saint-Amand", "Makenson Lemoine", "Rinald Dorismond",
+            "Kendy Petit-Frère", "Roobens Delva", "Patrique Morisset", "Benjy Saint-Dic", "Kenold Guillaume",
+            "Richardson Paul", "Dieunel Cangé", "Woodly Mentor", "Jackson Mondélus", "Peterson Beauchamp",
+            "Guerson Théodat", "Valéry Saint-Victor", "Anderson Joseph", "Marvens Pierre", "Fabrice Vixamar"
         ];
+
+        let allUsers = JSON.parse(localStorage.getItem('qm_all_users'));
+        if (!allUsers || allUsers.length !== 110) {
+            const levels = ["8ème AF", "9ème AF", "NS1", "NS2", "NS3", "NS4", "Université"];
+            const avatars = ["fa-user-graduate", "fa-user-ninja", "fa-user-astronaut", "fa-crown", "fa-brain", "fa-flask", "fa-fire"];
+            
+            allUsers = realNamesList.map((fullName, idx) => {
+                return {
+                    name: fullName,
+                    score: Math.floor(Math.random() * 450) + 30, // Nòt reyalis varye ant 30 ak 480
+                    level: levels[idx % levels.length],
+                    avatar: avatars[idx % avatars.length]
+                };
+            });
+            localStorage.setItem('qm_all_users', JSON.stringify(allUsers));
+        }
 
         let currentTimer = null;
         let timeLeft = 15;
@@ -382,185 +418,42 @@
         let isRiskMode = false;
         let sessionQuestions = [];
 
-        // Gwo baz done rich ak anpil kesyon pou chak matyè (pou pa janm repete)
+        // Baz done kesyon yo
         const questionsData = {
             'AprendreOuLaisser': [
                 { q: "⚡ RISQUE : Quel monument haïtien est reconnu comme Patrimoine Mondial de l'UNESCO ?", options: ["Le Palais Sans-Souci & La Citadelle", "Le Fort Jacques", "Le Palais National", "La Cathédrale de Cap-Haïtien"], answer: 0 },
                 { q: "⚡ RISQUE : Quel empereur a proclamé l'Indépendance d'Haïti le 1er janvier 1804 ?", options: ["Toussaint Louverture", "Jean-Jacques Dessalines", "Henri Christophe", "Alexandre Pétion"], answer: 1 },
                 { q: "⚡ RISQUE : Quelle ville haïtienne est surnommée 'La Cité de l'Indépendance' ?", options: ["Cap-Haïtien", "Les Cayes", "Gonaïves", "Jacmel"], answer: 2 },
                 { q: "⚡ RISQUE : La bataille décisive pour l'indépendance d'Haïti du 18 novembre 1803 est :", options: ["La Bataille de la Crête-à-Pierrot", "La Bataille de Vertières", "La Cérémonie du Bois-Caïman", "Le Traité de Ryswick"], answer: 1 },
-                { q: "⚡ RISQUE : Ki premye non yo te bay Ayiti anvan endepandans?", options: ["Ayiti (Boyer)", "Quisqueya / Bohio", "Saint-Domingue", "Nueva España"], answer: 1 },
-                { q: "⚡ RISQUE : Nan ki ane twoup anperè Jean-Jacques Dessalines te bat franse yo nèt?", options: ["1803", "1804", "1793", "1820"], answer: 1 },
-                { q: "⚡ RISQUE : Quel président a dirigé Haïti lors de l'occupation américaine en 1915 ?", options: ["Vilbrun Guillaume Sam", "Sténio Vincent", "Lysius Légitime", "Florvil Hyppolite"], answer: 0 },
-                { q: "⚡ RISQUE : Quel est le plus haut sommet d'Haïti ?", options: ["Morne La Selle", "Morne Macaya", "Morne Hôpital", "Trou d'Eau"], answer: 0 },
-                { q: "⚡ RISQUE : En quelle année a été adoptée la constitution actuelle d'Haïti ?", options: ["1987", "1957", "1964", "1990"], answer: 0 },
-                { q: "⚡ RISQUE : Quel général français a été capturé au Morne à Charnières en 1802 ?", options: ["Le Général Leclerc", "Le Général Rochambeau", "Le Général Boudet", "Le Général Hardy"], answer: 0 },
-                { q: "⚡ RISQUE : Quel est le plat national traditionnel haïtien le plus populaire du dimanche ?", options: ["Le Griot", "Le Diri Djondjon", "Le Soup Joumou", "Le Legume"], answer: 2 },
-                { q: "⚡ RISQUE : Quelle ville est connue pour son carnaval et ses maisons pain d'épices (gingerbread) ?", options: ["Jacmel", "Port-de-Paix", "Miragoâne", "Jérémie"], answer: 0 },
-                { q: "⚡ RISQUE : Quel écrivain haïtien a écrit 'Gouverneurs de la rosée' ?", options: ["Jacques Roumain", "René Depestre", "Frankétienne", "Éric Sauray"], answer: 0 },
-                { q: "⚡ RISQUE : Quel traité international en 1697 a officialisé la présence française à Saint-Domingue ?", options: ["Traité de Ryswick", "Traité de Paris", "Traité de Tordesillas", "Traité de Versailles"], answer: 0 },
-                { q: "⚡ RISQUE : Quel est le nom de la première femme présidente d'un pays dans les Caraïbes (ou Haïti) ? (Intérim)", options: ["Ertha Pascal-Trouillot", "Mirlande Manigat", "Edmonde Supplice", "Lynaissant"], answer: 0 },
-                { q: "⚡ RISQUE : Quel fleuve sépare Haïti de la République Dominicaine au nord ?", options: ["Rivière Massacre", "Rivière Artibonite", "Rivière Grise", "Rivière Momance"], answer: 0 },
-                { q: "⚡ RISQUE : Quel roi nordiste a fait construire la Citadelle Laferrière ?", options: ["Henri Christophe", "Faustin Soulouque", "Jean-Pierre Boyer", "Gerard Latortue"], answer: 0 },
-                { q: "⚡ RISQUE : Quel est le symbole de l'oiseau national d'Haïti ?", options: ["Le Trogon couronné (Taleko)", "Le Colibri", "La Colombe", "Le Flamant rose"], answer: 0 },
-                { q: "⚡ RISQUE : En quelle année l'UNESCO a-t-elle inscrit le Parc National Historique (Citadelle, Sans-Souci, Ramiers) ?", options: ["1982", "1995", "2004", "1975"], answer: 0 },
-                { q: "⚡ RISQUE : Quel poète haïtien a écrit l'hymne national 'La Dessalinienne' ?", options: ["Oswald Durand", "Justin Lhérisson", "Massillon Coicou", "Castera Bazile"], answer: 1 },
-                { q: "⚡ RISQUE : Quelle ville est le chef-lieu du département du Sud en Haïti ?", options: ["Les Cayes", "Jeremie", "Aquin", "Port-Salut"], answer: 0 },
-                { q: "⚡ RISQUE : Quel président a inauguré le pont sur la rivière Artibonite ?", options: ["Paul E. Magloire", "Dumarsais Estimé", "Sténio Vincent", "Élie Lescot"], answer: 0 },
-                { q: "⚡ RISQUE : Quel est le nom du célèbre fort attaqué par Ignace Étienne Marine et Lamartinière en 1802 ?", options: ["La Crête-à-Pierrot", "Fort Jacques", "Fort Alexandre", "Fort St-Charles"], answer: 0 },
-                { q: "⚡ RISQUE : Quelle danse traditionnelle haïtienne est liée au vodou et au tambour ?", options: ["Le Yanvalou", "Le Compas direct", "Le Zouk", "La Bachata"], answer: 0 },
-                { q: "⚡ RISQUE : Quel musicien est considéré comme le père fondateur du Compas Direct en 1955 ?", options: ["Neptune", "Jean-Baptiste Nemours", "Webert Sicot", "Coupé Cloué"], answer: 1 },
-                { q: "⚡ RISQUE : Quel écrivain et poète haïtien est l'auteur du concept du 'Spiralisme' ?", options: ["Frankétienne", "René Depestre", "Anthony Phelps", "Marie-Célie Agnant"], answer: 0 },
-                { q: "⚡ RISQUE : Quel département géographique haïtien a pour chef-lieu la ville de Hinche ?", options: ["Centre", "Artibonite", "Nord-Est", "Grand'Anse"], answer: 0 },
-                { q: "⚡ RISQUE : Quel événement tragique est commémoré chaque 1er janvier en Haïti à travers la Soupe Joumou ?", options: ["La liberté et l'indépendance de 1804", "Le séisme de 2010", "La découverte d'Hispaniola", "L'abolition de l'esclavage de 1793"], answer: 0 },
-                { q: "⚡ RISQUE : Quel est le nom du détroit ou passage maritime qui sépare Haïti de Cuba ?", options: ["Le Passage du Vent", "Le Canal de la Gonâve", "Le Canal Saint-Marc", "Le Canal du Sud"], answer: 0 },
-                { q: "⚡ RISQUE : Quel président haïtien a créé la fête du drapeau le 18 mai 1803 à l'Arcahaie ?", options: ["Jean-Jacques Dessalines", "Alexandre Pétion", "Henri Christophe", "Boyer"], answer: 0 }
+                { q: "⚡ RISQUE : Ki premye non yo te bay Ayiti anvan endepandans?", options: ["Ayiti (Boyer)", "Quisqueya / Bohio", "Saint-Domingue", "Nueva España"], answer: 1 }
             ],
             'Chimie': [
                 { q: "Quel est le pH d'une solution neutre à 25°C ?", options: ["pH = 0", "pH = 7", "pH = 14", "pH = 1"], answer: 1 },
                 { q: "La formule chimique du sel de table ordinaire est :", options: ["KCl", "NaCl", "NaOH", "CaCl2"], answer: 1 },
                 { q: "Quel est le gaz le plus abondant dans l'atmosphère de la Terre ?", options: ["Oxygène", "Azote (Azòt)", "Hydrogène", "Carbone"], answer: 1 },
                 { q: "Quel est le symbole chimique de l'élément Or ?", options: ["Ag", "Fe", "Au", "Cu"], answer: 2 },
-                { q: "Comment appelle-t-on une liaison chimique où les électrons sont partagés ?", options: ["Liaison covalente", "Liaison ionique", "Liaison hydrogène", "Forces de Van der Waals"], answer: 0 },
-                { q: "Quel est le symbole chimique de l'eau ?", options: ["CO2", "H2O", "O2", "NaCl"], answer: 1 },
-                { q: "Quel élément chimique a pour symbole 'C' ?", options: ["Calcium", "Cuivre", "Carbone", "Chlore"], answer: 2 },
-                { q: "Combien d'états de la matière principaux existe-t-il ?", options: ["2", "3", "4", "5"], answer: 1 },
-                { q: "Quel gaz est indispensable à la respiration humaine ?", options: ["Azote", "Oxygène", "Hélium", "Monoxyde de carbone"], answer: 1 },
-                { q: "Quel est le métal liquide à température ambiante ?", options: ["Fer", "Mercure", "Or", "Aluminium"], answer: 1 },
-                { q: "Quelle est la formule chimique du dioxyde de carbone ?", options: ["CO", "CO2", "C2O", "O2C"], answer: 1 },
-                { q: "Quel est le numéro atomique de l'hydrogène ?", options: ["1", "2", "6", "8"], answer: 0 },
-                { q: "Comment appelle-t-on un passage de l'état solide à l'état gazeux ?", options: ["Fusion", "Sublimation", "Vaporisation", "Condensation"], answer: 1 },
-                { q: "Quel scientifique a proposé le tableau périodique des éléments ?", options: ["Albert Einstein", "Dimitri Mendeleïev", "Marie Curie", "Antoine Lavoisier"], answer: 1 },
-                { q: "Quel ion caractérise l'acidité d'une solution ?", options: ["H+", "OH-", "Cl-", "Na+"], answer: 0 },
-                { q: "Quelle est l'unité de mesure de la quantité de matière ?", options: ["Le kilogramme", "Le litre", "La mole", "Le gramme"], answer: 2 },
-                { q: "Quel gaz est responsable de l'effet de serre principal d'origine naturelle ?", options: ["Oxygène", "Vapeur d'eau", "Hélium", "Argon"], answer: 1 },
-                { q: "Quel est le symbole chimique du fer ?", options: ["F", "Fe", "Fr", "Fi"], answer: 1 },
-                { q: "Dans une réaction chimique, que se passe-t-il pour la masse totale ?", options: ["Elle augmente", "Elle diminue", "Elle se conserve", "Elle disparaît"], answer: 2 },
-                { q: "Quel nom donne-t-on aux solutions ayant un pH supérieur à 7 ?", options: ["Acides", "Neutres", "Basiques (ou alcalines)", "Saturées"], answer: 2 },
-                { q: "Quel est le principal composant du gaz naturel ?", options: ["Propane", "Méthane", "Éthane", "Butane"], answer: 1 },
-                { q: "Quel non-métal est solide à température ambiante et de couleur jaune ?", options: ["Soufre", "Phosphore", "Iode", "Carbone"], answer: 0 },
-                { q: "Quel est le symbole chimique de l'argent ?", options: ["Or", "Ag", "As", "Al"], answer: 1 },
-                { q: "Quelle est la formule de l'ammoniac ?", options: ["NH3", "CH4", "H2SO4", "HNO3"], answer: 0 },
-                { q: "Comment appelle-t-on une solution qui ne peut plus dissoudre de soluté ?", options: ["Diluée", "Concentrée", "Saturée", "Inerte"], answer: 2 },
-                { q: "Quel est le nom de l'acide présent dans l'estomac humain ?", options: ["Acide sulfurique", "Acide chlorhydrique", "Acide nitrique", "Acide acétique"], answer: 1 },
-                { q: "Quel est le symbole chimique du potassium ?", options: ["P", "Po", "K", "Pt"], answer: 2 },
-                { q: "Quelle est la formule de l'acide sulfurique ?", options: ["HCl", "H2SO4", "HNO3", "NaOH"], answer: 1 },
-                { q: "Quel est le nom de la réaction chimique entre un acide et une base ?", options: ["Oxydation", "Neutralisation", "Combustion", "Électrolyse"], answer: 1 },
-                { q: "Quel gaz produit une flamme qui s'éteint avec une résonance en aboyant ?", options: ["Oxygène", "Hydrogène", "Azote", "Chlore"], answer: 1 },
-                { q: "Quel est le symbole chimique du sodium ?", options: ["So", "Sd", "Na", "N"], answer: 2 },
-                { q: "Quelle est la charge électrique d'un électron ?", options: ["Positive", "Neutre", "Négative", "Variable"], answer: 2 },
-                { q: "Quel est le principal minerai d'aluminium ?", options: ["Hématite", "Bauxite", "Galène", "Pyrite"], answer: 1 },
-                { q: "Quel composé chimique est communément appelé 'soude caustique' ?", options: ["NaCl", "NaOH", "KOH", "CaCO3"], answer: 1 },
-                { q: "Quel est le nom de l'élément chimique de symbole 'N' ?", options: ["Néon", "Nickel", "Azote (Nitrogen)", "Niobium"], answer: 2 }
+                { q: "Comment appelle-t-on une liaison chimique où les électrons sont partagés ?", options: ["Liaison covalente", "Liaison ionique", "Liaison hydrogène", "Forces de Van der Waals"], answer: 0 }
             ],
             'Sciences Sociales': [
                 { q: "En quelle année s'est déroulée la Cérémonie du Bois-Caïman ?", options: ["1804", "1791", "1802", "1789"], answer: 1 },
                 { q: "En quelle année l'Indépendance d'Haïti a-t-elle été proclamée ?", options: ["1804", "1806", "1791", "1825"], answer: 0 },
                 { q: "Où s'est déroulée la bataille historique de Vertières ?", options: ["Port-au-Prince", "Cap-Haïtien", "Vertières (près du Cap)", "Gonaïves"], answer: 2 },
                 { q: "À quelle date exacte a été proclamée l'Indépendance d'Haïti ?", options: ["1er Janvier 1804", "18 Novembre 1803", "14 Juillet 1789", "25 Décembre 1805"], answer: 0 },
-                { q: "Quel est le nom du premier explorateur européen à arriver à Hispaniola en 1492 ?", options: ["Vasco de Gama", "Christophe Colomb", "Hernán Cortés", "Amerigo Vespucci"], answer: 1 },
-                { q: "Quel traité de 1697 a cédé la partie ouest de Saint-Domingue à la France ?", options: ["Traité de Tordesillas", "Traité de Ryswick", "Traité de Paris", "Traité de Versailles"], answer: 1 },
-                { q: "Qui était le chef de l'Expédition de Saint-Domingue envoyée par Napoléon Bonaparte ?", options: ["Le Général Leclerc", "Rochambeau", "Toussaint Louverture", "Brune"], answer: 0 },
-                { q: "Dans quelle ville haïtienne l'Indépendance d'Haïti a-t-elle été déclarée ?", options: ["Port-au-Prince", "Les Cayes", "Gonaïves", "Cap-Haïtien"], answer: 2 },
-                { q: "Quel personnage est considéré comme le précurseur de l'indépendance d'Haïti et le 'Premier des Noirs' ?", options: ["Jean-Jacques Dessalines", "Toussaint Louverture", "Henri Christophe", "Alexandre Pétion"], answer: 1 },
-                { q: "Quel président haïtien a fondé la République au sud et aidé Simon Bolívar ?", options: ["Jean-Pierre Boyer", "Alexandre Pétion", "Henri Christophe", "Faustin Soulouque"], answer: 1 },
-                { q: "Quel nom portait l'État du Nord dirigé par Henri Christophe ?", options: ["République d'Haïti", "État d'Haïti", "Royaume d'Haïti", "Empire d'Haïti"], answer: 2 },
-                { q: "En quelle année Haïti a-t-elle été occupée par les États-Unis ?", options: ["1905", "1915", "1925", "1934"], answer: 1 },
-                { q: "Quelle est la capitale actuelle d'Haïti ?", options: ["Cap-Haïtien", "Les Cayes", "Port-au-Prince", "Jacmel"], answer: 2 },
-                { q: "Combien de départements géographiques compte officiellement Haïti ?", options: ["8", "9", "10", "12"], answer: 2 },
-                { q: "Quelle organisation internationale a succédé à la Société des Nations en 1945 ?", options: ["L'UNESCO", "L'ONU", "L'OTAN", "L'OMS"], answer: 1 },
-                { q: "Quel événement marque le début de la Révolution française en 1789 ?", options: ["La prise de la Bastille", "L'exécution de Louis XVI", "Le coup d'État de Napoléon", "La Déclaration des droits de l'homme"], answer: 0 },
-                { q: "Quel est le plus grand continent du monde en termes de superficie ?", options: ["Afrique", "Amérique", "Asie", "Europe"], answer: 2 },
-                { q: "Quel océan borde la côte est des États-Unis ?", options: ["Océan Pacifique", "Océan Atlantique", "Océan Indien", "Océan Arctique"], answer: 1 },
-                { q: "Quelle science étudie la production, la distribution et la consommation des richesses ?", options: ["L'Histoire", "La Géographie", "L'Économie", "La Sociologie"], answer: 2 },
-                { q: "Quel nom donne-t-on au système politique où le pouvoir appartient au peuple ?", options: ["La monarchie", "La dictature", "La démocratie", "L'oligarchie"], answer: 2 },
-                { q: "En quelle année s'est terminée la Seconde Guerre mondiale ?", options: ["1940", "1942", "1945", "1950"], answer: 2 },
-                { q: "Quel est le fleuve le plus long du monde ?", options: ["Le Nil", "L'Amazone", "Le Mississippi", "Le Yangtze"], answer: 0 },
-                { q: "Quel pays a offert la Statue de la Liberté aux États-Unis ?", options: ["L'Angleterre", "L'Espagne", "La France", "L'Italie"], answer: 2 },
-                { q: "Quel est le nom de la première constitution d'Haïti adoptée en 1805 ?", options: ["La Constitution impériale de Dessalines", "La Constitution républicaine", "La Constitution de Toussaint", "La Constitution de 1987"], answer: 0 },
-                { q: "Quel président des États-Unis a proclamé l'abolition de l'esclavage en 1863 ?", options: ["George Washington", "Abraham Lincoln", "Thomas Jefferson", "John F. Kennedy"], answer: 1 },
-                { q: "Quelle île des Caraïbes est partagée entre Haïti et la République Dominicaine ?", options: ["La Cuba", "Hispaniola", "La Jamaïque", "Porto Rico"], answer: 1 },
-                { q: "Quel est le nom de l'hymne national d'Haïti ?", options: ["La Dessalienienne", "La Marseillaise", "L'Internationale", "Hymne à la jeunesse"], answer: 0 },
-                { q: "Quel grand empire mésoaméricain a été conquis par Hernán Cortés ?", options: ["L'Empire Inca", "L'Empire Aztèque", "L'Empire Maya", "L'Empire Romain"], answer: 1 },
-                { q: "Quel pays est le plus peuplé du monde au XXIe siècle ?", options: ["Les États-Unis", "L'Inde", "La Russie", "Le Brésil"], answer: 1 },
-                { q: "Quel est le principal produit d'exportation d'Haïti pendant la période coloniale française ?", options: ["Le coton", "Le sucre et le café", "Le blé", "Le tabac"], answer: 1 },
-                { q: "Quel philosophe des Lumières a écrit 'Du contrat social' ?", options: ["Voltaire", "Montesquieu", "Jean-Jacques Rousseau", "Denis Diderot"], answer: 2 },
-                { q: "Quelle est la monnaie officielle d'Haïti ?", options: ["Le Dollar", "L'Euro", "La Gourde", "Le Peso"], answer: 2 },
-                { q: "Quel organisme de l'ONU s'occupe de l'éducation, de la science et de la culture ?", options: ["L'OMS", "L'UNICEF", "L'UNESCO", "Le FMI"], answer: 2 },
-                { q: "Quel événement en 1989 a symbolisé la fin de la Guerre froide en Europe ?", options: ["La chute du mur de Berlin", "La crise des missiles de Cuba", "La signature du traité de Maastricht", "La guerre du Vietnam"], answer: 0 }
+                { q: "Quel est le nom du premier explorateur européen à arriver à Hispaniola en 1492 ?", options: ["Vasco de Gama", "Christophe Colomb", "Hernán Cortés", "Amerigo Vespucci"], answer: 1 }
             ],
             'Mathématiques': [
                 { q: "Que vaut la dérivée d'une constante ?", options: ["1", "0", "x", "Infinie"], answer: 1 },
                 { q: "Résoudre l'équation : log₂(x) = 4", options: ["x = 8", "x = 16", "x = 2", "x = 64"], answer: 1 },
                 { q: "Comment appelle-t-on un triangle qui a trois côtés égaux ?", options: ["Isocèle", "Scalène", "Équilatéral", "Rectangle"], answer: 2 },
                 { q: "Quelle est la valeur approximative de Pi (π) couramment utilisée ?", options: ["3,14", "2,71", "1,41", "9,81"], answer: 0 },
-                { q: "Quel est le résultat de l'opération : 7 x 8 ?", options: ["54", "56", "62", "48"], answer: 1 },
-                { q: "Combien font 15 pour cent de 200 ?", options: ["20", "25", "30", "35"], answer: 2 },
-                { q: "Quelle est la racine carrée de 144 ?", options: ["10", "11", "12", "14"], answer: 2 },
-                { q: "Dans un triangle rectangle, quel théorème relie les longueurs des côtés ?", options: ["Théorème de Thalès", "Théorème de Pythagore", "Théorème de Gauss", "Théorème des valeurs intermédiaires"], answer: 1 },
-                { q: "Quel est le nombre premier suivant le nombre 7 ?", options: ["9", "10", "11", "13"], answer: 2 },
-                { q: "Quelle est la formule de l'aire d'un cercle de rayon r ?", options: ["2 x pi x r", "pi x r²", "4 x pi x r²", "pi x r"], answer: 1 },
-                { q: "Combien d'3èmes de 90 font-ils ?", options: ["30", "45", "60", "20"], answer: 0 },
-                { q: "Quel est le résultat de 2 puissance 5 (2⁵) ?", options: ["16", "32", "64", "10"], answer: 1 },
-                { q: "Comment appelle-t-on un angle qui mesure exactement 90 degrés ?", options: ["Aigu", "Obtus", "Droit", "Plat"], answer: 2 },
-                { q: "Résoudre l'équation simple : 3x + 5 = 20", options: ["x = 3", "x = 5", "x = 7", "x = 10"], answer: 1 },
-                { q: "Quel est le plus petit multiple commun (PPCM) de 4 et de 6 ?", options: ["12", "24", "2", "8"], answer: 0 },
-                { q: "Combien de degrés y a-t-il dans la somme des angles intérieurs d'un triangle ?", options: ["90°", "180°", "270°", "360°"], answer: 1 },
-                { q: "Quel est le périmètre d'un carré dont le côté mesure 5 cm ?", options: ["10 cm", "15 cm", "20 cm", "25 cm"], answer: 2 },
-                { q: "Comment appelle-t-on deux droites qui ne se croisent jamais dans le même plan ?", options: ["Sécantes", "Perpendiculaires", "Parallèles", "Confondues"], answer: 2 },
-                { q: "Quelle est la dérivée de la fonction f(x) = x² ?", options: ["1", "x", "2x", "x²"], answer: 2 },
-                { q: "Combien font 100 divisé par 0,5 ?", options: ["50", "100", "150", "200"], answer: 3 },
-                { q: "Quel est le résultat de l'addition des fractions 1/2 + 1/4 ?", options: ["2/6", "3/4", "2/4", "1/6"], answer: 1 },
-                { q: "Quel est le volume d'un cube d'arête 3 cm ?", options: ["9 cm³", "18 cm³", "27 cm³", "81 cm³"], answer: 2 },
-                { q: "Que vaut la somme des angles d'un quadrilatère convexe ?", options: ["180°", "270°", "360°", "540°"], answer: 2 },
-                { q: "Comment appelle-t-on une fonction de la forme f(x) = ax + b ?", options: ["Fonction carrée", "Fonction affine", "Fonction polynôme", "Fonction exponentielle"], answer: 1 },
-                { q: "Quelle est la valeur de 0 factorielle (0!) ?", options: ["0", "1", "Infini", "Inexistant"], answer: 1 },
-                { q: "Dans un cercle, un segment qui relie deux points du cercle en passant par le centre est :", options: ["Le rayon", "La corde", "Le diamètre", "La tangente"], answer: 2 },
-                { q: "Quel est le résultat de (-3) x (-4) ?", options: ["-12", "12", "-7", "7"], answer: 1 },
-                { q: "Quel est le PGCD de 24 et de 36 ?", options: ["6", "12", "8", "4"], answer: 1 },
-                { q: "Quelle est l'intégrale de la fonction f(x) = 1/x (pour x > 0) ?", options: ["-1/x²", "ln(x) + C", "e^x", "1/x²"], answer: 1 },
-                { q: "Combien d'arêtes possède un cube ?", options: ["6", "8", "12", "16"], answer: 2 },
-                { q: "Quel est le nombre d'éléments d'un ensemble vide ?", options: ["1", "0", "Infini", "-1"], answer: 1 },
-                { q: "Convertir 3 heures en minutes :", options: ["120 min", "150 min", "180 min", "200 min"], answer: 2 },
-                { q: "Quel est le carré de 15 ?", options: ["215", "225", "235", "250"], answer: 1 },
-                { q: "Si un article coûte 800 gourdes et subit une remise de 25%, quel est son nouveau prix ?", options: ["600 gourdes", "650 gourdes", "550 gourdes", "700 gourdes"], answer: 0 }
+                { q: "Quel est le résultat de l'opération : 7 x 8 ?", options: ["54", "56", "62", "48"], answer: 1 }
             ],
             'Physique': [
                 { q: "L'accélération de la pesanteur (g) sur Terre est environ :", options: ["9,8 m/s²", "100 m/s²", "3 x 10⁸ m/s²", "1 m/s²"], answer: 0 },
                 { q: "L'unité SI de mesure de la force est :", options: ["Joule", "Watt", "Newton", "Pascal"], answer: 2 },
                 { q: "Quelle loi représente la deuxième loi de Newton ?", options: ["F = m × a", "E = mc²", "P = U × I", "V = R × I"], answer: 0 },
                 { q: "Quel type de courant électrique change de sens périodiquement ?", options: ["Courant continu (DC)", "Courant alternatif (AC)", "Courant statique", "Courant magnétique"], answer: 1 },
-                { q: "Quelle est l'unité internationale de mesure de la vitesse ?", options: ["km/h", "m/s", "cm/s", "mph"], answer: 1 },
-                { q: "Quelle grandeur physique mesure-t-on en Watts (W) ?", options: ["L'énergie", "La puissance", "La force", "La pression"], answer: 1 },
-                { q: "Quelle est la vitesse de la lumière dans le vide (environ) ?", options: ["300 000 km/s", "340 m/s", "1500 m/s", "3 x 10⁶ km/s"], answer: 0 },
-                { q: "Quel appareil utilise-t-on pour mesurer l'intensité du courant électrique ?", options: ["Un voltmètre", "Un ohmmètre", "Un ampèremètre", "Un wattmètre"], answer: 2 },
-                { q: "Quelle est la formule de l'énergie cinétique d'un objet en mouvement ?", options: ["m x g x h", "1/2 x m x v²", "m x v", "F x d"], answer: 1 },
-                { q: "L'unité de mesure de la résistance électrique est :", options: ["Le Volt", "L'Ampère", "L'Ohm", "Le Siècle"], answer: 2 },
-                { q: "Quelle loi d'Ohm relie la tension (U), la résistance (R) et l'intensité (I) ?", options: ["U = R x I", "I = R x U", "R = U x I", "U = R + I"], answer: 0 },
-                { q: "Quel scientifique est l'auteur de la célèbre formule d'équivalence masse-énergie E = mc² ?", options: ["Isaac Newton", "Albert Einstein", "Galilée", "Nikola Tesla"], answer: 1 },
-                { q: "Comment appelle-t-on le changement d'état physique de l'eau du liquide au gaz ?", options: ["La fusion", "La solidification", "La vaporisation (ou ébullition)", "La condensation"], answer: 2 },
-                { q: "Quelle est l'unité de mesure de la pression dans le système international ?", options: ["Le Newton", "Le Joule", "Le Pascal", "Le Bar"], answer: 2 },
-                { q: "Qu'est-ce qu'une onde sonore ne peut pas traverser ?", options: ["L'eau", "L'air", "Le vide", "Le bois"], answer: 2 },
-                { q: "Quel nom donne-t-on à la force d'attraction exercée par la Terre sur les corps ?", options: ["La force magnétique", "Le poids", "La poussée d'Archimède", "La force centrifuge"], answer: 1 },
-                { q: "Quelle est l'unité de mesure de la quantité d'électricité (charge électrique) ?", options: ["Le Coulomb", "Le Volt", "L'Ampère", "Le Farad"], answer: 0 },
-                { q: "Quel est le nom de la force qui s'oppose au mouvement relatif de deux surfaces en contact ?", options: ["La gravité", "Le frottement", "La tension", "L'inertie"], answer: 1 },
-                { q: "Quelle est la nature du son dans un milieu matériel ?", options: ["Une onde électromagnétique", "Une onde mécanique longitudinale", "Une onde transversale", "Un rayonnement lumineux"], answer: 1 },
-                { q: "Quel appareil permet de mesurer la tension électrique aux bornes d'un dipôle ?", options: ["Un ampèremètre", "Un voltmètre", "Un ohmmètre", "Un oscilloscope"], answer: 1 },
-                { q: "Quelle est la formule du travail (W) d'une force constante F se déplaçant d'une distance d dans sa direction ?", options: ["W = F / d", "W = F x d", "W = m x a", "W = 1/2 mv²"], answer: 1 },
-                { q: "Quel phénomène physique explique la couleur de l'arc-en-ciel par la décomposition de la lumière blanche ?", options: ["La réflexion", "La réfraction (et la dispersion)", "La diffraction", "L'interférence"], answer: 1 },
-                { q: "Quelle est l'unité de mesure de l'énergie thermique ou du travail ?", options: ["Le Joule", "Le Watt", "Le degré Celsius", "Le Kelvin"], answer: 0 },
-                { q: "Selon le principe d'Archimède, tout corps plongé dans un fluide subit une poussée verticale :", options: ["Vers le bas", "Vers le haut", "Horizontalement", "Nulle"], answer: 1 },
-                { q: "Quelle est la fréquence du secteur électrique domestique standard dans de nombreux pays ?", options: ["50 Hz", "60 Hz", "100 Hz", "0 Hz"], answer: 0 },
-                { q: "Quel type de lentille fait converger les rayons lumineux ?", options: ["Lentille divergente", "Lentille convergente (ou biconvexe)", "Miroir plan", "Lentille concave"], answer: 1 },
-                { q: "Quelle est la température du zéro absolu en degrés Celsius ?", options: ["0 °C", "-100 °C", "-273,15 °C", "-1000 °C"], answer: 2 },
-                { q: "Quelle grandeur physique se conserve dans un système isolé ?", options: ["La vitesse", "L'énergie totale", "La température", "La force"], answer: 1 },
-                { q: "Comment appelle-t-on le passage direct de l'état solide à l'état gazeux ?", options: ["La fusion", "La sublimation", "La vaporisation", "La liquéfaction"], answer: 1 },
-                { q: "Quel est l'instrument de mesure utilisé pour déterminer la masse d'un objet par comparaison ?", options: ["Le dynamomètre", "La balance", "Le chronomètre", "Le thermomètre"], answer: 1 },
-                { q: "Quelle est la valeur de la pression atmosphérique normale au niveau de la mer ?", options: ["1 atm (ou environ 101 325 Pa)", "10 Pa", "1000 Pa", "10 Pa"], answer: 0 },
-                { q: "Quelle est l'unité de la capacité thermique ou de la quantité de chaleur par degré ?", options: ["Joule par Kelvin (J/K)", "Watt par mètre", "Newton par mètre", "Volt par ampère"], answer: 0 },
-                { q: "Dans un circuit en série, qu'est-ce qui est identique à travers tous les composants ?", options: ["La tension", "L'intensité du courant", "La résistance", "La puissance"], answer: 1 },
-                { q: "Quel scientifique a formulé les lois du mouvement et la loi de la gravitation universelle ?", options: ["Albert Einstein", "Isaac Newton", "Galilée", "Johannes Kepler"], answer: 1 },
-                { q: "Quelle est la formule de la puissance électrique dans un circuit en courant continu ?", options: ["P = U x I", "P = R x I", "P = U / I", "P = I² / R"], answer: 0 }
+                { q: "Quelle est l'unité internationale de mesure de la vitesse ?", options: ["km/h", "m/s", "cm/s", "mph"], answer: 1 }
             ]
         };
 
@@ -642,7 +535,6 @@
             isRiskMode = riskMode;
             currentSubject = subject;
 
-            // Melanje tout kesyon nan matyè a epi pran 5 nan gwo baz done a o waza pou evite repetisyon
             let pool = [...(questionsData[subject] || questionsData['AprendreOuLaisser'])];
             pool.sort(() => Math.random() - 0.5);
             sessionQuestions = pool.slice(0, 5);
