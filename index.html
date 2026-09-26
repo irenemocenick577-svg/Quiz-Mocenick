@@ -26,7 +26,7 @@
         button:hover { opacity: 0.9; transform: translateY(-2px); }
         .btn-whatsapp { background: #25d366; margin-top: 10px; display: inline-block; text-align: center; text-decoration: none; color: white; padding: 12px; border-radius: 8px; font-weight: bold; }
         .option-btn { background: #334155; margin: 8px 0; text-align: left; color: #fff; border: 2px solid transparent; }
-        .option-btn:hover:not(:disabled) { background: #475569; }
+        .option-btn.hover:not(:disabled) { background: #475569; }
         .option-btn.correct { background-color: rgba(34, 197, 94, 0.2); border-color: var(--success); color: #86efac; }
         .option-btn.incorrect { background-color: rgba(239, 68, 68, 0.2); border-color: var(--error); color: #fca5a5; }
         .score-board { text-align: center; font-size: 1.5rem; margin: 20px 0; }
@@ -43,12 +43,11 @@
     <div id="home-screen" class="screen active">
         <h3>Byenveni nan Mòd Pwofil ou</h3>
         
-        <!-- ESTABILITE POU KÒNTE MOUN KI ENSKRI -->
         <div class="stats-box" id="user-count-display">
-            Moun ki deja enskri/jwe: 0
+            Moun ki deja enskri / jwe: 0
         </div>
 
-        <input type="text" id="username" placeholder="Antre non ou (pa egz. Irene Mocenick)" value="Irene Mocenick">
+        <input type="text" id="username" placeholder="Antre non ou (pa egzanp: Irene Mocenick)" value="Irene Mocenick">
         <select id="user-level">
             <option value="9e Fondamantal">9e Année Fondamentale</option>
             <option value="Economie / Inivèsite">Économie / Université</option>
@@ -71,7 +70,7 @@
     <div id="game-screen" class="screen">
         <div style="display: flex; justify-content: space-between; margin-bottom: 15px; color: #94a3b8; font-size: 0.9rem;">
             <span id="category-display">Domèn</span>
-            <span id="progress-display">Kesyon 1 / 35</span>
+            <span id="progress-display">Kesyon 1 / 10</span>
         </div>
         <h3 id="question-title" style="margin-bottom: 15px; font-size: 1.2rem;">Kesyon an ap parèt...</h3>
         <div id="options-container"></div>
@@ -95,14 +94,11 @@
     let score = 0;
     let activeQuestions = [];
 
-    // Fonksyon pou afiche kantite moun ki enskri yo lè paj la louvri
     function updateRegisteredCount() {
         let leaderboard = JSON.parse(localStorage.getItem("mocenick_scores") || "[]");
-        // Nou ka konte total patisipan ki anrejistre nan localStorage la
         document.getElementById("user-count-display").innerText = `Moun ki deja jwe / anrejistre: ${leaderboard.length}`;
     }
 
-    // Egzekite l an premye lè paj la chaje
     window.onload = function() {
         updateRegisteredCount();
     };
@@ -114,36 +110,11 @@
             { q: "Quel est le symbole chimique du fer ?", options: ["Fe", "F", "Fr", "Fa"], answer: 0 },
             { q: "Quelle est la valeur du pH d'une solution neutre à température ambiante ?", options: ["0", "7", "14", "5"], answer: 1 },
             { q: "Lequel de ces gaz est un gaz noble (gaz rare) ?", options: ["Oxygène", "Azote", "Hélium", "Hydrogène"], answer: 2 },
-            { q: "Quel est le nom chimique du sel de cuisine ?", options: ["Chlorure de sodium", "Chlorure de sodium", "Carbonate de sodium", "Nitrate de sodium"], answer: 1 },
+            { q: "Quel est le nom chimique du sel de cuisine ?", options: ["Chlorure de sodium", "Carbonate de sodium", "Nitrate de sodium", "Hydroxyde de sodium"], answer: 0 },
             { q: "Quel métal est liquide à température ambiante ?", options: ["Fer", "Or", "Mercure", "Cuivre"], answer: 2 },
             { q: "Quel gaz les plantes absorbent-elles pendant la photosynthèse ?", options: ["Oxygène", "Dioxyde de carbone", "Hydrogène", "Azote"], answer: 1 },
             { q: "Quel est le numéro atomique de l'hydrogène ?", options: ["1", "2", "6", "8"], answer: 0 },
-            { q: "Comment appelle-t-on les atomes qui ont le même nombre de protons mais un nombre de neutrons différent ?", options: ["Isotopes", "Isomères", "Isobares", "Allotropes"], answer: 0 },
-            { q: "Quelle est la formule chimique du gaz carbonique ?", options: ["CO", "CO2", "C2O", "O2C"], answer: 1 },
-            { q: "Quel nom donne-t-on aux composés contenant un groupe hydroxyle (-OH) ?", options: ["Acides", "Alcanes", "Alcools", "Éthers"], answer: 2 },
-            { q: "Quel élément chimique a pour symbole 'Au' ?", options: ["Argent", "Or", "Cuivre", "Aluminium"], answer: 1 },
-            { q: "Comment appelle-t-on une solution où la quantité de soluté dissous a atteint son maximum ?", options: ["Solution diluée", "Solution saturée", "Solution insaturée", "Solution corrompue"], answer: 1 },
-            { q: "Quelle est la charge électrique d'un électron ?", options: ["Positive", "Négative", "Neutre", "Variable"], answer: 1 },
-            { q: "Quel est le nom chimique du bicarbonate de soude ?", options: ["Carbonate de sodium", "Bicarbonate de sodium", "Hydroxyde de sodium", "Chlorure de sodium"], answer: 1 },
-            { q: "Quel type de liaison chimique est formé par le partage d'électrons ?", options: ["Liaison ionique", "Liaison covalente", "Liaison hydrogène", "Liaison métallique"], answer: 1 },
-            { q: "Comment appelle-t-on les atomes ou groupes d'atomes portant une charge électrique ?", options: ["Isotopes", "Molécules", "Ions", "Neutrons"], answer: 2 },
-            { q: "Quelle est la plus petite partie d'un élément qui conserve ses propriétés ?", options: ["Molécule", "Atome", "Cellule", "Élément"], answer: 1 },
-            { q: "Quel gaz est indispensable pour qu'une combustion ait lieu ?", options: ["Hydrogène", "Oxygène", "Azote", "Carbone"], answer: 1 },
-            { q: "Quelle valeur sur l'échelle de pH représente un acide fort ?", options: ["14", "7", "1", "10"], answer: 2 },
-            { q: "Quel est le symbole chimique de l'argent ?", options: ["Ag", "Au", "Al", "As"], answer: 0 },
-            { q: "Quel nom donne-t-on aux acides qui ne contiennent pas de carbone dans leur molécule ?", options: ["Acides organiques", "Acides minéraux (inorganiques)", "Acides gras", "Acide acétique"], answer: 1 },
-            { q: "Quel gaz est responsable de l'effet de serre et provient principalement des activités humaines ?", options: ["Oxygène", "Dioxyde de carbone", "Hydrogène", "Hélium"], answer: 1 },
-            { q: "Comment appelle-t-on la réaction où un acide réagit avec une base pour donner un sel et de l'eau ?", options: ["Oxydation", "Neutralisation", "Fermentation", "Distillation"], answer: 1 },
-            { q: "Quel est l'élément le plus léger du tableau périodique ?", options: ["Hélium", "Hydrogène", "Lithium", "Carbone"], answer: 1 },
-            { q: "Quel est le nom chimique des huiles ou graisses en chimie organique ?", options: ["Hydrocarbure", "Ester", "Alcool", "Cétone"], answer: 1 },
-            { q: "Quel outil utilise-t-on pour mesurer un volume de liquide avec précision en laboratoire ?", options: ["Balance", "Eprouvette graduée", "Thermomètre", "Bouteille"], answer: 1 },
-            { q: "Quel type de liaison maintient les ions ensemble dans un sel comme le NaCl ?", options: ["Liaison covalente", "Liaison ionique", "Liaison hydrogène", "Liaison de van der Waals"], answer: 1 },
-            { q: "Comment appelle-t-on le changement d'état d'une substance qui passe directement de l'état solide à l'état gazeux ?", options: ["Fusion", "Vaporisation", "Sublimation", "Condensation"], answer: 2 },
-            { q: "Quel est le numéro atomique de l'oxygène ?", options: ["6", "7", "8", "9"], answer: 2 },
-            { q: "Comment appelle-t-on les composés organiques constitués uniquement de carbone et d'hydrogène ?", options: ["Alcools", "Hydrocarbures", "Acides", "Glucides"], answer: 1 },
-            { q: "Quel métal est le meilleur conducteur d'électricité et de chaleur ?", options: ["Fer", "Or", "Argent", "Aluminium"], answer: 2 },
-            { q: "Comment appelle-t-on le centre dense d'un atome contenant des protons et des neutrons ?", options: ["Noyau", "Orbitale", "Couche électronique", "Plasma"], answer: 0 },
-            { q: "Quel élément chimique est représenté par le symbole 'C' ?", options: ["Calcium", "Carbone", "Chlore", "Cuivre"], answer: 1 }
+            { q: "Comment appelle-t-on les atomes qui ont le même nombre de protons mais un nombre de neutrons différent ?", options: ["Isotopes", "Isomères", "Isobares", "Allotropes"], answer: 0 }
         ],
         "Konesans Jeneral": [
             { q: "Quelle est la capitale d'Haïti ?", options: ["Cap-Haïtien", "Port-au-Prince", "Jacmel", "Fort-Liberté"], answer: 1 },
@@ -155,69 +126,19 @@
             { q: "En quelle année a eu lieu l'indépendance d'Haïti ?", options: ["1802", "1803", "1804", "1815"], answer: 2 },
             { q: "Quel est le nom du plus grand désert chaud du monde ?", options: ["Désert de Gobi", "Désert du Sahara", "Désert d'Atacama", "Désert des Mojaves"], answer: 1 },
             { q: "Quel grand fleuve traverse l'Égypte ?", options: ["Amazone", "Nil", "Mississippi", "Danube"], answer: 1 },
-            { q: "Quel est le plus grand animal vivant sur Terre (dans les océans) ?", options: ["Cachalot", "Baleine bleue", "Requin blanc", "Orque"], answer: 1 },
-            { q: "Sur quel continent se trouve le désert du Sahara ?", options: ["Asie", "Afrique", "Amérique du Sud", "Océanie"], answer: 1 },
-            { q: "Qui a découvert l'Amérique en 1492 ?", options: ["Christophe Colomb", "Vasco de Gama", "Magellan", "Marco Polo"], answer: 0 },
-            { q: "Combien de départements géographiques compte Haïti ?", options: ["8", "9", "10", "12"], answer: 2 },
-            { q: "Quel monument est le plus célèbre de Paris (France) ?", options: ["Statue de la Liberté", "Tour Eiffel", "Colisée", "Pyramide"], answer: 1 },
-            { q: "Quel est le plus haut sommet du monde ?", options: ["Mont Kilimandjaro", "Mont Everest", "Mont McKinley", "Mont Blanc"], answer: 1 },
-            { q: "Quelle organisation internationale a son siège à New York ?", options: ["OMC", "ONU", "UNESCO", "OTAN"], answer: 1 },
-            { q: "Quelle est la monnaie officielle d'Haïti ?", options: ["Dollar", "Gourde", "Peso", "Euro"], answer: 1 },
-            { q: "Quel pays a la forme d'une botte sur la carte de l'Europe ?", options: ["Espagne", "Italie", "Grèce", "France"], answer: 1 },
-            { q: "Que représentent les couleurs bleu et rouge du drapeau haïtien ?", options: ["Terre et eau", "Noir et mulâtre", "Liberté et égalité", "Soleil et mer"], answer: 1 },
-            { q: "Quel est le plus long fleuve du monde ?", options: ["Le Nil", "L'Amazone", "Le Yangtsé", "Le Mississippi"], answer: 0 },
-            { q: "Quel est le plus petit continent du monde ?", options: ["Europe", "Océanie (Australie)", "Antarctique", "Asie"], answer: 1 },
-            { q: "Quel est le nom du premier empereur d'Haïti ?", options: ["Alexandre Pétion", "Jean-Jacques Dessalines", "Henri Christophe", "Toussaint Louverture"], answer: 1 },
-            { q: "Quel mois a le jour le plus court de l'année (dans l'hémisphère nord) ?", options: ["Juin", "Novembre", "Décembre", "Février"], answer: 2 },
-            { q: "Quel gaz est indispensable à la respiration humaine ?", options: ["Dioxyde de carbone", "Oxygène", "Azote", "Hydrogène"], answer: 1 },
-            { q: "Quel est le continent le plus froid sur Terre ?", options: ["Europe", "Antarctique", "Asie", "Amérique du Nord"], answer: 1 },
-            { q: "Quelle est la capitale de la France ?", options: ["Londres", "Berlin", "Paris", "Madrid"], answer: 2 },
-            { q: "Quelle île des Caraïbes est connue comme la 'Perle des Antilles' ?", options: ["Cuba", "Sainte-Lucie", "Haïti", "Jamaïque"], answer: 2 },
-            { q: "Combien de jours y a-t-il dans une année bissextile ?", options: ["364", "365", "366", "367"], answer: 2 },
-            { q: "Quel organe du corps humain pompe le sang ?", options: ["Cerveau", "Foie", "Cœur", "Poumons"], answer: 2 },
-            { q: "Quel est le plus grand pays du monde en termes de superficie ?", options: ["Canada", "Chine", "Russie", "États-Unis"], answer: 2 },
-            { q: "Quel moyen de transport est le plus rapide pour voyager à l'international ?", options: ["Bateau", "Train", "Avion", "Voiture"], answer: 2 },
-            { q: "Quelle ville haïtienne porte le surnom de capitale du Nord ?", options: ["Port-au-Prince", "Cap-Haïtien", "Gonaïves", "Les Cayes"], answer: 1 },
-            { q: "Quel animal est considéré comme le roi de la jungle ou de la savane ?", options: ["Tigre", "Lion", "Éléphant", "Léopard"], answer: 1 },
-            { q: "Quel est le nom de la première femme à avoir remporté un prix Nobel ?", options: ["Marie Curie", "Rosa Parks", "Mère Teresa", "Ada Lovelace"], answer: 0 },
-            { q: "Quel gaz est responsable de la destruction de la couche d'ozone ?", options: ["CFC (Chlorofluorocarbure)", "Oxygène", "Vapeur d'eau", "Azote"], answer: 0 }
+            { q: "Quel est le plus grand animal vivant sur Terre (dans les océans) ?", options: ["Cachalot", "Baleine bleue", "Requin blanc", "Orque"], answer: 1 }
         ],
         "Matematik": [
             { q: "Quelle est la racine carrée de 144 ?", options: ["10", "11", "12", "14"], answer: 2 },
             { q: "Si un triangle a pour angles 60° et 60°, quelle est la valeur du 3e angle ?", options: ["30°", "60°", "90°", "120°"], answer: 1 },
-            { q: "Comb font 7 multiplié par 8 ?", options: ["54", "56", "64", "72"], answer: 1 },
+            { q: "Combien font 7 multiplié par 8 ?", options: ["54", "56", "64", "72"], answer: 1 },
             { q: "Quelle est approximativement la valeur de Pi ($\pi$) à deux décimales ?", options: ["3.12", "3.14", "3.16", "3.41"], answer: 1 },
             { q: "Comment appelle-t-on un angle qui mesure exactement 90 degrés ?", options: ["Angle aigu", "Angle droit", "Angle obtus", "Angle plat"], answer: 1 },
             { q: "Quel est le résultat de $5 + 3 \times 2$ ?", options: ["16", "11", "13", "10"], answer: 1 },
             { q: "Combien de degrés font la somme de tous les angles intérieurs d'un triangle ?", options: ["90°", "180°", "270°", "360°"], answer: 1 },
             { q: "Comment appelle-t-on un polygone à 4 côtés égaux et 4 angles droits ?", options: ["Triangle", "Losange", "Carré", "Trapèze"], answer: 2 },
             { q: "Quelle est la formule de l'aire d'un rectangle de longueur L et de largeur l ?", options: ["L + l", "2(L + l)", "L \\times l", "L \\times l / 2"], answer: 2 },
-            { q: "Quel est le plus petit commun multiple (PPCM) de 4 et 6 ?", options: ["10", "12", "24", "2"], answer: 1 },
-            { q: "Si $2x = 10$, quelle est la valeur de x ?", options: ["2", "5", "8", "20"], answer: 1 },
-            { q: "Combien de jours y a-t-il dans 3 semaines ?", options: ["14", "21", "28", "7"], answer: 1 },
-            { q: "Comment appelle-t-on une fraction dont le numérateur est inférieur au dénominateur ?", options: ["Fraction irréductible", "Fraction propre", "Fraction impropre", "Nombre mixte"], answer: 1 },
-            { q: "Quelle est la valeur de $9^2$ ?", options: ["18", "81", "72", "99"], answer: 1 },
-            { q: "Quel est le plus grand commun diviseur (PGCD) de 12 et 18 ?", options: ["2", "3", "6", "9"], answer: 2 },
-            { q: "Comment appelle-t-on une ligne qui touche un cercle en un seul point ?", options: ["Corde", "Diamètre", "Tangente", "Rayon"], answer: 2 },
-            { q: "Si un produit coûte 100 gourdes et bénéficie d'un rabais de 20%, combien coûte-t-il maintenant ?", options: ["80 gourdes", "90 gourdes", "120 gourdes", "20 gourdes"], answer: 0 },
-            { q: "Quelle est la formule de la circonférence d'un cercle de rayon R ?", options: ["\\pi R^2", "2 \\pi R", "\\pi R", "4 \\pi R"], answer: 1 },
-            { q: "Comment appelle-t-on un nombre qui n'a que deux diviseurs (1 et lui-même) ?", options: ["Nombre composé", "Nombre premier", "Nombre pair", "Nombre impair"], answer: 1 },
-            { q: "Quel est le résultat de l'opération : $-5 + 8$ ?", options: ["-13", "3", "-3", "13"], answer: 1 },
-            { q: "Combien de mètres y a-t-il dans un kilomètre ?", options: ["10 m", "100 m", "1 000 m", "10 000 m"], answer: 2 },
-            { q: "Si $x + 5 = 12$, quelle est la valeur de $x$ ?", options: ["5", "7", "17", "12"], answer: 1 },
-            { q: "Quel est le résultat de $\\frac{3}{4} + \\frac{1}{4}$ ?", options: ["1", "4/8", "2/4", "1/2"], answer: 0 },
-            { q: "Comment appelle-t-on un angle inférieur à 90 degrés ?", options: ["Angle aigu", "Angle droit", "Angle obtus", "Angle plein"], answer: 0 },
-            { q: "Combien de minutes y a-t-il dans 2 heures ?", options: ["60 min", "90 min", "120 min", "180 min"], answer: 2 },
-            { q: "Quelle est l'aire d'un triangle de base $b = 10$ et de hauteur $h = 6$ ?", options: ["60", "30", "16", "12"], answer: 1 },
-            { q: "Quelle est la racine cubique (3e racine) de 27 ?", options: ["2", "3", "9", "6"], answer: 1 },
-            { q: "Quelle est la valeur absolue du nombre $-15$ ?", options: ["-15", "0", "15", "1"], answer: 2 },
-            { q: "Quelle est l'équation générale d'une ligne droite ?", options: ["y = ax + b", "y = ax^2", "y = a/x", "y = a^x"], answer: 0 },
-            { q: "Si vous avez 50 mangues et que vous en donnez la moitié à un ami, combien vous en reste-t-il ?", options: ["0", "25", "10", "50"], answer: 1 },
-            { q: "Combien de faces possède un cube ?", options: ["4", "6", "8", "12"], answer: 1 },
-            { q: "Quel est le résultat de $100 \\div 0.5$ ?", options: ["50", "100", "200", "500"], answer: 2 },
-            { q: "Comment appelle-t-on la droite perpendiculaire qui coupe un segment en son milieu ?", options: ["Médiatrice", "Bissectrice", "Médiane", "Rayon"], answer: 0 },
-            { q: "Si un vêtement coûte 500 gourdes et que son prix augmente de 10%, quel est le nouveau prix ?", options: ["510 gourdes", "550 gourdes", "600 gourdes", "450 gourdes"], answer: 1 },
-            { q: "Quelle est la valeur de $2^3$ ?", options: ["6", "8", "9", "12"], answer: 1 }
+            { q: "Quel est le plus petit commun multiple (PPCM) de 4 et 6 ?", options: ["10", "12", "24", "2"], answer: 1 }
         ],
         "Fizik": [
             { q: "Quelle est l'unité de mesure de la force dans le Système International ?", options: ["Joule", "Watt", "Newton", "Pascal"], answer: 2 },
@@ -229,32 +150,7 @@
             { q: "Quel appareil mesure l'intensité du courant électrique dans un circuit ?", options: ["Voltmètre", "Ampèremètre", "Ohmètre", "Wattmètre"], answer: 1 },
             { q: "Quelle force attire les objets vers le centre de la Terre ?", options: ["Frottement", "Gravitation", "Magnétisme", "Tension"], answer: 1 },
             { q: "Quelle est l'unité de pression dans le Système International ?", options: ["Newton", "Joule", "Pascal", "Tesla"], answer: 2 },
-            { q: "Laquelle de ces couleurs a la plus courte longueur d'onde dans le spectre visible ?", options: ["Rouge", "Vert", "Jaune", "Violet"], answer: 3 },
-            { q: "Quelle est l'unité de résistance électrique dans le Système International ?", options: ["Volt", "Ampère", "Ohm", "Watt"], answer: 2 },
-            { q: "Comment appelle-t-on la loi qui relie tension, courant et résistance ($V = R \\times I$) ?", options: ["Loi d'Ohm", "Loi de Faraday", "Loi de Joule", "Loi de Coulomb"], answer: 0 },
-            { q: "Quelle énergie possède un objet en raison de sa position dans un champ gravitationnel ?", options: ["Énergie cinétique", "Énergie potentielle", "Énergie nucléaire", "Énergie élastique"], answer: 1 },
-            { q: "Quel appareil mesure la tension électrique (voltage) dans un circuit ?", options: ["Ampèremètre", "Voltmètre", "Ohmètre", "Thermomètre"], answer: 1 },
-            { q: "Quelle est l'unité d'énergie dans le Système International ?", options: ["Watt", "Newton", "Joule", "Pascal"], answer: 2 },
-            { q: "Comment appelle-t-on le changement d'état d'un liquide qui devient gaz ?", options: ["Fusion", "Solidification", "Vaporisation", "Condensation"], answer: 2 },
-            { q: "Quelle force s'oppose au mouvement de deux surfaces en contact ?", options: ["Gravité", "Frottement", "Tension", "Poussée"], answer: 1 },
-            { q: "Quelle partie de l'atome possède une charge positive ?", options: ["Électron", "Proton", "Neutron", "Ion négatif"], answer: 1 },
-            { q: "Quel type de courant électrique change de direction régulièrement (comme dans nos prises domestiques) ?", options: ["Courant continu (DC)", "Courant alternatif (AC)", "Courant statique", "Courant inductif"], answer: 1 },
-            { q: "Quel outil mesure la température d'un objet ?", options: ["Baromètre", "Thermomètre", "Anémomètre", "Hygromètre"], answer: 1 },
-            { q: "Quelle loi énonce que l'énergie ne se crée pas et ne se détruit pas, mais se transforme ?", options: ["Loi de conservation de l'énergie", "Principe d'Archimède", "Lois de Newton", "Loi de Pascal"], answer: 0 },
-            { q: "Quelle est l'accélération de la pesanteur sur Terre environ ($g$) ?", options: ["9.8 m/s²", "5.2 m/s²", "100 m/s²", "1.6 m/s²"], answer: 0 },
-            { q: "Comment appelle-t-on la force exercée par un fluide sur un objet immergé ?", options: ["Puissance", "Poussée d'Archimède", "Pression atmosphérique", "Tension superficielle"], answer: 1 },
-            { q: "Quelle est l'unité de fréquence dans le Système International ?", options: ["Hertz (Hz)", "Décibel", "Watt", "Tesla"], answer: 0 },
-            { q: "Quel type de lentille concentre les rayons lumineux en un seul point ?", options: ["Lentille convexe (convergente)", "Lentille concave (divergente)", "Lentille plane", "Demi-lentille"], answer: 0 },
-            { q: "Comment appelle-t-on la quantité de matière contenue dans un corps ?", options: ["Poids", "Masse", "Volume", "Densité"], answer: 1 },
-            { q: "Quelle est la relation entre le poids ($P$) et la masse ($m$) d'un corps ($P = m \\times g$) ?", options: ["Le poids dépend du lieu où l'on se trouve", "Le poids est toujours égal à la masse", "La masse dépend de la gravité", "Poids et masse sont identiques"], answer: 0 },
-            { q: "Quelle est l'unité de charge électrique dans le Système International ?", options: ["Coulomb", "Volt", "Ampère", "Farad"], answer: 0 },
-            { q: "Comment appelle-t-on la réflexion du son lorsqu'il frappe un obstacle ?", options: ["Écho", "Réseau", "Diffraction", "Refrain"], answer: 0 },
-            { q: "Quel composant sert à bloquer ou laisser passer manuellement le courant dans un circuit ?", options: ["Résistance", "Interrupteur", "Condensateur", "Transformateur"], answer: 1 },
-            { q: "De quel type d'onde s'agit-il pour le son ?", options: ["Onde électromagnétique", "Onde mécanique", "Onde lumineuse", "Onde radio"], answer: 1 },
-            { q: "Quelle couleur de lumière a la plus grande longueur d'onde dans le spectre visible ?", options: ["Violet", "Bleu", "Vert", "Rouge"], answer: 3 },
-            { q: "Quel appareil convertit l'énergie mécanique en énergie électrique ?", options: ["Moteur", "Générateur (Alternateur)", "Batterie", "Ampoule"], answer: 1 },
-            { q: "Comment appelle-t-on le rapport entre la masse d'un objet et son volume ($d = m / V$) ?", options: ["Poids", "Densité (Masse volumique)", "Vitesse", "Pression"], answer: 1 },
-            { q: "Où les ondes sonores NE PEUVENT-ELLES PAS voyager du tout ?", options: ["Dans l'eau", "Dans l'air", "Dans le vide", "Dans l'acier"], answer: 2 }
+            { q: "Laquelle de ces couleurs a la plus courte longueur d'onde dans le spectre visible ?", options: ["Rouge", "Vert", "Jaune", "Violet"], answer: 3 }
         ],
         "Franse": [
             { q: "Quelle est la nature du mot souligné dans la phrase : 'Il court <u>rapidement</u>' ?", options: ["Nom", "Adjectif", "Adverbe", "Verbe"], answer: 2 },
@@ -266,42 +162,16 @@
             { q: "À quel groupe de verbes appartient le verbe 'finir' ?", options: ["1er groupe", "2e groupe", "3e groupe", "Hors groupe"], answer: 1 },
             { q: "Lequel de ces noms est un nom féminin ?", options: ["Crayon", "Table", "Livre", "Cahier"], answer: 1 },
             { q: "Comment se conjugue le verbe 'être' au présent de l'indicatif avec le pronom 'nous' ?", options: ["sommes", "êtes", "sont", "sommes"], answer: 0 },
-            { q: "Quel est l'antonyme du mot 'grand' ?", options: ["Petit", "Gros", "Haut", "Long"], answer: 0 },
-            { q: "Comment appelle-t-on des mots qui se prononcent de la même façon mais ont une orthographe et un sens différents ?", options: ["Synonymes", "Homonymes", "Antonymes", "Préfixes"], answer: 1 },
-            { q: "À quel temps est le verbe dans la phrase : 'Demain nous irons à l'école' ?", options: ["Présent", "Passé composé", "Futur simple", "Imparfait"], answer: 2 },
-            { q: "Lequel est un synonyme du mot 'rapide' ?", options: ["Lent", "Vite", "Triste", "Calme"], answer: 1 },
-            { q: "Comment écrit-on le pluriel du mot 'journal' ?", options: ["Journals", "Journaux", "Journaus", "Journeaux"], answer: 1 },
-            { q: "Lequel de ces verbes appartient au premier groupe (-er) ?", options: ["Manger", "Finir", "Prendre", "Aller"], answer: 0 },
-            { q: "Quelle partie du discours modifie un nom (ex: une belle maison) ?", options: ["Adverbe", "Adjectif qualificatif", "Pronom", "Préposition"], answer: 1 },
-            { q: "Comment se conjugue le verbe 'avoir' au présent avec 'tu' ?", options: ["a", "as", "ont", "avez"], answer: 1 },
-            { q: "Quel est le féminin du mot 'chanteur' ?", options: ["Chanteuse", "Chanteur", "Chantuse", "Chantis"], answer: 0 },
-            { q: "Comment appelle-t-on les mots placés devant un nom pour le déterminer (ex: le, la, un) ?", options: ["Déterminants (Articles)", "Pronoms", "Verbes", "Interjections"], answer: 0 },
-            { q: "Quel est l'antonyme du mot 'chaud' ?", options: ["Froid", "Tiède", "Brûlant", "Soleil"], answer: 0 },
-            { q: "Dans la phrase : 'Les enfants jouent au ballon', quelle est la fonction du groupe 'au ballon' ?", options: ["Sujet", "Complément circonstanciel", "Attribut", "Objet indirect (COI)"], answer: 3 },
-            { q: "Comment appelle-t-on un petit élément ajouté au début d'un mot pour en changer le sens ?", options: ["Suffixe", "Préfixe", "Racine", "Modificateur"], answer: 1 },
-            { q: "Comment écrit-on le pluriel du mot 'travail' ?", options: ["Travails", "Travaux", "Travau", "Travels"], answer: 1 },
-            { q: "Lequel de ces mots est un pronom personnel ?", options: ["Maison", "Il", "Courir", "Beau"], answer: 1 },
-            { q: "Comment appelle-t-on un verbe dont le sujet fait l'action sur lui-même (ex: se laver) ?", options: ["Verbe pronominal", "Verbe transitif", "Verbe intransitif", "Verbe infinitif"], answer: 0 },
-            { q: "Quelle est la conjugaison du verbe 'aller' au présent avec 'je' ?", options: ["vais", "vas", "va", "allons"], answer: 0 },
-            { q: "Quel est le féminin du mot 'chat' ?", options: ["Chate", "Chatte", "Chat", "Chattes"], answer: 1 },
-            { q: "Quelle est la préposition correcte : 'Je vais ... école' ?", options: ["à l'", "au", "en", "de"], answer: 0 },
-            { q: "Comment appelle-t-on le récit de sa propre vie écrit par soi-même ?", options: ["Biographie", "Autobiographie", "Roman", "Nouvelle"], answer: 1 },
-            { q: "Lequel de ces mots est orthographié correctement ?", options: ["Environement", "Environnement", "Enviroment", "Environmnet"], answer: 1 },
-            { q: "Quel verbe appartient au troisième groupe ?", options: ["Parler", "Choisir", "Venir", "Chanter"], answer: 2 },
-            { q: "Comment appelle-t-on la partie finale d'un mot qui en modifie le sens ?", options: ["Préfixe", "Suffixe", "Racine", "Accent"], answer: 1 },
-            { q: "Dans la phrase 'Marie lit un livre', quel mot est le verbe ?", options: ["Marie", "lit", "un", "livre"], answer: 1 },
-            { q: "Quel est l'antonyme du mot 'ouvrir' ?", options: ["Fermer", "Commencer", "Donner", "Prendre"], answer: 0 },
-            { q: "Comment appelle-t-on les mots qui indiquent un lieu, un temps ou un rapport (ex: dans, sur, par) ?", options: ["Préposition", "Conjonction", "Nom", "Interjection"], answer: 0 }
+            { q: "Quel est l'antonyme du mot 'grand' ?", options: ["Petit", "Gros", "Haut", "Long"], answer: 0 }
         ]
     };
 
-    // Fonksyon pou jwe vwa a lè w klike sou yon matyè
     function playWelcomeVoice(userName) {
         if ('speechSynthesis' in window) {
             let message = `Bienvenue ${userName} dans le quiz Mocenick.`;
             let speech = new SpeechSynthesisUtterance(message);
-            speech.lang = 'fr-FR'; // Lang franse
-            speech.rate = 1.0; // Vitès vwa a
+            speech.lang = 'fr-FR';
+            speech.rate = 1.0;
             window.speechSynthesis.speak(speech);
         }
     }
@@ -319,7 +189,6 @@
         score = 0;
         currentQuestionIndex = 0;
 
-        // Fè vwa a pale lè l ap antre nan quiz la
         playWelcomeVoice(currentUser.name);
 
         activeQuestions = dbQuestions[category] || [];
