@@ -1,162 +1,516 @@
 <!DOCTYPE html>
-<html lang="ht">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Mocenick PRO</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #4f46e5;
-            --secondary: #ec4899;
-            --bg-dark: #0f172a;
-            --card-bg: #1e293b;
-            --text-color: #f8fafc;
+            --primary-bg: #1a1b35;
+            --card-bg: #2b2d5c;
+            --accent-color: #f39c12;
+            --text-color: #ffffff;
+            --text-muted: #b0b3c6;
+            --green-btn: #27ae60;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-        body { background: var(--bg-dark); color: var(--text-color); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
-        .container { width: 100%; max-width: 600px; background: var(--card-bg); border-radius: 16px; padding: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
-        h1 { text-align: center; margin-bottom: 20px; color: var(--secondary); font-size: 2rem; }
-        .screen { display: none; }
-        .screen.active { display: block; }
-        input, select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #475569; background: #0f172a; color: #fff; font-size: 1rem; }
-        button { width: 100%; padding: 12px; margin-top: 15px; border: none; border-radius: 8px; background: var(--primary); color: white; font-weight: bold; font-size: 1rem; cursor: pointer; transition: 0.3s; }
-        button:hover { opacity: 0.9; transform: translateY(-2px); }
-        .btn-whatsapp { background: #25d366; margin-top: 10px; display: inline-block; text-align: center; text-decoration: none; color: white; padding: 12px; border-radius: 8px; font-weight: bold; }
-        .option-btn { background: #334155; margin: 8px 0; text-align: left; }
-        .option-btn:hover { background: #475569; }
-        .score-board { text-align: center; font-size: 1.5rem; margin: 20px 0; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Header PRO */
+        header {
+            background-color: #1e1f3a;
+            width: 100%;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #3a3d75;
+            box-sizing: border-box;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            background: var(--accent-color);
+            color: #000;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+        }
+
+        .logo-text h2 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #fff;
+        }
+
+        .logo-text span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .badge-pro {
+            background: var(--accent-color);
+            color: #000;
+            font-size: 0.65rem;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 5px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* Container Main */
+        .main-container {
+            width: 100%;
+            max-width: 450px;
+            padding: 1.5rem;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        /* Hero Card */
+        .hero-card {
+            background: linear-gradient(135deg, #3f428c, #2b2d5c);
+            border-radius: 16px;
+            padding: 1.8rem 1.2rem;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nouveau-mode-tag {
+            background-color: var(--accent-color);
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .hero-card h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.5rem;
+        }
+
+        .hero-card p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mode-btn {
+            background-color: var(--accent-color);
+            color: #000;
+            border: none;
+            padding: 0.9rem;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            width: 100%;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .mode-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* User Profile Card */
+        .profile-card {
+            background-color: #ffffff;
+            color: #333;
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .profile-avatar {
+            background: #dbeafe;
+            color: #2563eb;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3rem;
+        }
+
+        .profile-details h3 {
+            margin: 0;
+            font-size: 1rem;
+            color: #1f2937;
+        }
+
+        .profile-details span {
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+        .profile-score {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #1f2937;
+        }
+
+        /* Service Client / WhatsApp Button */
+        .whatsapp-btn {
+            background-color: var(--green-btn);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            width: 100%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+            text-decoration: none;
+        }
+
+        /* Quiz Active Screen Styles */
+        .quiz-box {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .option-btn {
+            background-color: #3a3d75;
+            color: white;
+            border: none;
+            padding: 0.85rem;
+            border-radius: 8px;
+            width: 100%;
+            text-align: left;
+            margin-bottom: 0.6rem;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: background 0.2s;
+        }
+
+        .option-btn:hover {
+            background-color: #4c5096;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Klasman Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #3a3d75;
+        }
+
+        th {
+            color: var(--accent-color);
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Quiz Mocenick PRO</h1>
+    <!-- Header PRO -->
+    <header>
+        <div class="header-logo">
+            <div class="logo-icon">🎓</div>
+            <div class="logo-text">
+                <h2>Quiz Mocenick <span class="badge-pro">PRO</span></h2>
+                <span>Défis & Culture Générale 🇭🇹 Haïti</span>
+            </div>
+        </div>
+        <div class="header-actions">
+            <span onclick="toggleSound()">🔊</span>
+            <span onclick="openLeaderboard()">📊</span>
+        </div>
+    </header>
 
-    <!-- EKRAN AKÈY & PWOFIL -->
-    <div id="home-screen" class="screen active">
-        <h3>Byenveni nan Mòd Pwofil ou</h3>
-        <input type="text" id="username" placeholder="Antre non ou (pa egz. Irene Mocenick)">
-        <select id="user-level">
-            <option value="9e Fondamantal">9e Année Fondamentale</option>
-            <option value="Economie / Inivèsite">Économie / Université</option>
-            <option value="Génie Informatique">Génie Informatique</option>
-        </select>
-        <label style="margin-top:15px; display:block;">Chwazi Mòd Jwèt:</label>
-        <button onclick="startGame('classique')">Matières Classiques</button>
-        <button onclick="startGame('laisser')" style="background: var(--secondary);">À prendre ou à laisser</button>
+    <div class="main-container">
         
-        <a href="https://wa.me/50933270330" target="_blank" class="btn-whatsapp">Kontakte Sèvis Kliyan (WhatsApp)</a>
+        <!-- Ekran Akèy -->
+        <div id="home-screen">
+            <div class="hero-card">
+                <div class="nouveau-mode-tag">Nouveau Mode</div>
+                <h1>Bienvenue sur Quiz Mocenick !</h1>
+                <p>Sélectionnez votre mode de jeu ci-dessous :</p>
+                
+                <button class="mode-btn" onclick="startQuiz('classique')">
+                    📖 MODE MATIÈRES CLASSIQUES
+                </button>
+                <button class="mode-btn" onclick="startQuiz('rapide')">
+                    ⚖️ MODE À PRENDRE OU À LAISSER ⚡
+                </button>
+            </div>
+
+            <div class="profile-card">
+                <div class="profile-info">
+                    <div class="profile-avatar">🎓</div>
+                    <div class="profile-details">
+                        <h3 id="display-name">irene mocenick</h3>
+                        <span>Niveau : <b>Université</b></span>
+                    </div>
+                </div>
+                <div class="profile-score" id="display-score">0 pts</div>
+            </div>
+
+            <a href="https://wa.me/50933270330" target="_blank" class="whatsapp-btn">
+                💬 Service Client (33270330)
+            </a>
+        </div>
+
+        <!-- Ekran Kesyon yo -->
+        <div id="quiz-screen" class="quiz-box hidden">
+            <p id="question-counter" style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0;"></p>
+            <p class="question-text" id="question-text"></p>
+            <div id="options-container"></div>
+        </div>
+
+        <!-- Ekran Rezilta & Klasman -->
+        <div id="result-screen" class="quiz-box hidden">
+            <h2 style="color: var(--accent-color); text-align: center; margin-top: 0;">Partie Terminée !</h2>
+            <p id="final-score-text" style="font-size: 1.1rem; text-align: center; margin: 1rem 0;"></p>
+            
+            <h3 style="color: var(--accent-color); font-size: 1rem; border-bottom: 1px solid #3a3d75; padding-bottom: 5px;">Klasman Global</h3>
+            <div style="max-height: 200px; overflow-y: auto;">
+                <table id="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>Non</th>
+                            <th>Score</th>
+                            <th>Nivo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboard-body">
+                        <tr><td colspan="3" style="text-align: center;">Chaje klasman an...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <button class="mode-btn" style="margin-top: 1.5rem;" onclick="location.reload()">Jwe Ankò</button>
+        </div>
+
     </div>
 
-    <!-- EKRAN JWÈT -->
-    <div id="game-screen" class="screen">
-        <h3 id="question-title" style="margin-bottom: 15px;">Kesyon an ap parèt...</h3>
-        <div id="options-container"></div>
-        <p id="timer" style="text-align: right; margin-top: 10px; color: #facc15;"></p>
-    </div>
-
-    <!-- EKRAN REZILTA -->
-    <div id="result-screen" class="screen">
-        <h2>Jwèt la fini!</h2>
-        <div class="score-board" id="final-score">Pwen ou: 0</div>
-        <button onclick="location.reload()">Jwe Ankò</button>
-        <a href="https://wa.me/50933270330" target="_blank" class="btn-whatsapp">Voye Rezilta sou WhatsApp</a>
-    </div>
-</div>
+    <!-- Audio -->
+    <audio id="click-sound" src="https://www.myinstants.com/media/sounds/click_1.mp3"></audio>
+    <audio id="success-sound" src="https://www.myinstants.com/media/sounds/success-1-6287.mp3"></audio>
 
 <script>
-    // METE URL GOOGLE APPS SCRIPT OU A LA A:
-    const GOOGLE_SHEET_URL = "APOTE_GOOGLE_APPS_SCRIPT_URL_IS_LA";
-
-    let currentUser = { name: "", level: "", score: 0, mode: "" };
+    const API_URL = "https://sheetdb.io/api/v1/0f9hmos4ofob1";
+    
+    let playerName = localStorage.getItem("mocenick_quiz_user") || "irene mocenick";
     let currentQuestionIndex = 0;
     let score = 0;
+    let soundEnabled = true;
 
     const questions = [
-        { q: "Ki kapital peyi Ayiti?", options: ["Pòtoprens", "Kap Ayisyen", "Fort-Liberté", "Gonayiv"], correct: 0 },
-        { q: "Nan ki depatman vil Fort-Liberté ye?", options: ["Nò", "Nòdès", "Artibonite", "Nòdwès"], correct: 1 },
-        { q: "Ki espesyalite etid Irene Mocenick gen rapò avè l?", options: ["Medsin", "Économie & Génie Informatique", "Agronomi", "Dwa"], correct: 1 }
+        {
+            q: "Kisa ki kapital peyi Ayiti?",
+            options: ["Cap-Haïtien", "Pòtoprens", "Les Cayes", "Gonaïves"],
+            answer: 1
+        },
+        {
+            q: "Nan ki ane Ayiti te vin endepandan?",
+            options: ["1804", "1802", "1820", "1789"],
+            answer: 0
+        },
+        {
+            q: "Ki pi gwo domèn etid Irene Mocenick?",
+            options: ["Medsin", "Dwa", "Ekonomi ak Génie Informatique", "Agronomi"],
+            answer: 2
+        },
+        {
+            q: "Ki vil kote w ap viv la?",
+            options: ["Pòtoprens", "Fort-Liberté", "St. Domingue", "Milot"],
+            answer: 1
+        }
     ];
 
-    function startGame(mode) {
-        const nameInput = document.getElementById("username").value.trim();
-        if (!nameInput) {
-            alert("Tanpri antre non ou anvan ou kòmanse!");
-            return;
-        }
-        currentUser.name = nameInput;
-        currentUser.level = document.getElementById("user-level").value;
-        currentUser.mode = mode;
-        currentUser.score = 0;
-        score = 0;
-        currentQuestionIndex = 0;
+    window.onload = function() {
+        document.getElementById("display-name").innerText = playerName;
+        fetchVisitorStats();
+    };
 
-        document.getElementById("home-screen").classList.remove("active");
-        document.getElementById("game-screen").classList.add("active");
+    function toggleSound() {
+        soundEnabled = !soundEnabled;
+        alert(soundEnabled ? "Son aktive 🔊" : "Son koupe 🔇");
+    }
+
+    function playSound(type) {
+        if (!soundEnabled) return;
+        let sound = document.getElementById(type === 'success' ? 'success-sound' : 'click-sound');
+        if (sound) {
+            sound.currentTime = 0;
+            sound.play().catch(e => console.log("Audio play blocked"));
+        }
+    }
+
+    function startQuiz(mode) {
+        playSound('click');
+        currentQuestionIndex = 0;
+        score = 0;
+        document.getElementById("home-screen").classList.add("hidden");
+        document.getElementById("result-screen").classList.add("hidden");
+        document.getElementById("quiz-screen").classList.remove("hidden");
         loadQuestion();
     }
 
     function loadQuestion() {
         if (currentQuestionIndex >= questions.length) {
-            endGame();
+            endQuiz();
             return;
         }
-        let qData = questions[currentQuestionIndex];
-        document.getElementById("question-title").innerText = `Kesyon ${currentQuestionIndex + 1}: ${qData.q}`;
-        let optContainer = document.getElementById("options-container");
-        optContainer.innerHTML = "";
 
-        qData.options.forEach((opt, index) => {
+        let q = questions[currentQuestionIndex];
+        document.getElementById("question-counter").innerText = `Kesyon ${currentQuestionIndex + 1} sou ${questions.length}`;
+        document.getElementById("question-text").innerText = q.q;
+
+        let optionsContainer = document.getElementById("options-container");
+        optionsContainer.innerHTML = "";
+
+        q.options.forEach((opt, index) => {
             let btn = document.createElement("button");
             btn.className = "option-btn";
             btn.innerText = opt;
-            btn.onclick = () => checkAnswer(index, qData.correct);
-            optContainer.appendChild(btn);
+            btn.onclick = () => {
+                playSound('click');
+                checkAnswer(index);
+            };
+            optionsContainer.appendChild(btn);
         });
     }
 
-    function checkAnswer(selected, correct) {
-        if (selected === correct) {
+    function checkAnswer(selectedIndex) {
+        let q = questions[currentQuestionIndex];
+        if (selectedIndex === q.answer) {
             score += 10;
         }
         currentQuestionIndex++;
         loadQuestion();
     }
 
-    function endGame() {
-        currentUser.score = score;
-        document.getElementById("game-screen").classList.remove("active");
-        document.getElementById("result-screen").classList.add("active");
-        document.getElementById("final-score").innerText = `Pwen ou: ${score} / ${questions.length * 10}`;
+    function endQuiz() {
+        playSound('success');
+        document.getElementById("quiz-screen").classList.add("hidden");
+        document.getElementById("result-screen").classList.remove("hidden");
+        document.getElementById("final-score-text").innerText = `${playerName}, ou fè ${score} pwen!`;
+        document.getElementById("display-score").innerText = `${score} pts`;
 
-        // Sovve sou localStorage tou
-        let leaderboard = JSON.parse(localStorage.getItem("mocenick_scores") || "[]");
-        leaderboard.push(currentUser);
-        localStorage.setItem("mocenick_scores", JSON.stringify(leaderboard));
+        let data = {
+            data: {
+                nom: playerName,
+                score: score,
+                niveau: "Université"
+            }
+        };
 
-        // Voye done yo nan Google Sheets otomatikman
-        sendDataToGoogleSheet(currentUser);
+        fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(() => fetchLeaderboard())
+        .catch(() => fetchLeaderboard());
     }
 
-    function sendDataToGoogleSheet(data) {
-        if (GOOGLE_SHEET_URL === "APOTE_GOOGLE_APPS_SCRIPT_URL_IS_LA") return;
-        
-        fetch(GOOGLE_SHEET_URL, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                nom: data.name,
-                nivo: data.level,
-                pwen: data.score,
-                mod: data.mode
-            })
-        }).then(() => {
-            console.log("Done yo voye nan Google Sheet avèk siksè!");
-        }).catch(err => {
-            console.error("Erè pandan y ap voye done yo:", err);
+    function fetchVisitorStats() {
+        fetch(API_URL)
+        .then(response => response.json())
+        .then(data => {
+            console.log("Total jwè:", data.length);
+        })
+        .catch(err => console.log(err));
+    }
+
+    function fetchLeaderboard() {
+        fetch(API_URL)
+        .then(response => response.json())
+        .then(data => {
+            let tbody = document.getElementById("leaderboard-body");
+            tbody.innerHTML = "";
+            data.sort((a, b) => parseInt(b.score) - parseInt(a.score));
+            data.forEach(row => {
+                let tr = document.createElement("tr");
+                tr.innerHTML = `<td>${row.nom || 'Enkoni'}</td><td>${row.score || 0}</td><td>${row.niveau || 'N/A'}</td>`;
+                tbody.appendChild(tr);
+            });
+        })
+        .catch(() => {
+            document.getElementById("leaderboard-body").innerHTML = `<tr><td colspan="3" style="text-align: center; color: #ff6b6b;">Erè pou chaje klasman an.</td></tr>`;
         });
+    }
+
+    function openLeaderboard() {
+        playSound('click');
+        fetchLeaderboard();
+        document.getElementById("home-screen").classList.add("hidden");
+        document.getElementById("quiz-screen").classList.add("hidden");
+        document.getElementById("result-screen").classList.remove("hidden");
+        document.getElementById("final-score-text").innerText = "Klasman jwè yo nan baz done a:";
     }
 </script>
 
