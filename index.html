@@ -18,7 +18,7 @@
     <!-- En-tête avec Menu et Contrôle Audio -->
     <header class="bg-indigo-900 text-white p-4 shadow-md flex justify-between items-center sticky top-0 z-50">
         <div class="flex items-center space-x-3 cursor-pointer" onclick="showPage('page-accueil')">
-            <div id="user-avatar-header" class="w-10 h-10 bg-yellow-400 text-indigo-950 rounded-full flex items-center justify-center text-xl font-bold shadow border-2 border-white">
+            <div id="user-avatar-header" class="w-10 h-10 bg-yellow-400 text-indigo-950 rounded-full flex items-center justify-center text-xl font-bold shadow border-2 border-white overflow-hidden">
                 <i class="fas fa-user-graduate"></i>
             </div>
             <div>
@@ -72,7 +72,7 @@
             <!-- Profil Joueur -->
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                    <div id="card-avatar" class="w-12 h-12 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center text-2xl border-2 border-indigo-500">
+                    <div id="card-avatar" class="w-12 h-12 bg-indigo-100 text-indigo-800 rounded-full flex items-center justify-center text-2xl border-2 border-indigo-500 overflow-hidden">
                         <i class="fas fa-user-graduate"></i>
                     </div>
                     <div>
@@ -161,10 +161,12 @@
                         <option value="Université">Université / Supérieur</option>
                         <option value="Autre / Passionné">Autre / Passionné</option>
                     </select>
-                    <div class="text-left space-y-1 mt-3 pt-3 border-t border-slate-200">
-    <label class="text-xs font-bold text-slate-700">Mete yon foto pèsonèl :</label>
-    <input type="file" id="user-photo-file" accept="image/*" onchange="previewCustomPhoto(event)" class="w-full p-2 bg-slate-50 border border-slate-300 rounded-xl text-xs text-slate-600">
-</div>
+                </div>
+
+                <!-- Jaden pou mete foto pèsonèl la -->
+                <div class="text-left space-y-1 mt-3 pt-3 border-t border-slate-200">
+                    <label class="text-xs font-bold text-slate-700">Mete yon foto pèsonèl :</label>
+                    <input type="file" id="user-photo-file" accept="image/*" onchange="previewCustomPhoto(event)" class="w-full p-2 bg-slate-50 border border-slate-300 rounded-xl text-xs text-slate-600">
                 </div>
 
                 <p class="text-xs text-slate-500 pt-2">Choisissez votre Avatar :</p>
@@ -369,6 +371,7 @@
             localStorage.setItem('qm_score', '0');
         }
         let currentAvatar = localStorage.getItem('qm_avatar') || 'fa-user-graduate';
+        let customUserPhoto = localStorage.getItem('qm_custom_photo') || '';
         let userScore = parseInt(localStorage.getItem('qm_score')) || 0;
         let userLevel = localStorage.getItem('qm_level') || 'Université';
 
@@ -398,7 +401,7 @@
             "Guerson Théodat", "Valéry Saint-Victor", "Anderson Joseph", "Marvens Pierre", "Fabrice Vixamar"
         ];
 
-        let allUsers = JSON.parse(localStorage.getItem('qm_all_users'));
+        let allUsers = JSON.parse(localStorage.getItem('qm_all_users_110'));
         if (!allUsers || allUsers.length !== 110) {
             const levels = ["8ème AF", "9ème AF", "NS1", "NS2", "NS3", "NS4", "Université"];
             const avatars = ["fa-user-graduate", "fa-user-ninja", "fa-user-astronaut", "fa-crown", "fa-brain", "fa-flask", "fa-fire"];
@@ -406,12 +409,13 @@
             allUsers = realNamesList.map((fullName, idx) => {
                 return {
                     name: fullName,
-                    score: Math.floor(Math.random() * 450) + 30, // Nòt reyalis varye ant 30 ak 480
+                    score: Math.floor(Math.random() * 450) + 30,
                     level: levels[idx % levels.length],
-                    avatar: avatars[idx % avatars.length]
+                    avatar: avatars[idx % avatars.length],
+                    photo: ""
                 };
             });
-            localStorage.setItem('qm_all_users', JSON.stringify(allUsers));
+            localStorage.setItem('qm_all_users_110', JSON.stringify(allUsers));
         }
 
         let currentTimer = null;
@@ -422,7 +426,6 @@
         let isRiskMode = false;
         let sessionQuestions = [];
 
-        // Baz done kesyon yo
         const questionsData = {
             'AprendreOuLaisser': [
                 { q: "⚡ RISQUE : Quel monument haïtien est reconnu comme Patrimoine Mondial de l'UNESCO ?", options: ["Le Palais Sans-Souci & La Citadelle", "Le Fort Jacques", "Le Palais National", "La Cathédrale de Cap-Haïtien"], answer: 0 },
@@ -467,8 +470,7 @@
             document.getElementById('user-level-select').value = userLevel;
             document.getElementById('username-input').value = userName;
             document.getElementById('card-username').innerText = userName;
-            document.getElementById('card-avatar').innerHTML = `<i class="fas ${currentAvatar}"></i>`;
-            document.getElementById('user-avatar-header').innerHTML = `<i class="fas ${currentAvatar}"></i>`;
+            updateAvatarDisplay();
             updateDatabase();
         });
 
@@ -511,15 +513,42 @@
 
         function selectAvatar(iconClass) {
             currentAvatar = iconClass;
+            customUserPhoto = ""; // Efase foto si l te chwazi yon avatè ikon
+            localStorage.removeItem('qm_custom_photo');
             localStorage.setItem('qm_avatar', iconClass);
-            document.getElementById('card-avatar').innerHTML = `<i class="fas ${iconClass}"></i>`;
-            document.getElementById('user-avatar-header').innerHTML = `<i class="fas ${iconClass}"></i>`;
+            updateAvatarDisplay();
             updateDatabase();
         }
 
+        function previewCustomPhoto(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    customUserPhoto = e.target.result;
+                    localStorage.setItem('qm_custom_photo', customUserPhoto);
+                    updateAvatarDisplay();
+                    updateDatabase();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function updateAvatarDisplay() {
+            const avatarContainers = [document.getElementById('card-avatar'), document.getElementById('user-avatar-header')];
+            
+            avatarContainers.forEach(container => {
+                if (container) {
+                    if (customUserPhoto) {
+                        container.innerHTML = `<img src="${customUserPhoto}" class="w-full h-full object-cover rounded-full">`;
+                    } else {
+                        container.innerHTML = `<i class="fas ${currentAvatar}"></i>`;
+                    }
+                }
+            });
+        }
+
         function updateDatabase() {
-            let storedUsers = JSON.parse(localStorage.getItem('qm_all_users')) || allUsers;
-                    function updateDatabase() {
             let storedUsers = JSON.parse(localStorage.getItem('qm_all_users_110')) || allUsers;
             let existingIndex = storedUsers.findIndex(u => u.name === userName);
             
@@ -527,27 +556,13 @@
                 storedUsers[existingIndex].score = userScore;
                 storedUsers[existingIndex].level = userLevel;
                 storedUsers[existingIndex].avatar = currentAvatar;
-                storedUsers[existingIndex].photo = customUserPhoto; // <--- Ajoute liy sa a la a
+                storedUsers[existingIndex].photo = customUserPhoto;
             } else {
-                storedUsers.push({ name: userName, score: userScore, level: userLevel, avatar: currentAvatar, photo: customUserPhoto }); // <--- Epi la a tou
+                storedUsers.push({ name: userName, score: userScore, level: userLevel, avatar: currentAvatar, photo: customUserPhoto });
             }
             
             allUsers = storedUsers;
             localStorage.setItem('qm_all_users_110', JSON.stringify(allUsers));
-        }
-
-            let existingIndex = storedUsers.findIndex(u => u.name === userName);
-            
-            if (existingIndex >= 0) {
-                storedUsers[existingIndex].score = userScore;
-                storedUsers[existingIndex].level = userLevel;
-                storedUsers[existingIndex].avatar = currentAvatar;
-            } else {
-                storedUsers.push({ name: userName, score: userScore, level: userLevel, avatar: currentAvatar });
-            }
-            
-            allUsers = storedUsers;
-            localStorage.setItem('qm_all_users', JSON.stringify(allUsers));
         }
 
         function startSession(subject, riskMode = false) {
@@ -688,7 +703,7 @@
             container.innerHTML = '';
             
             updateDatabase();
-            let storedUsers = JSON.parse(localStorage.getItem('qm_all_users')) || allUsers;
+            let storedUsers = JSON.parse(localStorage.getItem('qm_all_users_110')) || allUsers;
             storedUsers.sort((a, b) => b.score - a.score);
 
             storedUsers.forEach((item, index) => {
@@ -697,13 +712,18 @@
                 if (index === 1) rankBadge = `<span class="text-base w-6 text-center">🥈</span>`;
                 if (index === 2) rankBadge = `<span class="text-base w-6 text-center">🥉</span>`;
 
+                let avatarHtml = `<i class="fas ${item.avatar}"></i>`;
+                if (item.photo) {
+                    avatarHtml = `<img src="${item.photo}" class="w-full h-full object-cover rounded-full">`;
+                }
+
                 const div = document.createElement('div');
                 div.className = `flex items-center justify-between p-3 text-xs ${item.name === userName ? 'bg-indigo-50 border-l-4 border-indigo-600 font-bold' : ''}`;
                 div.innerHTML = `
                     <div class="flex items-center gap-2.5">
                         ${rankBadge}
-                        <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-800 flex items-center justify-center text-sm">
-                            <i class="fas ${item.avatar}"></i>
+                        <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-800 flex items-center justify-center text-sm overflow-hidden">
+                            ${avatarHtml}
                         </div>
                         <div>
                             <span class="font-bold text-slate-800 block">${item.name} ${item.name === userName ? '(Vous)' : ''}</span>
