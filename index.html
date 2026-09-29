@@ -161,6 +161,10 @@
                         <option value="Université">Université / Supérieur</option>
                         <option value="Autre / Passionné">Autre / Passionné</option>
                     </select>
+                    <div class="text-left space-y-1 mt-3 pt-3 border-t border-slate-200">
+    <label class="text-xs font-bold text-slate-700">Mete yon foto pèsonèl :</label>
+    <input type="file" id="user-photo-file" accept="image/*" onchange="previewCustomPhoto(event)" class="w-full p-2 bg-slate-50 border border-slate-300 rounded-xl text-xs text-slate-600">
+</div>
                 </div>
 
                 <p class="text-xs text-slate-500 pt-2">Choisissez votre Avatar :</p>
@@ -515,6 +519,23 @@
 
         function updateDatabase() {
             let storedUsers = JSON.parse(localStorage.getItem('qm_all_users')) || allUsers;
+                    function updateDatabase() {
+            let storedUsers = JSON.parse(localStorage.getItem('qm_all_users_110')) || allUsers;
+            let existingIndex = storedUsers.findIndex(u => u.name === userName);
+            
+            if (existingIndex >= 0) {
+                storedUsers[existingIndex].score = userScore;
+                storedUsers[existingIndex].level = userLevel;
+                storedUsers[existingIndex].avatar = currentAvatar;
+                storedUsers[existingIndex].photo = customUserPhoto; // <--- Ajoute liy sa a la a
+            } else {
+                storedUsers.push({ name: userName, score: userScore, level: userLevel, avatar: currentAvatar, photo: customUserPhoto }); // <--- Epi la a tou
+            }
+            
+            allUsers = storedUsers;
+            localStorage.setItem('qm_all_users_110', JSON.stringify(allUsers));
+        }
+
             let existingIndex = storedUsers.findIndex(u => u.name === userName);
             
             if (existingIndex >= 0) {
