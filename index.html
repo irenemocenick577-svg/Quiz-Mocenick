@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Mocenick - Culture & Examens</title>
+    <title>Quiz Mocenick - Culture & Examens PRO</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -23,7 +23,7 @@
             </div>
             <div>
                 <h1 class="font-extrabold text-xl tracking-wide flex items-center gap-1">Quiz Mocenick <span class="text-xs bg-yellow-500 text-indigo-950 px-2 py-0.5 rounded-full">PRO</span></h1>
-                <p class="text-xs text-yellow-300">Défis & Culture Générale 🇭🇹 Haïti</p>
+                <p class="text-xs text-yellow-300">Défis & Examens Officiels 🇭🇹 Haïti</p>
             </div>
         </div>
         
@@ -40,7 +40,7 @@
     <!-- Menu Déroulant -->
     <div id="dropdown-menu" class="hidden bg-indigo-950 text-white flex-col space-y-2 p-4 shadow-lg border-b border-indigo-800 sticky top-16 z-40">
         <button onclick="showPage('page-accueil'); closeMenu();" class="text-left font-semibold py-2 hover:text-yellow-400 flex items-center gap-2"><i class="fas fa-gamepad"></i> Accueil</button>
-        <button onclick="showPage('page-matieres'); closeMenu();" class="text-left font-semibold py-2 hover:text-yellow-400 flex items-center gap-2"><i class="fas fa-book-open"></i> Matières Classiques (20 Kesyon)</button>
+        <button onclick="showPage('page-niveaux-choix'); closeMenu();" class="text-left font-semibold py-2 hover:text-yellow-400 flex items-center gap-2"><i class="fas fa-book-open"></i> Matières d'Examens (9ème & NS4)</button>
         <button onclick="showPage('page-avance'); closeMenu();" class="text-left font-extrabold py-2 text-yellow-400 hover:text-yellow-300 flex items-center gap-2"><i class="fas fa-graduation-cap"></i> Mode : Kesyon Avanse 🎓</button>
         <button onclick="showPage('page-aprendre'); closeMenu();" class="text-left font-semibold py-2 hover:text-yellow-400 flex items-center gap-2"><i class="fas fa-balance-scale"></i> Mode : À prendre ou à laisser ⚡</button>
         <button onclick="showPage('page-classement'); closeMenu();" class="text-left font-semibold py-2 hover:text-yellow-400 flex items-center gap-2"><i class="fas fa-trophy"></i> Classement Général</button>
@@ -58,11 +58,11 @@
                 <div class="absolute -right-4 -bottom-4 opacity-20 text-8xl"><i class="fas fa-brain"></i></div>
                 <span class="bg-yellow-400 text-indigo-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">Mèv - Nivo Difisil / Ekzamen</span>
                 <h2 class="text-2xl font-black mb-2">Bienvenue sur Quiz Mocenick !</h2>
-                <p class="text-indigo-200 text-xs mb-5">Sélectionnez votre mode de jeu (30 Kesyon nan À prendre ou à laisser) :</p>
+                <p class="text-indigo-200 text-xs mb-5">Préparez vos examens officiels (9ème Année & NS4) avec 30 questions par matière :</p>
                 
                 <div class="space-y-3">
-                    <button onclick="showPage('page-matieres')" class="w-full bg-yellow-400 text-indigo-950 font-black px-6 py-3.5 rounded-2xl shadow-lg hover:bg-yellow-300 transition transform active:scale-95 text-xs uppercase flex items-center justify-center gap-2">
-                        <i class="fas fa-book-open"></i> Mode Matières Classiques
+                    <button onclick="showPage('page-niveaux-choix')" class="w-full bg-yellow-400 text-indigo-950 font-black px-6 py-3.5 rounded-2xl shadow-lg hover:bg-yellow-300 transition transform active:scale-95 text-xs uppercase flex items-center justify-center gap-2">
+                        <i class="fas fa-book-open"></i> Matières d'Examens (9e & NS4)
                     </button>
                     <button onclick="showPage('page-avance')" class="w-full bg-purple-500 text-white font-black px-6 py-3.5 rounded-2xl shadow-lg hover:bg-purple-400 transition transform active:scale-95 text-xs uppercase flex items-center justify-center gap-2">
                         <i class="fas fa-graduation-cap"></i> Mode Kesyon Avanse 🎓
@@ -94,6 +94,135 @@
             </a>
         </section>
 
+        <!-- Page Choix des Niveaux d'Examens (9e vs NS4) -->
+        <section id="page-niveaux-choix" class="hidden space-y-4">
+            <h2 class="text-lg font-black text-slate-800 border-b pb-2 flex justify-between items-center">
+                <span>Chwazi Nivo Ekzamen</span>
+                <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full font-normal">30 Kesyon / Seksyon</span>
+            </h2>
+
+            <div class="space-y-3">
+                <button onclick="showPage('page-matieres-9eme')" class="w-full bg-indigo-900 text-white p-4 rounded-2xl shadow-md hover:bg-indigo-800 flex items-center justify-between transition">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-yellow-400 text-indigo-950 rounded-xl flex items-center justify-center text-lg font-bold"><i class="fas fa-school"></i></div>
+                        <div class="text-left">
+                            <h4 class="font-black text-sm">9ème Année Fondamentale (9e AF)</h4>
+                            <p class="text-[10px] text-yellow-300">EPS, EEA, ETAP, Kreyòl, Franse, Matèmatik, Syans Eksperimantal, Syans Sosyal</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-right text-yellow-400"></i>
+                </button>
+
+                <button onclick="showPage('page-matieres-ns4')" class="w-full bg-purple-900 text-white p-4 rounded-2xl shadow-md hover:bg-purple-800 flex items-center justify-between transition">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-yellow-400 text-purple-950 rounded-xl flex items-center justify-center text-lg font-bold"><i class="fas fa-user-graduate"></i></div>
+                        <div class="text-left">
+                            <h4 class="font-black text-sm">NS4 (Philosophie / Secondaire IV)</h4>
+                            <p class="text-[10px] text-yellow-300">Chimi, Fizik, Kreyòl, Syans Sosyal, Syans Eksperimantal, Filozofi, Franse</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-right text-yellow-400"></i>
+                </button>
+            </div>
+            
+            <button onclick="showPage('page-accueil')" class="w-full bg-slate-200 text-slate-700 font-bold py-3 rounded-xl text-xs mt-2">← Retounen nan Akèy</button>
+        </section>
+
+        <!-- Page Matières 9ème AF -->
+        <section id="page-matieres-9eme" class="hidden space-y-4">
+            <h2 class="text-lg font-black text-slate-800 border-b pb-2 flex justify-between items-center">
+                <span>9ème Année Fondamentale</span>
+                <button onclick="showPage('page-niveaux-choix')" class="text-xs text-indigo-600 font-bold">Chanje Nivo</button>
+            </h2>
+            
+            <div class="grid grid-cols-2 gap-3">
+                <button onclick="startSession('9e_eps', false)" class="bg-white p-3.5 rounded-2xl shadow-sm border hover:border-indigo-600 text-center transition flex flex-col items-center justify-center gap-2">
+                    <div class="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-lg"><i class="fas fa-running"></i></div>
+                    <span class="font-bold text-xs text-slate-800">EPS (Sport)</span>
+                </button>
+
+                <button onclick="startSession('9e_eea', false)" class="bg-white p-3.5 rounded-2xl shadow-sm border hover:border-indigo-600 text-center transition flex flex-col items-center justify-center gap-2">
+                    <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-lg"><i class="fas fa-palette"></i></div>
+                    <span class="font-bold text-xs text-slate-800">EEA (Art & Env.)</span>
+                </button>
+
+                <button onclick="startSession('9e_etap', false)" class="bg-white p-3.5 rounded-2xl shadow-sm border hover:border-indigo-600 text-center transition flex flex-col items-center justify-center gap-2">
+                    <div class="w-10 h-10 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-lg"><i class="fas fa-hands-helping"></i></div>
+                    <span class="font-bold text-xs text-slate-800">ETAP (Civisme)</span>
+                </button>
+
+                <button onclick="startSession('9e_creole', false)" class="bg-white p-3.5 rounded-2xl shadow-sm border hover:border-indigo-600 text-center transition flex flex-col items-center justify-center gap-2">
+                    <div class="w-10 h-10 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-lg"><i class="fas fa-comment-dots"></i></div>
+                    <span class="font-bold text-xs text-slate-800">Kreyòl</span>
+                </button>
+
+                <button onclick="startSession('9e_francais', false)" class="bg-white p-3.5 rounded-2xl shadow-sm border hover:border-indigo-600 text-center transition flex flex-col items-center justify-center gap-2">
+                    <div class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-lg"><i class="fas fa-book"></i></div>
+                    <span class="font-bold text-xs text-slate-800">Français</span>
+                </button>
+
+                <button onclick="startSession('9e_mathematiques', false)" class="bg-white p-3.5 rounded-2xl shadow-sm border hover:border-indigo-600 text-center transition flex flex-col items-center justify-center gap-2">
+                    <div class="w-10 h-10 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center text-lg"><i class="fas fa-calculator"></i></div>
+                    <span class="font-bold text-xs text-slate-800">Matèmatik</span>
+                </button>
+
+                <button onclick="startSession('9e_science_exp', false)" class="bg-white p-3.5 rounded-2xl shadow-sm border hover:border-indigo-600 text-center transition flex flex-col items-center justify-center gap-2">
+                    <div class="w-10 h-10 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center text-lg"><i class="fas fa-flask"></i></div>
+                    <span class="font-bold text-xs text-slate-800">Syans Eksperimantal</span>
+                </button>
+
+                <button onclick="startSession('9e_sciences_soc', false)" class="bg-white p-3.5 rounded-2xl shadow-sm border hover:border-indigo-600 text-center transition flex flex-col items-center justify-center gap-2">
+                    <div class="w-10 h-10 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-lg"><i class="fas fa-globe-americas"></i></div>
+                    <span class="font-bold text-xs text-slate-800">Syans Sosyal</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Page Matières NS4 -->
+        <section id="page-matieres-ns4" class="hidden space-y-4">
+            <h2 class="text-lg font-black text-slate-800 border-b pb-2 flex justify-between items-center">
+                <span>NS4 (Philosophie)</span>
+                <button onclick="showPage('page-niveaux-choix')" class="text-xs text-purple-600 font-bold">Chanje Nivo</button>
+            </h2>
+            
+            <div class="grid grid-cols-2 gap-3">
+                <button onclick="startSession('ns4_chimie', false)" class="bg-white p-3.5 rounded-2xl shadow-sm border hover:border-purple-600 text-center transition flex flex-col items-center justify-center gap-2">
+                    <div class="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-lg"><i class="fas fa-atom"></i></div>
+                    <span class="font-bold text-xs text-slate-800">Chimie</span>
+                </button>
+
+                <button onclick="startSession('ns4_physique', false)" class="bg-white p-3.5 rounded-2xl shadow-sm border hover:border-purple-600 text-center transition flex flex-col items-center justify-center gap-2">
+                    <div class="w-10 h-10 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-lg"><i class="fas fa-bolt"></i></div>
+                    <span class="font-bold text-xs text-slate-800">Physique</span>
+                </button>
+
+                <button onclick="startSession('ns4_creole', false)" class="bg-white p-3.5 rounded-2xl shadow-sm border hover:border-purple-600 text-center transition flex flex-col items-center justify-center gap-2">
+                    <div class="w-10 h-10 bg-yellow-100 text-yellow-700 rounded-full flex items-center justify-center text-lg"><i class="fas fa-comment"></i></div>
+                    <span class="font-bold text-xs text-slate-800">Kreyòl</span>
+                </button>
+
+                <button onclick="startSession('ns4_sciences_soc', false)" class="bg-white p-3.5 rounded-2xl shadow-sm border hover:border-purple-600 text-center transition flex flex-col items-center justify-center gap-2">
+                    <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-lg"><i class="fas fa-landmark"></i></div>
+                    <span class="font-bold text-xs text-slate-800">Sciences Sociales</span>
+                </button>
+
+                <button onclick="startSession('ns4_science_exp', false)" class="bg-white p-3.5 rounded-2xl shadow-sm border hover:border-purple-600 text-center transition flex flex-col items-center justify-center gap-2">
+                    <div class="w-10 h-10 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center text-lg"><i class="fas fa-dna"></i></div>
+                    <span class="font-bold text-xs text-slate-800">Sciences Expérimentales</span>
+                </button>
+
+                <button onclick="startSession('ns4_philosophie', false)" class="bg-white p-3.5 rounded-2xl shadow-sm border hover:border-purple-600 text-center transition flex flex-col items-center justify-center gap-2">
+                    <div class="w-10 h-10 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-lg"><i class="fas fa-brain"></i></div>
+                    <span class="font-bold text-xs text-slate-800">Philosophie</span>
+                </button>
+
+                <button onclick="startSession('ns4_francais', false)" class="bg-white p-3.5 rounded-2xl shadow-sm border hover:border-purple-600 col-span-2 text-center transition flex flex-col items-center justify-center gap-2">
+                    <div class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-lg"><i class="fas fa-feather-alt"></i></div>
+                    <span class="font-bold text-xs text-slate-800">Français</span>
+                </button>
+            </div>
+        </section>
+
         <!-- Page Mode Kesyon Avanse -->
         <section id="page-avance" class="hidden space-y-4">
             <div class="bg-purple-900 text-white p-5 rounded-3xl shadow-xl border border-purple-700 space-y-3 text-center">
@@ -101,7 +230,7 @@
                     <i class="fas fa-graduation-cap"></i>
                 </div>
                 <h3 class="font-black text-xl">Kesyon Avanse (Nivo Siperyè)</h3>
-                <p class="text-xs text-purple-200">Chwazi youn nan gwoup yo (chak gen pil kesyon difisil k ap melanje o aza):</p>
+                <p class="text-xs text-purple-200">Chwazi youn nan gwoup yo :</p>
                 
                 <div class="space-y-2.5 pt-2">
                     <button onclick="startSession('AvanceGroupe1', false)" class="w-full bg-yellow-400 hover:bg-yellow-300 text-indigo-950 font-black py-3 px-4 rounded-2xl shadow text-xs uppercase flex items-center justify-between transition">
@@ -128,43 +257,13 @@
                 </div>
                 <h3 class="font-black text-2xl">À prendre ou à laisser ⚡</h3>
                 <p class="text-xs text-indigo-200 leading-relaxed text-left bg-indigo-950/50 p-4 rounded-2xl border border-indigo-800">
-                    Un mode indépendant axé sur la prise de risque et la culture générale (30 questions intégrées) :<br><br>
+                    Un mode indépendant axé sur la prise de risque et la culture générale :<br><br>
                     • <b>Bonne réponse :</b> <span class="text-green-400 font-bold">+40 Points</span><br>
                     • <b>Mauvaise réponse :</b> <span class="text-red-400 font-bold">-20 Points</span><br>
                     • <b>Passer la question :</b> <span class="text-yellow-300 font-bold">-10 Points</span>
                 </p>
                 <button onclick="startSession('AprendreOuLaisser', true)" class="w-full bg-yellow-400 hover:bg-yellow-300 text-indigo-950 font-black py-4 rounded-2xl shadow-lg text-xs uppercase tracking-wider transition transform active:scale-95">
                     🚀 Démarrer une partie Risque
-                </button>
-            </div>
-        </section>
-
-        <!-- Page Matières Classiques -->
-        <section id="page-matieres" class="hidden space-y-4">
-            <h2 class="text-lg font-black text-slate-800 border-b pb-2 flex justify-between items-center">
-                <span>Matières d'Examens (20 Kesyon chak)</span>
-                <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full font-normal">Melanj O Aza 🎯</span>
-            </h2>
-            
-            <div class="grid grid-cols-2 gap-3">
-                <button onclick="startSession('Chimie', false)" class="bg-white p-4 rounded-2xl shadow-sm border hover:border-indigo-600 text-center transition flex flex-col items-center justify-center gap-2">
-                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xl"><i class="fas fa-flask"></i></div>
-                    <span class="font-bold text-xs text-slate-800">Chimie</span>
-                </button>
-
-                <button onclick="startSession('Sciences Sociales', false)" class="bg-white p-4 rounded-2xl shadow-sm border hover:border-indigo-600 text-center transition flex flex-col items-center justify-center gap-2">
-                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xl"><i class="fas fa-landmark"></i></div>
-                    <span class="font-bold text-xs text-slate-800">Sciences Sociales</span>
-                </button>
-
-                <button onclick="startSession('Mathématiques', false)" class="bg-white p-4 rounded-2xl shadow-sm border hover:border-indigo-600 text-center transition flex flex-col items-center justify-center gap-2">
-                    <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-xl"><i class="fas fa-calculator"></i></div>
-                    <span class="font-bold text-xs text-slate-800">Mathématiques</span>
-                </button>
-
-                <button onclick="startSession('Physique', false)" class="bg-white p-4 rounded-2xl shadow-sm border hover:border-indigo-600 text-center transition flex flex-col items-center justify-center gap-2">
-                    <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-xl"><i class="fas fa-atom"></i></div>
-                    <span class="font-bold text-xs text-slate-800">Physique</span>
                 </button>
             </div>
         </section>
@@ -187,7 +286,7 @@
                         <option value="NS1">NS1 (Seconde)</option>
                         <option value="NS2">NS2 (Première)</option>
                         <option value="NS3">NS3 (Rhéto)</option>
-                        <option value="NS4">NS4 (Philo)</option>
+                        <option value="NS4">NS4 (Philosophie)</option>
                         <option value="Université">Université / Supérieur</option>
                         <option value="Autre / Passionné">Autre / Passionné</option>
                     </select>
@@ -404,480 +503,4 @@
         let userScore = parseInt(localStorage.getItem('qm_score')) || 0;
         let userLevel = localStorage.getItem('qm_level') || 'Université';
 
-        const realNamesList = [
-            "Irene Mocenick", "Wensley Angrand", "Jean Pierre", "Paul Joseph", "Marc Antoine", "David Saint-Fleur",
-            "Samuel Dorvil", "Daniel Exantus", "Michel Étienne", "Thomas Baptiste", "Emmanuel Charles",
-            "Roody Célestin", "James Louis", "Wilner Pierre-Louis", "Sony Desir", "Kenley Saint-Juste",
-            "Stéphane Joseph", "Frantz Voltaire", "Ronald Labossière", "Junior Méus", "Alex Toussaint",
-            "Wilson Beauvil", "Mackendy François", "Richardson Noël", "Dieuseul Jeanty", "Rose-Marie Jean-Baptiste",
-            "Marie-Josée Dabel", "Nathalie Exuma", "Stéphanie Hyppolite", "Jessica Laurent", "Vanessa Saint-Amand",
-            "Kimberley Lemoine", "Medjine Dorismond", "Rachelle Petit-Frère", "Katia Delva", "Shedeline Morisset",
-            "Yvrose Saint-Dic", "Gertha Guillaume", "Marlène Paul", "Ginette Cangé", "Ghislaine Mentor",
-            "Evelyne Mondélus", "Chantal Beauchamp", "Nadine Théodat", "Murielle Saint-Victor", "Magalie Joseph",
-            "Betina Pierre", "Esther Vixamar", "Ruth Belizaire", "Naomie Alexis", "Abigail Saint-Hilaire",
-            "Sarah Bernadel", "Miriam Hilaire", "Debora St-Fort", "Priscille Cadet", "Lydia Constant",
-            "Judith Desrouleaux", "Rachel Bien-Aimé", "Leah Monestime", "Hannah Jeune", "Rebecca St-Surin",
-            "Kassandra Destin", "Samantha Cazeau", "Jennifer Magloire", "Melissa Dorcé", "Wilfried Saint-Louis",
-            "Woody Pierre", "Stevenson Auguste", "Wadner Alcius", "Makenson Louis-Jeune", "Jamesley Joseph",
-            "Ritchy Charles", "Kensley Michel", "Wismith Thomas", "Djimy Jean", "Frantzdy Paul",
-            "Rony Célestin", "Disner Desir", "Evens Saint-Juste", "Edyson Joseph", "Jonel Voltaire",
-            "Herold Labossière", "Benito Méus", "Wilkens Toussaint", "Dantès Beauvil", "Alix François",
-            "Reginald Noël", "Hervé Jeanty", "Carl Jean-Baptiste", "Willy Dabel", "Jerry Exuma",
-            "Eddy Hyppolite", "Widly Laurent", "Sadrac Saint-Amand", "Makenson Lemoine", "Rinald Dorismond",
-            "Kendy Petit-Frère", "Roobens Delva", "Patrique Morisset", "Benjy Saint-Dic", "Kenold Guillaume",
-            "Richardson Paul", "Dieunel Cangé", "Woodly Mentor", "Jackson Mondélus", "Peterson Beauchamp",
-            "Guerson Théodat", "Valéry Saint-Victor", "Anderson Joseph", "Marvens Pierre", "Fabrice Vixamar"
-        ];
-
-        let allUsers = JSON.parse(localStorage.getItem('qm_global_users_db'));
-        if (!allUsers) {
-            const levels = ["8ème AF", "9ème AF", "NS1", "NS2", "NS3", "NS4", "Université"];
-            const avatars = ["fa-user-graduate", "fa-user-ninja", "fa-user-astronaut", "fa-crown", "fa-brain", "fa-flask", "fa-fire"];
-            
-            allUsers = realNamesList.map((fullName, idx) => {
-                return {
-                    name: fullName,
-                    score: fullName === "Irene Mocenick" ? 1040 : (Math.floor(Math.random() * 450) + 30),
-                    level: levels[idx % levels.length],
-                    avatar: avatars[idx % avatars.length],
-                    photo: ""
-                };
-            });
-            localStorage.setItem('qm_global_users_db', JSON.stringify(allUsers));
-        }
-
-        let currentTimer = null;
-        let timeLeft = 15;
-        let currentSubject = '';
-        let sessionCount = 0;
-        let sessionCorrectCount = 0;
-        let isRiskMode = false;
-        let sessionQuestions = [];
-
-        // Baz done ak 30 kesyon yo nan 'AprendreOuLaisser' ak lòt yo
-        const questionsData = {
-            'AprendreOuLaisser': [
-                { q: "1. [Syans Eksperimantal] Nan yon eksperyans chimik, ki sa yo rele teknik ki sèvi pou separe de likid ki pa misib ki gen dèt dansite diferan lè l sèvi avèk yon ampoul a dekanstasyon?", options: ["Dekantasyon", "Distilasyon", "Filtrasyon", "Ekstraksyon"], answer: 0 },
-                { q: "2. [Franse] Nan estil literè ak nan lèt kòmandman, ki sa yon figi estile ki rele litotes la vle di?", options: ["Di mwens pou fè konprann plis", "Di plis pou fè konprann mwens", "Egzajere yon reyalite", "Repete yon menm mo"], answer: 0 },
-                { q: "3. [Syans Eksperimantal] Nan tèmodinamik, ki sa dezyèm prensip la di anrapò ak evolisyon espontanèl yon sistèm izole ak grandè entropi (S)?", options: ["Entropi a toujou ap ogmante oubyen rete konstan", "Entropi a toujou desann a zewo", "Entropi a toujou rete nèt egal a zewo", "Entropi a pa gen okenn enpak"], answer: 0 },
-                { q: "4. [Syans Eksperimantal] Nan byoloji molekilè, ki non anzim ki pèmèt pou l kole bout fragman ADN yo pandan manipilasyon jenetik yo?", options: ["ADN ligaz", "ADN polimèraz", "Amilaz", "Pepsin"], answer: 0 },
-                { q: "5. [Franse] Ki diferans fondamantal ki genyen ant yon métaphore ak yon métonymie nan figi de style yo?", options: ["Metafò baze sou analoji, metonimi sou relasyon lojik", "Metafò itilize mo tankou 'kòm'", "Metonimi pa janm gen sans figire", "Yo se egzakteman menm bagay la"], answer: 0 },
-                { q: "6. [Syans Eksperimantal] Lè w ap fè yon titraj colorimetrik nan chimik, ki jan yo rele moman egzak kote reyaktif ki itilize a vin an pwopòsyon stèkiyometrik ak espès yo dwe titre a?", options: ["Pwen ekivalans", "Pwen enfleksyon", "Pwen satirasyon", "Pwen fizyon"], answer: 0 },
-                { q: "7. [Franse] Nan analiz tèks an fransè, ki sa yo rele yon fraz ki pa gen okenn pwpozisyon subòdone (ki gen yon sèl vèb konjige)?", options: ["Fraz senp (proposition indépendante)", "Fraz konplèks", "Fraz kowòdone", "Fraz jenerik"], answer: 0 },
-                { q: "8. [Syans Eksperimantal] Nan fizik nikleyè, ki sa ki konstan dekrwasans radyoaktif la, epi ki relasyon ki genyen ant li menm ak mwatye lavi (t_1/2) yon nwayo?", options: ["t_1/2 = ln(2) / lambda", "t_1/2 = lambda / ln(2)", "t_1/2 = lambda * ln(2)", "t_1/2 = 2 * lambda"], answer: 0 },
-                { q: "9. [Syans Eksperimantal] Nan optik ondilatwa, ki fenomèn ki pwodui lè yon gwo bout limyè pase nan yon ti ouvèti ki konparab ak longè dòn li, sa ki kreye tach limyè ak fènwa sou ekran an?", options: ["Difraksyon", "Refraksyon", "Refleksyon", "Polarizasyon"], answer: 0 },
-                { q: "10. [Franse] Ki sa ki yon 'oxymore' nan literati franse a?", options: ["De mo opoze kò kole sou kò", "Yon konparezon long", "Repitisyon yon vè", "Yon mo ki gen de sans"], answer: 0 },
-                { q: "11. [Syans Eksperimantal] Nan chimik òganik, ki diferans ki genyen ant yon efè inductif attractif ak yon efè donateur nan yon chèn kaboné?", options: ["Attractif atire elèktron yo, donateur pouse yo ale", "Attractif pouse elèktron yo, donateur atire yo", "Tou de pouse elèktron yo menm jan", "Tou de atire pwoton yo"], answer: 0 },
-                { q: "12. [Syans Eksperimantal] Nan mekanik jeneral, ki kondisyon ki fè pou yon sistèm nan yon refèrans ki pa galilyen ka aplike fòs inètsi (fòs fiktiv)?", options: ["Lè referans lan ap akselere oubyen ap vire", "Lè referans lan fiks nèt", "Lè vitès la konstan sou liy dwat", "Lè pa gen okenn akselerasyon"], answer: 0 },
-                { q: "13. [Franse] Nan kisa 'l'implicite' diferan de 'l'explicite' nan yon diskou literè oubyen yon tèks diskitif?", options: ["Enplisit kache, eksplisit di net nan tèks la", "Enplisit pi long pase eksplisit", "Yo vle di egzakteman menm bagay la", "Eksplisit toujou kache nan sou-tèks"], answer: 0 },
-                { q: "14. [Syans Eksperimantal] Ki kalite lyezon chimik ki responsab estrikti segondè ak tèttyè nan yon pwoteyin (tankou helis alfa ak fèy beta)?", options: ["Lyezon idwojèn", "Lyezon kovalente sèlman", "Lyezon metalik", "Lyezon ionik sèlman"], answer: 0 },
-                { q: "15. [Franse] Ki sa ki yon anaphore nan retorik ak estilistik lang franse a?", options: ["Repitasyon yon menm mo nan kòmansman plizyè vè oswa fraz", "Chanjman radikal nan sijè a", "Opòtinite pou itilize de kontras", "Itilizasyon yon sinonim ra"], answer: 0 },
-                { q: "16. [Syans Eksperimantal] Nan elektrik dinamik, ki ekwasyon differansyèl ki bay varyasyon tansyon u_C sou yon kondansateur pandan l ap dechaje nan yon rezistans (RC)?", options: ["RC (du_C/dt) + u_C = 0", "RC (du_C/dt) - u_C = 0", "(du_C/dt) + RC u_C = 0", "u_C + RC = 0"], answer: 0 },
-                { q: "17. [Syans Eksperimantal] Nan ekoloji ak byoloji popilasyon, ki sa ki kapasite pote (carrying capacity) yon anviwònman pou yon popilasyon bèt?", options: ["Kantite maksimòm endividi yon anviwònman kapab sipòte", "Kantite minimòm bèt ki nesesè pou siviv", "Vitès kwasans anyèl popilasyon an", "Kantite manje ki rete nan dlo a"], answer: 0 },
-                { q: "18. [Franse] Eksplike tèm 'polysemie' nan semantik lang franse a.", options: ["Yon sèl mo ki gen plizyè siyifikasyon diferan", "Plizyè mo ki gen menm sans sèlman", "Yon mo ki pa gen okenn sans", "Yon mo ki gen menm siyifikasyon nan tout lang"], answer: 0 },
-                { q: "19. [Syans Eksperimantal] Nan fizik solid, ki sa yo rele yon materyèl ki wè rezistans elektrik li tonbe a zewo lè yo refwadi l anba yon tanperati kritik?", options: ["Sipèkondiktè", "Izolan pafè", "Semi-kondiktè", "Kondiktè Ohmik"], answer: 0 },
-                { q: "20. [Franse] Ki sa yon chiasme ye nan estrikti yon fraz oubyen yon vès?", options: ["Yon estrikti kwaze (fòma ABBA)", "Yon repitasyon lineyè", "Yon konparezon dirèk san vèb", "Yon kontradiksyon evidan"], answer: 0 },
-                { q: "21. [Syans Eksperimantal] Nan byoloji selilè, ki pwosesis ki pèmèt yon selil debarase li de dechè entèn oubyen organit ki domaje lè l anvlope yo nan yon manbràn pou voye yo nan lizozòm?", options: ["Otofaji", "Mitoz", "Meyoz", "Osmoz"], answer: 0 },
-                { q: "22. [Franse] Nan konparezon tèks yo, ki sa ki analèks ak ki wòl li nan yon redaksyon inivèsitè an franse?", options: ["Yon rapò analoji pou soutni yon argumentasyon", "Yon fòmil matematik konplèks", "Yon konklizyon san apèl", "Yon mo etranje ki pa tradwi"], answer: 0 },
-                { q: "23. [Syans Eksperimantal] Nan teknik espektroskopi (tankou IR oswa RMN), ki sa ki endike pa pik ki parèt nan yon graf pou yon molekil òganik?", options: ["Prezans sèten gwoup fonksyonèl oswa kalite lyezon", "Kantite total atom ki nan laboratwa a", "Tan li pran pou chofe molekil la", "Pwa egzak nan gram"], answer: 0 },
-                { q: "24. [Franse] Ki sa yo rele yon mo ki gen menm siyifikasyon ak yon lòt men ki gen yon fòm diferan (egzanp: bâton ak gourdin)?", options: ["Sinonim", "Antonim", "Omonim", "Paronim"], answer: 0 },
-                { q: "25. [Syans Eksperimantal] Nan mekanik fluides, ki lwa oswa prensip ki esplike poukisa vitès yon likid ki ap koule ogmante lè seksyon tiyo a vin pi sere (konsèvasyon débit)?", options: ["Prensip kontinwite a", "Prensip inètsi", "Lwa Newton", "Teyorèm d'Archimède"], answer: 0 },
-                { q: "26. [Franse] Ki sa yon paradoxe ye nan diskou fòmèl la an franse, epi ki diferans li genyen ak yon kontradiksyon lojik?", options: ["Yon lide ki pote yon verite pwofon malgre aparans li, kontras ak kontradiksyon ki se erè lojik", "Yon erè gramatikal grav", "Yon kalite powèm kout", "Yon sinonim pou manti"], answer: 0 },
-                { q: "27. [Syans Eksperimantal] Nan chimik fiziko-chimik, ki sa ki konstan d'équilibre (K) yon reyaksyon endike anrapò ak avansman reyaksyon an lè l rive nan eta ekilib?", options: ["Si K>1 li favorize pwodwi yo, si K<1 li favorize reyaktif yo", "Toujou endike ke tout reyaktif fini nèt", "Pa gen okenn relasyon ak pwodwi yo", "Endike vitès tanperati a sèlman"], answer: 0 },
-                { q: "28. [Franse] Eksplike nosyon 'l'intertextualité' nan teyori literè modèn yo.", options: ["Prezans yon tèks anndan yon lòt tèks", "Lè de otè ekri menm liv la ansanm", "Tradiksyon yon tèks nan yon lòt lang", "Kritik yon liv nan jounal"], answer: 0 },
-                { q: "29. [Syans Eksperimantal] Nan jeni byolojik oswa mikwobyoloji, ki sa ki faz 'lag' la nan koub kwasans yon popilasyon bakteri nan yon miltiplikatè?", options: ["Faz adaptasyon kote bakteri yo ap prepare anzim yo", "Faz kote tout bakteri yo ap mouri rapid", "Faz kote kwasans lan rive nan maksimòm li", "Faz kote pa gen okenn molekil nan dlo a"], answer: 0 },
-                { q: "30. [Franse] Nan lèt ak redaksyon ki mande yon wo nivo pwotokòl, ki diferans ki genyen ant ton ironique ak ton sarcastique?", options: ["Ironi a sèvi ak tak pou di kontrè a, sarkasm lan pi mòdan ak dirèk nan betiz", "Yo se egzakteman menm bagay la nan chak tèks", "Sarkasm pa janm sèvi nan lèt fòmèl", "Ironi pi mechan pase sarkasm"], answer: 0 }
-            ],
-            'AvanceGroupe1': [
-                { q: "Konstitisyon 1801 : Ki atik nan Konstitisyon Toussaint Louverture an 1801 ki te deklare li Gouvènè a lavi, tout an ba l dwa tou pou l chwazi siksesè l?", options: ["Atik 40", "Atik 28", "Atik 36", "Atik 45"], answer: 0 },
-                { q: "Ekonomi kolonyal : Nan epòk Koloni Sen Domeng, ki moun yo te rele 'Affranchis' yo, e ki t ap fren anpi nan dwa politik yo te vle jwenn anvan Revolisyon an?", options: ["Moun koulè lib yo ki t ap goumen pou jwenn menm dwa sivil ak politik", "Esklav ki te achte libète yo sèlman", "Kolon franse ki te gen dèt", "Endyen ki te siviv sou zile a"], answer: 0 },
-                { q: "Istwa Karayib : Ki non òganizasyon entènasyonal ki te reyini ansyen koloni an kòm yon mache komen (CARICOM), e ki ane li te ranplase CARIFTA?", options: ["1973 (Trète Chaguaramas)", "1985", "1968", "1994"], answer: 0 },
-                { q: "Jewografi ak Istwa : Nan ki ane egzak ak nan ki zòn Panyòl yo te fonde premye vil ewopeyen nan Nouvo Mond lan ki te rele La Isabela?", options: ["1493 nan nò Repiblik Dominikèn jodi a", "1492 nan sid Ayiti", "1502 nan kòt Kiba", "1496 nan Pòtoprens"], answer: 0 },
-                { q: "Sosyoloji d Ayiti : Nan teyori sosyolojik Jean Price-Mars sou 'Boujwazi d Ayiti', ki konsèp li itilize pou pale de tandans elit la pou chache imite kilti ewopeyen bliye rasin yo?", options: ["Bovarisme collectif (Bovarism kolektif)", "Endijenis", "Boujwazi nasyonal", "Bwouyayis"], answer: 0 }
-            ],
-            'AvanceGroupe2': [
-                { q: "Dyplomasi d Ayiti : Ki peyi nan kontinan Ameriken an ki te premye rekonèt endepandans d Ayiti yon fason ofisyèl (san presyon dirèk) apre gwo diskou ak batay diplomatik yo?", options: ["Kolonbi (oswa Gran Kolonbi anba lidèchip Simón Bolívar)", "Etazini", "Brezil", "Kiba"], answer: 0 },
-                { q: "Politik anba Okipasyon : Ki non mouvman rezistans entèlektyèl ak politik ki te fèt an Ayiti kont okipasyon ameriken an (1915-1934) ki te mete aksan sou revalorizasyon kilti popilè ak rasin afriken yo?", options: ["L'Indigénisme (Mouvman Indigéniste a)", "Mouvman Nasyonalis la", "Les Griots", "Patryotis Douvan"], answer: 0 },
-                { q: "Istwa Karayib : Nan listwa Kiba, ki non manifestasyon oubyen premye atak sou yon kazèn militè an 1953 ki te bay Fidel Castro ak mouvman li an non 'Mouvman 26 Jiyè'?", options: ["Atak sou Moncada (Quartel Moncada)", "Batay la Sierra Maestra", "Debak Granma", "Revolisyon Habanera"], answer: 0 },
-                { q: "Kriz ak Trete : Ki non akò ki te mete fen nan 'Gè Bwa Mango' ant Ayiti ak Repiblik Dominikèn an 1937, apre masak ki te fèt sou fwontyè a?", options: ["Akò Tròv oswa Pak Aribitraj ak Enpansasyon", "Pak Sispansye Zanmi", "Konvansyon Katò", "Trete Siman"], answer: 0 },
-                { q: "Sosyoloji ak Antwopoloji : Nan travay Alfred Métraux sou vodou ayisyen an, ki jan li dekri wòl 'hougan' oubyen 'mambo' nan estrikti kominotè ak solidarite riral nan peyi a?", options: ["Tankou gid espirityèl, terapis, ak poto mitan ki kenbe koyezyon ak solidarite", "Tankou senp machann relijye", "Tankou lidè politik lokal", "Tankou mèt tè yo"], answer: 0 }
-            ],
-            'AvanceGroupe3': [
-                { q: "Gè Endepandans : Lè batay Vètyè a t ap fèt an 1803, ki jeneral franse ki te siyen akò rann tèt ak Jeneral Jean-Jacques Dessalines nan kapital la?", options: ["Donatien Rochambeau (ak lòt jeneral nan rejyon yo)", "Rochambeau sèlman", "Leclerq", "Ferrand"], answer: 0 },
-                { q: "Politik entènasyonal d Ayiti : Nan ki konferans entènasyonal sou dekolonizasyon ak dwa pèp yo nan ane 1950 yo d Ayiti te jwe yon wòl vizib malgre sitiyasyon politik entèn li an?", options: ["Konferans Bandoeng (Bandung) an 1955", "Konferans Yalta", "Konferans San Francisco", "Konferans Pari"], answer: 0 },
-                { q: "Istwa Karayib (Ayiti) : Ki non premye enstitisyon finansye nasyonal d Ayiti ki te ranplase bank etranje yo apre yon seri batay sou souverènte monetè nan mitan 20yèm syèk la?", options: ["Banque Nationale de la République d'Haïti (BNRH)", "Sogebank", "BNC (Banque Nationale de Crédit)", "Capital Bank"], answer: 0 },
-                { q: "Demografi ak Urbanis : Ki jan sosyològ yo rele fenomèn migrasyon masiv popilasyon riral la vin nan zòn metwopolitèn Pòtoprens lan ki te akselere ant ane 1970 ak 1980 yo?", options: ["Eksod riral (Exode rural)", "Urbanizasyon vètikal", "Transmigrasyon", "Decentralizasyon"], answer: 0 },
-                { q: "Diyò ak Dwa Moun : Ki dat egzak ak non rezolisyon Nasyonzini ki te voye Misyon Nasyonzini pou Estabilizasyon an Ayiti (MINUSTAH) an 2004 apre kriz politik la?", options: ["Rezolisyon 1529 (ak 1542 nan mwa avril 2004 ki te kreye MINUSTAH ofisyèlman)", "Rezolisyon 1200", "Rezolisyon 2000", "Rezolisyon 101"], answer: 0 }
-            ],
-            'Chimie': [
-                { q: "1. Quel est le volume molaire d'un gaz parfait dans les conditions normales de température et de pression (CNTP) ?", options: ["22,4 L/mol", "11,2 L/mol", "24,8 L/mol", "1,0 L/mol"], answer: 0 },
-                { q: "2. Selon la théorie de Brönsted-Lowry, un acide est une entité chimique capable de :", options: ["Céder un proton (H⁺)", "Capter un proton (H⁺)", "Céder un électron", "Capter une paire d'électrons"], answer: 0 },
-                { q: "3. Quel est le nombre d'oxydation du manganèse (Mn) dans l'ion permanganate (MnO₄⁻) ?", options: ["+7", "+4", "+2", "+6"], answer: 0 },
-                { q: "4. Quelle est la formule générale des alcanes acycliques saturés ?", options: ["CₙH₂ₙ₊₂", "CₙH₂ₙ", "CₙH₂ₙ₋₂", "CₙHₙ"], answer: 0 },
-                { q: "5. Dans une réaction chimique en équilibre, si on augmente la température d'un système exothermique, l'équilibre se déplace vers :", options: ["Le sens endothermique (sens inverse)", "Le sens exothermique (sens direct)", "Il n'y a aucun déplacement", "La précipitation totale"], answer: 0 },
-                { q: "6. Quel catalyseur industriel utilise-t-on traditionnellement dans le procédé Haber-Bosch pour synthétiser l'ammoniac ?", options: ["Fer (Fe) avec des promoteurs", "Nickel de Raney", "Dioxyde de manganèse", "Platine pur"], answer: 0 },
-                { q: "7. Comment appelle-t-on le passage direct d'un corps de l'état solide à l'état gazeux ?", options: ["Sublimation", "Fusion", "Vaporisation", "Condensation"], answer: 0 },
-                { q: "8. Quelle est la molarité d'une solution contenant 40 g d'hydroxyde de sodium (NaOH) dans 500 mL de solution ? (Masses molaires: Na=23, O=16, H=1)", options: ["2,0 mol/L", "1,0 mol/L", "0,5 mol/L", "4,0 mol/L"], answer: 0 },
-                { q: "9. Quel composé organique possède un groupe fonctionnel hydroxyle (-OH) lié à un carbone saturé ?", options: ["Un alcool", "Un aldéhyde", "Un acide carboxylique", "Une cétone"], answer: 0 },
-                { q: "10. Quel est l'élément chimique le plus électronégatif du tableau périodique ?", options: ["Fluor (F)", "Oxygène (O)", "Chlore (Cl)", "Azote (N)"], answer: 0 },
-                { q: "11. Quelle est la nature de la liaison chimique au sein d'une molécule d'eau (H₂O) ?", options: ["Covalente polaire", "Ionique pure", "Covalente apolaire", "Métallique"], answer: 0 },
-                { q: "12. Quel est le nom de l'acide dont la formule chimique est H₂SO₄ ?", options: ["Acide sulfurique", "Acide sulfureux", "Acide sulfhydrique", "Acide persulfurique"], answer: 0 },
-                { q: "13. Qu'est-ce qu'une solution tampon ?", options: ["Une solution qui résiste aux variations de pH lors de l'ajout d'acides ou de bases", "Une solution dont le pH est rigoureusement égal à 7", "Une solution saturée en sel", "Une solution qui neutralise instantanément l'eau"], answer: 0 },
-                { q: "14. Quel est le produit principal de l'oxydation ménagée d'un alcool secondaire par le permanganate de potassium acidifié ?", options: ["Une cétone", "Un aldéhyde", "Un acide carboxylique", "Un éther"], answer: 0 },
-                { q: "15. Quelle est la configuration électronique externe d'un gaz noble comme le néon (Z = 10) ?", options: ["ns²np⁶", "ns²np⁴", "ns¹", "ns²np²"], answer: 0 },
-                { q: "16. Quel est le nom du phénomène par lequel un métal se détériore par réaction électrochimique avec son environnement ?", options: ["La corrosion", "La réduction", "La polymérisation", "La saponification"], answer: 0 },
-                { q: "17. Quel volume de gaz dihydrogène (H₂) mesuré dans les CNTP obtient-on par action de l'excès d'acide chlorhydrique sur 6,5 g de zinc (Zn) ? (Zn = 65 g/mol)", options: ["2,24 litres", "1,12 litres", "22,4 litres", "4,48 litres"], answer: 0 },
-                { q: "18. Qu'appelle-t-on des isomères de position en chimie organique ?", options: ["Des molécules ayant la même formule brute mais dont la position du groupe fonctionnel diffère", "Des molécules ayant des formules brutes différentes", "Des molécules images l'une de l'autre dans un miroir", "Des composés de masses différentes"], answer: 0 },
-                { q: "19. Quelle est la formule chimique du carbonate de calcium, principal constituant du calcaire ?", options: ["CaCO₃", "CaO", "Ca(OH)₂", "CaCl₂"], answer: 0 },
-                { q: "20. Quelle loi stipule que la masse totale des réactifs est égale à la masse totale des produits dans une réaction chimique fermée ?", options: ["Loi de Lavoisier (Conservation de la masse)", "Loi de Proust", "Loi de Gay-Lussac", "Loi d'Avogadro"], answer: 0 }
-            ],
-            'Sciences Sociales': [
-                { q: "1. Ki dat egzak ak non lidè ki te òganize reyinyon Bwa Kayiman an ki te bay siyal revòlt jeneral esklav yo an 1791?", options: ["Nuit du 14 aoû 1791 ak Boukman Dutty", "1 janvye 1804 ak Dessalines", "18 novanm 1803 ak Capois La Mort", "28 novanm 1802 ak Toussaint"], answer: 0 },
-                { q: "2. Ki non premye trete ki te divize zile Ayiti a (Sen Domeng) an de pati ant anpi franse ak espanyòl an 1697?", options: ["Trete Ryswick", "Trete Basse-Terre", "Trete Paris", "Trete Tordesillas"], answer: 0 },
-                { q: "3. Nan ki ane ak ki prezidan ameriken ki te bay lòd pou Lame Ameriken an fè okipasyon militè nan peyi Ayiti?", options: ["1915 sou prezidans Woodrow Wilson", "1934 sou Franklin Roosevelt", "1905 sou Theodore Roosevelt", "1920 sou Warren G. Harding"], answer: 0 },
-                { q: "4. Ki gwo teyoris ak antwopològ ayisyen ki te ekri liv fondamantal 'Ainsi parla l'oncle' an 1928?", options: ["Jean Price-Mars", "Jacques Roumain", "Dantès Bellegarde", "Carl Brouard"], answer: 0 },
-                { q: "5. Ki sa nou rele sistèm ekonomik kiltivasyon gwo echèl nan koloni an kote yo te itilize travay fòse esklav afriken yo?", options: ["Sistèm Plantasyon an (Ekonomi Plantasyon)", "Feyodalite Ewopeyen", "Kapitalis endistriyèl modèn", "Komèsan lib endepandan"], answer: 0 },
-                { q: "6. Ki non jeneral ki te kondui lame endijèn nan viktwa istorik batay la Crête-à-Pierrot an mas 1802?", options: ["Jean-Jacques Dessalines ak Louis Delgrès / Pétion", "Toussaint Louverture sèlman", "Henri Christophe sèlman", "Bojwè a"], answer: 0 },
-                { q: "7. Nan listwa konstitisyon ayisyèn yo, ki konstitisyon ki te pote tinon 'Konstitisyon an Peyi d Ayiti a lavi' epi ki bay Toussaint pouvwa a lavi?", options: ["Konstitisyon 1801", "Konstitisyon 1805", "Konstitisyon 1806", "Konstitisyon 1987"], answer: 0 },
-                { q: "8. Ki non òganizasyon entènasyonal sou kesyon komès ak entegrasyon rejyonal nan Karayib la ki gen Ayiti kòm manm ofisyèl depi 2002?", options: ["CARICOM", "OEA", "ONU", "UNESCO"], answer: 0 },
-                { q: "9. Nan domèn sosyoloji d Ayiti, ki konsèp ki dekri fason popilasyon pòv la oblije debrouye l pou l viv nan informalite ak lavi chak jou?", options: ["Bwouyayis (La Brouille)", "Bovarism", "Alienasyon", "Élitismi"], answer: 0 },
-                { q: "10. Ki prezidan ayisyen ki te siyen akò kote li te aksepte kontwòl koutim (douy) ayisyèn yo pa Etazini nan kòmansman okipasyon an?", options: ["Sudre Dartiguenave", "Sténio Vincent", "Élie Lescot", "Lysius Légitime"], answer: 0 },
-                { q: "11. Ki gwo otè ak ekriven ayisyen ki te fonde pati kominis ayisyen an epi ki ekri woman reyalis 'Gouverneurs de la rosée'?", options: ["Jacques Roumain", "Jacques Stephen Alexis", "René Depestre", "Frankétienne"], answer: 0 },
-                { q: "12. Ki non batay naval kote flòt franse ak britanik te rankontre, men ki pa gen rapò ak Ayiti direkteman, men ki te afekte fòs anpi yo?", options: ["Bataille de Trafalgar", "Bataille de Waterloo", "Bataille de Marignan", "Bataille d'Austerlitz"], answer: 0 },
-                { q: "13. Nan ki ane ofisyèlman yo te adopte dènye gwo Konstitisyon d Ayiti ki ap dirije peyi a malgre kriz yo?", options: ["1987", "1964", "1957", "1983"], answer: 0 },
-                { q: "14. Ki sa ekspresyon 'Lwa 1804' la senbolize nan konsyans kolektif pèp ayisyen an ak listwa mondyal?", options: ["Abolisyon esklavaj ak nesans an premye repiblik nwa lib nan mond lan", "Deklarasyon endepandans Etazini", "Siyati kòd sivil la", "Kreyasyon premye bank nan Karayib la"], answer: 0 },
-                { q: "15. Ki jeyograf ki te make listwa Ayiti nan etidye estrikti tè ak pwoblèm ewozyon an nan mitan 20yèm syèk la?", options: ["Georges Anglade", "Paul Moral", "Dantès Bellegarde", "J. Price-Mars"], answer: 0 },
-                { q: "16. Ki non akò komèsyal ak koperasyon ant peyi ki nan Karayib, Pasifik ak Afrik ak Inyon Ewopeyen an?", options: ["Akò Cotonou (ak akò Lome anvan)", "Akò NAFTA", "Akò ALBA", "Akò Mercosur"], answer: 0 },
-                { q: "17. Nan sosyoloji politik, ki jan yo rele yon rejim kote pouvwa a konsantre nan men yon sèl gwo lidè san kontwòl demokratik reyèl?", options: ["Otoritarisman oubyen Diktati", "Demokrasi dirèk", "Felisitasyon popilè", "Anachi"], answer: 0 },
-                { q: "18. Ki vil an Ayiti ki te sèvi kòm kapital anba rèy Henri Christophe nan Eta d Ayiti nan nò a?", options: ["Milapò / Kap-Ayisyen (ak sitadèl la nan Pòtòprens non, men nan Milot)", "Les Cayes", "Gonaïves", "Jacmel"], answer: 0 },
-                { q: "19. Ki gwo mouvman kiltirèl nan ane 1930 yo an Ayiti ki te rejte kilti kolonizatè a pou tounen vers VALÈ afriken yo?", options: ["L'Indigénisme", "Le Romantisme", "Le Classicisme", "Le Positivisme"], answer: 0 },
-                { q: "20. Ki non kòd legal ki te sèvi pou reglemante lavi esklav yo nan koloni franse yo anvan 1789?", options: ["Code Noir (Kòd Nwa)", "Code Civil", "Code Pénal", "Code Rural"], answer: 0 }
-            ],
-            'Mathématiques': [
-                { q: "1. Que vaut la limite de (sin x) / x lorsque x tend vers 0 ?", options: ["1", "0", "Indéterminée", "Infinie"], answer: 0 },
-                { q: "2. Quelle est la dérivée de la fonction f(x) = e^(2x) ?", options: ["2e^(2x)", "e^(2x)", "2xe^(2x)", "ln(2)e^(2x)"], answer: 0 },
-                { q: "3. Quelle est l'intégrale indéfinie de f(x) = 1/x ?", options: ["ln|x| + C", "-1/x² + C", "e^x + C", "x + C"], answer: 0 },
-                { q: "4. Soit une suite arithmétique de premier terme u₁ = 3 et de raison r = 4. Quel est le 10ème terme (u₁₀) ?", options: ["39", "40", "36", "43"], answer: 0 },
-                { q: "5. Quel est le déterminant de la matrice carrée 2x2 : [[2, 3], [1, 4]] ?", options: ["5", "11", "8", "-5"], answer: 0 },
-                { q: "6. Résoudre dans R l'inéquation : ln(x - 1) ≤ 0", options: ["]1, 2]", "[1, 2]", "]0, 1]", "]1, +∞["], answer: 0 },
-                { q: "7. Quel est le module du nombre complexe z = 3 - 4i ?", options: ["5", "7", "25", "1"], answer: 0 },
-                { q: "8. Dans un plan rapporté à un repère orthonormé, quelle est l'équation de la tangente à un cercle de centre O au point de coordonnées (x₀, y₀) ?", options: ["x₀x + y₀y = R²", "y = ax + b", "x + y = 0", "ax + by + c = 0"], answer: 0 },
-                { q: "9. Quel est le nombre de combinaisons de 3 objets pris parmi 5 (noté C(5,3) ou 5 choose 3) ?", options: ["10", "15", "20", "60"], answer: 0 },
-                { q: "10. Soit la fonction f(x) = x³ - 3x. En quels points la dérivée s'annule-t-elle ?", options: ["x = 1 et x = -1", "x = 0 seulement", "x = 3 et x = -3", "Aucun point"], answer: 0 },
-                { q: "11. Quelle est la somme des angles intérieurs d'un polygone convexe à n côtés ?", options: ["(n - 2) × 180°", "n × 180°", "(n - 1) × 90°", "360°"], answer: 0 },
-                { q: "12. Si la probabilité d'un événement A est P(A) = 0,3 et celle de B sachant A est 0,5, quelle est la probabilité de l'intersection P(A ∩ B) ?", options: ["0,15", "0,8", "0,2", "0,35"], answer: 0 },
-                { q: "13. Quelle est la solution générale de l'équation différentielle y'' + y = 0 ?", options: ["y = A cos(x) + B sin(x)", "y = A e^x + B e⁻ˣ", "y = A e^(rx)", "y = Ax + B"], answer: 0 },
-                { q: "14. Quel est le rang de la matrice nulle de dimension 3x3 ?", options: ["0", "3", "1", "9"], answer: 0 },
-                { q: "15. Comment appelle-t-on une matrice carrée dont la transposite est égale à son inverse (Aᵀ = A⁻¹) ?", options: ["Matrice orthogonale", "Matrice symétrique", "Matrice diagonale", "Matrice antisymétrique"], answer: 0 },
-                { q: "16. Quelle est la valeur de i^2026 (où i est l'unité imaginaire i² = -1) ?", options: ["-1", "1", "i", "-i"], answer: 0 },
-                { q: "17. Quel est le lieu géométrique des points M dont la somme des distances à deux foyers fixes est constante ?", options: ["Une ellipse", "Une hyperbole", "Une parabole", "Un cercle"], answer: 0 },
-                { q: "18. Si f(x) est une fonction paire, quelle propriété graphique possède sa courbe représentative ?", options: ["Symétrique par rapport à l'axe des ordonnées (y)", "Symétrique par rapport à l'origine (0,0)", "Symétrique par rapport à l'axe des abscisses (x)", "Aucune symétrie"], answer: 0 },
-                { q: "19. Quelle est la valeur de la somme des termes d'une suite géométrique infinie de premier terme a = 2 et de raison q = 1/2 ?", options: ["4", "2", "1", "Infinie"], answer: 0 },
-                { q: "20. Que vaut le produit scalaire de deux vecteurs orthogonaux u et v ?", options: ["0", "1", "Le produit de leurs normes", "-1"], answer: 0 }
-            ],
-            'Physique': [
-                { q: "1. Quelle est l'expression de l'énergie cinétique d'un corps de masse m animé d'une vitesse v ?", options: ["E_c = 1/2 m v²", "E_c = m g h", "E_c = m v", "E_c = 1/2 m v"], answer: 0 },
-                { q: "2. Selon la loi de Coulomb en électrostatique, la force entre deux charges ponctuelles est inversement proportionnelle à :", options: ["Le carré de la distance les séparant (d²)", "La distance (d)", "La somme des charges", "La vitesse de propagation"], answer: 0 },
-                { q: "3. Quelle est l'unité du flux magnétique dans le Système International (SI) ?", options: ["Weber (Wb)", "Tesla (T)", "Henry (H)", "Volt (V)"], answer: 0 },
-                { q: "4. Qu'énonce le premier principe de la thermodynamique ?", options: ["La conservation de l'énergie dans un système isolé (ΔU = W + Q)", "L'augmentation inéluctable de l'entropie", "L'impossibilité d'atteindre le zéro absolu", "La conversion totale de chaleur en travail"], answer: 0 },
-                { q: "5. Quelle est l'expression de la période propre d'un pendule simple de longueur l dans un lieu de pesanteur g ?", options: ["T = 2π √(l/g)", "T = 2π √(g/l)", "T = 1/2π √(l/g)", "T = 2π l g"], answer: 0 },
-                { q: "6. Dans un circuit RLC série en résonance, quelle est la relation entre la réactance inductive (Lω) et capacitive (1/Cω) ?", options: ["Lω = 1/Cω", "Lω > 1/Cω", "Lω < 1/Cω", "Lω = R"], answer: 0 },
-                { q: "7. Quel phénomène explique la décomposition de la lumière blanche à travers un prisme ?", options: ["La dispersion de la lumière", "La diffraction", "L'interférence", "La polarisation"], answer: 0 },
-                { q: "8. Quelle est la dimension physique de la constante de Planck (h) ?", options: ["Énergie × Temps (ML²T⁻¹)", "Force × Longueur", "Puissance / Temps", "Masse / Vitesse"], answer: 0 },
-                { q: "9. Quelle loi de l'électromagnétisme indique qu'un courant induit s'oppose par ses effets à la cause qui lui a donné naissance ?", options: ["Loi de Lenz", "Loi d'Ohm", "Loi de Faraday", "Loi de Ampère"], answer: 0 },
-                { q: "10. Qu'appelle-t-on l'effet photoélectrique mis en évidence par Albert Einstein ?", options: ["L'émission d'électrons par un métal soumis à un rayonnement lumineux adéquat", "L'émission de lumière par un corps chauffé", "La déviation d'un faisceau d'électrons par un champ magnétique", "La fusion des noyaux atomiques"], answer: 0 },
-                { q: "11. Quelle est l'expression de la force de Lorentz agissant sur une charge q animée d'une vitesse v dans un champ magnétique B ?", options: ["F = q (v × B)", "F = q E", "F = I l × B", "F = m a"], answer: 0 },
-                { q: "12. Quel type d'onde est une onde sonore se propageant dans l'air ?", options: ["Onde mécanique longitudinale", "Onde électromagnétique transversale", "Onde stationnaire pure", "Onde gravitationnelle"], answer: 0 },
-                { q: "13. Quelle est la vitesse de propagation des ondes électromagnétiques dans le vide (c) ?", options: ["≈ 3 × 10⁸ m/s", "≈ 340 m/s", "≈ 3 × 10⁵ km/h", "≈ 9,8 m/s"], answer: 0 },
-                { q: "14. Qu'exprime le théorème de Bernoulli en mécanique des fluides parfaits en écoulement stationnaire ?", options: ["La conservation de l'énergie le long d'une ligne de courant", "La constance du débit volumique", "La proportionnalité de la pression et de la profondeur", "La viscosité critique d'un fluide"], answer: 0 },
-                { q: "15. Quelle est l'unité de mesure de l'inductance d'une bobine dans le système international ?", options: ["Henry (H)", "Farad (F)", "Siemens (S)", "Ohm (Ω)"], answer: 0 },
-                { q: "16. Quel est l'énoncé du principe d'Archimède concernant un corps plongé dans un fluide ?", options: ["Il subit une force verticale vers le haut égale au poids du fluide déplacé", "Il coule si sa masse volumique est nulle", "Il perd tout son poids apparent", "Il crée une pression nulle au fond"], answer: 0 },
-                { q: "17. Dans une transformation adiabatique réversible d'un gaz parfait, quelle relation lie la pression P et le volume V (avec γ = Cp/Cv) ?", options: ["P·V^γ = constante", "P·V = constante", "P·V^1/γ = constante", "P / V = constante"], answer: 0 },
-                { q: "18. Comment qualifie-t-on une collision où l'énergie cinétique totale du système n'est pas conservée ?", options: ["Collision inélastique", "Collision élastique", "Collision parfaite", "Choc isochore"], answer: 0 },
-                { q: "19. Quelle est la formule de l'impédance Z d'un circuit RLC série alimenté en alternatif sinusoïdal ?", options: ["Z = √(R² + (Lω - 1/Cω)²,)", "Z = R + Lω + 1/Cω", "Z = R² + Lω²", "Z = U / I"], answer: 0 },
-                { q: "20. Que représente le quantum d'énergie lumineuse (photon) selon la relation de Planck-Einstein ?", options: ["E = h·ν (ou h·f)", "E = m·c²", "E = 1/2 m v²", "E = q·V"], answer: 0 }
-            ]
-        };
-
-        document.addEventListener("DOMContentLoaded", () => {
-            document.getElementById('user-score-display').innerText = userScore + " pts";
-            document.getElementById('user-level-display').innerText = userLevel;
-            document.getElementById('user-level-select').value = userLevel;
-            document.getElementById('username-input').value = userName;
-            document.getElementById('card-username').innerText = userName;
-            updateAvatarDisplay();
-            updateDatabase();
-        });
-
-        function toggleMenu(e) {
-            if(e) e.stopPropagation();
-            const menu = document.getElementById('dropdown-menu');
-            menu.classList.toggle('hidden');
-            menu.classList.toggle('flex');
-        }
-
-        function closeMenu() {
-            const menu = document.getElementById('dropdown-menu');
-            menu.classList.add('hidden');
-            menu.classList.remove('flex');
-        }
-
-        function showPage(pageId) {
-            startAudioSystem();
-            ['page-accueil', 'page-matieres', 'page-quiz', 'page-classement', 'page-avatar', 'page-aprendre', 'page-avance', 'page-resultats'].forEach(id => {
-                document.getElementById(id).classList.add('hidden');
-            });
-            document.getElementById(pageId).classList.remove('hidden');
-            clearInterval(currentTimer);
-            if (pageId === 'page-classement') renderLeaderboard();
-        }
-
-        function updateUserName() {
-            userName = document.getElementById('username-input').value || 'Jwè';
-            localStorage.setItem('qm_name', userName);
-            document.getElementById('card-username').innerText = userName;
-            updateDatabase();
-        }
-
-        function updateUserLevel() {
-            userLevel = document.getElementById('user-level-select').value;
-            localStorage.setItem('qm_level', userLevel);
-            document.getElementById('user-level-display').innerText = userLevel;
-            updateDatabase();
-        }
-
-        function selectAvatar(iconClass) {
-            currentAvatar = iconClass;
-            customUserPhoto = "";
-            localStorage.removeItem('qm_custom_photo');
-            localStorage.setItem('qm_avatar', iconClass);
-            updateAvatarDisplay();
-            updateDatabase();
-        }
-
-        function previewCustomPhoto(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    customUserPhoto = e.target.result;
-                    localStorage.setItem('qm_custom_photo', customUserPhoto);
-                    updateAvatarDisplay();
-                    updateDatabase();
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function updateAvatarDisplay() {
-            const avatarContainers = [document.getElementById('card-avatar'), document.getElementById('user-avatar-header')];
-            
-            avatarContainers.forEach(container => {
-                if (container) {
-                    if (customUserPhoto) {
-                        container.innerHTML = `<img src="${customUserPhoto}" class="w-full h-full object-cover rounded-full">`;
-                    } else {
-                        container.innerHTML = `<i class="fas ${currentAvatar}"></i>`;
-                    }
-                }
-            });
-        }
-
-        function updateDatabase() {
-            let storedUsers = JSON.parse(localStorage.getItem('qm_global_users_db')) || allUsers;
-            let existingIndex = storedUsers.findIndex(u => u.name.toLowerCase() === userName.toLowerCase());
-            
-            if (existingIndex >= 0) {
-                storedUsers[existingIndex].score = userScore;
-                storedUsers[existingIndex].level = userLevel;
-                storedUsers[existingIndex].avatar = currentAvatar;
-                storedUsers[existingIndex].photo = customUserPhoto;
-            } else {
-                storedUsers.push({ name: userName, score: userScore, level: userLevel, avatar: currentAvatar, photo: customUserPhoto });
-            }
-            
-            allUsers = storedUsers;
-            localStorage.setItem('qm_global_users_db', JSON.stringify(allUsers));
-        }
-
-        function startSession(subject, riskMode = false) {
-            sessionCount = 0;
-            sessionCorrectCount = 0;
-            isRiskMode = riskMode;
-            currentSubject = subject;
-
-            let sourcePool = questionsData[subject] || questionsData['AprendreOuLaisser'];
-            let shuffledPool = [...sourcePool].sort(() => Math.random() - 0.5);
-            sessionQuestions = shuffledPool.slice(0, 5);
-
-            startQuiz();
-        }
-
-        function startQuiz() {
-            if (sessionCount >= sessionQuestions.length) {
-                showResults();
-                return;
-            }
-
-            let currentQ = sessionQuestions[sessionCount];
-            sessionCount++;
-            document.getElementById('session-progress').innerText = `${sessionCount}/5`;
-
-            let displaySubName = currentSubject;
-            if(currentSubject === 'AvanceGroupe1') displaySubName = "AVANSE - G1";
-            if(currentSubject === 'AvanceGroupe2') displaySubName = "AVANSE - G2";
-            if(currentSubject === 'AvanceGroupe3') displaySubName = "AVANSE - G3";
-
-            document.getElementById('quiz-subject').innerText = isRiskMode ? "À PRENDRE OU LAISSER" : displaySubName;
-            document.getElementById('question-text').innerText = currentQ.q;
-            
-            const fb = document.getElementById('feedback-message');
-            fb.classList.add('hidden');
-
-            const container = document.getElementById('options-container');
-            container.innerHTML = '';
-            
-            let optionsWithIndex = currentQ.options.map((opt, idx) => ({ text: opt, originalIndex: idx }));
-            optionsWithIndex.sort(() => Math.random() - 0.5);
-
-            optionsWithIndex.forEach((item) => {
-                const btn = document.createElement('button');
-                btn.className = "w-full text-left p-3.5 rounded-xl border-2 border-slate-200 hover:border-indigo-600 hover:bg-indigo-50 font-semibold text-slate-700 text-xs transition";
-                btn.innerText = item.text;
-                btn.onclick = () => selectAnswer(item.originalIndex === currentQ.answer, btn);
-                container.appendChild(btn);
-            });
-
-            showPage('page-quiz');
-            startTimer();
-        }
-
-        function startTimer() {
-            timeLeft = 15;
-            document.getElementById('timer').innerText = timeLeft;
-            clearInterval(currentTimer);
-            currentTimer = setInterval(() => {
-                timeLeft--;
-                document.getElementById('timer').innerText = timeLeft;
-                if (timeLeft <= 0) {
-                    clearInterval(currentTimer);
-                    playSound('wrong');
-                    userScore = Math.max(0, userScore - 20);
-                    updateScoreDisplay();
-                    showFeedback("⏱ Temps écoulé ! (-20 pts)", false);
-                    setTimeout(() => startQuiz(), 1500);
-                }
-            }, 1000);
-        }
-
-        function selectAnswer(isCorrect, btnElement) {
-            clearInterval(currentTimer);
-            
-            const buttons = document.querySelectorAll('#options-container button');
-            buttons.forEach(b => b.disabled = true);
-
-            const points = isRiskMode ? 40 : 20;
-
-            if (isCorrect) {
-                playSound('correct');
-                btnElement.className = "w-full text-left p-3.5 rounded-xl border-2 border-green-500 bg-green-100 font-bold text-green-900 text-xs";
-                userScore += points;
-                sessionCorrectCount++;
-                showFeedback(`🎉 Excellente réponse ! (+${points} pts)`, true);
-            } else {
-                playSound('wrong');
-                btnElement.className = "w-full text-left p-3.5 rounded-xl border-2 border-red-500 bg-red-100 font-bold text-red-900 text-xs";
-                userScore = Math.max(0, userScore - 20);
-                showFeedback("❌ Mauvaise réponse. (-20 pts)", false);
-            }
-
-            updateScoreDisplay();
-
-            setTimeout(() => {
-                startQuiz();
-            }, 1600);
-        }
-
-        function skipAnswer() {
-            clearInterval(currentTimer);
-            playSound('skip');
-            userScore = Math.max(0, userScore - 10);
-            updateScoreDisplay();
-            showFeedback("⚠ Question passée (-10 pts)", false);
-            
-            setTimeout(() => {
-                startQuiz();
-            }, 1200);
-        }
-
-        function updateScoreDisplay() {
-            localStorage.setItem('qm_score', userScore);
-            document.getElementById('user-score-display').innerText = userScore + " pts";
-            updateDatabase();
-        }
-
-        function showFeedback(text, isSuccess) {
-            const fb = document.getElementById('feedback-message');
-            fb.innerText = text;
-            fb.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'border-green-300', 'bg-red-100', 'text-red-800', 'border-red-300');
-            
-            if (isSuccess) {
-                fb.classList.add('bg-green-100', 'text-green-800', 'border-green-300');
-            } else {
-                fb.classList.add('bg-red-100', 'text-red-800', 'border-red-300');
-            }
-        }
-
-        function showResults() {
-            showPage('page-resultats');
-            const accuracy = Math.round((sessionCorrectCount / 5) * 100);
-            document.getElementById('result-text').innerText = `Vous avez obtenu ${sessionCorrectCount} bonne(s) réponse(s) sur 5.`;
-            document.getElementById('result-total-score').innerText = `${userScore} pts`;
-            document.getElementById('result-accuracy').innerText = `${accuracy}%`;
-        }
-
-        function shareScoreWhatsApp() {
-            const text = encodeURIComponent(`🔥 Je viens de marquer ${userScore} points sur Quiz Mocenick ! Peux-tu faire mieux ? Teste tes connaissances dès maintenant !`);
-            window.open(`https://wa.me/?text=${text}`, '_blank');
-        }
-
-        function renderLeaderboard() {
-            const container = document.getElementById('leaderboard-list');
-            container.innerHTML = '';
-            
-            updateDatabase();
-            let storedUsers = JSON.parse(localStorage.getItem('qm_global_users_db')) || allUsers;
-            storedUsers.sort((a, b) => b.score - a.score);
-
-            storedUsers.forEach((item, index) => {
-                let rankBadge = `<span class="font-extrabold text-slate-400 w-6 text-center text-xs">#${index + 1}</span>`;
-                if (index === 0) rankBadge = `<span class="text-base w-6 text-center">🥇</span>`;
-                if (index === 1) rankBadge = `<span class="text-base w-6 text-center">🥈</span>`;
-                if (index === 2) rankBadge = `<span class="text-base w-6 text-center">🥉</span>`;
-
-                let avatarHtml = `<i class="fas ${item.avatar}"></i>`;
-                if (item.photo) {
-                    avatarHtml = `<img src="${item.photo}" class="w-full h-full object-cover rounded-full">`;
-                }
-
-                const div = document.createElement('div');
-                div.className = `flex items-center justify-between p-3 text-xs ${item.name.toLowerCase() === userName.toLowerCase() ? 'bg-indigo-50 border-l-4 border-indigo-600 font-bold' : ''}`;
-                div.innerHTML = `
-                    <div class="flex items-center gap-2.5">
-                        ${rankBadge}
-                        <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-800 flex items-center justify-center text-sm overflow-hidden">
-                            ${avatarHtml}
-                        </div>
-                        <div>
-                            <span class="font-bold text-slate-800 block">${item.name} ${item.name.toLowerCase() === userName.toLowerCase() ? '(Vous)' : ''}</span>
-                            <span class="text-[10px] text-indigo-600 font-semibold">${item.level}</span>
-                        </div>
-                    </div>
-                    <span class="font-black text-indigo-900">${item.score} pts</span>
-                `;
-                container.appendChild(div);
-            });
-        }
-    </script>
-</body>
-</html>
+        const real
