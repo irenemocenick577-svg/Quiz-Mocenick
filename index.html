@@ -223,7 +223,7 @@
                     <span id="session-progress" class="text-[10px] bg-slate-100 text-slate-600 font-bold px-2 py-0.5 rounded-full">1/5</span>
                 </div>
                 <div class="flex items-center gap-1.5 text-red-600 font-black text-base bg-red-50 px-3 py-1 rounded-full border border-red-200">
-                    <i class="fas fa-stopwatch animate-pulse"></i> <span id="timer">15</span>s
+                    <i class="fas fa-stopwatch animate-pulse"></i> <span id="timer">40</span>s
                 </div>
             </div>
 
@@ -447,7 +447,7 @@
         }
 
         let currentTimer = null;
-        let timeLeft = 15;
+        let timeLeft = 40; // Tan an pase de 15 a 40 segonn
         let currentSubject = '';
         let sessionCount = 0;
         let sessionCorrectCount = 0;
@@ -752,7 +752,7 @@
         }
 
         function startTimer() {
-            timeLeft = 15;
+            timeLeft = 40; // Tan an mete nan 40 segonn
             document.getElementById('timer').innerText = timeLeft;
             clearInterval(currentTimer);
             currentTimer = setInterval(() => {
