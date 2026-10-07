@@ -41,9 +41,7 @@
     <div id="dropdown-menu" class="hidden bg-indigo-950 text-white flex-col space-y-2 p-4 shadow-lg border-b border-indigo-800 sticky top-16 z-40">
         <button onclick="showPage('page-accueil'); closeMenu();" class="text-left font-semibold py-2 hover:text-yellow-400 flex items-center gap-2"><i class="fas fa-gamepad"></i> Accueil</button>
         <button onclick="showPage('page-matieres'); closeMenu();" class="text-left font-semibold py-2 hover:text-yellow-400 flex items-center gap-2"><i class="fas fa-book-open"></i> Matières Classiques (20 Questions)</button>
-        <button onclick="showPage('page-9eme'); closeMenu();" class="text-left font-extrabold py-2 text-yellow-400 hover:text-yellow-300 flex items-center gap-2"><i class="fas fa-school"></i> 9ème Année (40 Questions)</button>
-        <button onclick="showPage('page-ns4'); closeMenu();" class="text-left font-extrabold py-2 text-yellow-400 hover:text-yellow-300 flex items-center gap-2"><i class="fas fa-user-graduate"></i> NS4 - Philo (40 Questions)</button>
-        <button onclick="showPage('page-avance'); closeMenu();" class="text-left font-extrabold py-2 text-purple-300 hover:text-purple-200 flex items-center gap-2"><i class="fas fa-graduation-cap"></i> Mode : Questions Avancées 🎓</button>
+        <button onclick="showPage('page-avance'); closeMenu();" class="text-left font-extrabold py-2 text-yellow-400 hover:text-yellow-300 flex items-center gap-2"><i class="fas fa-graduation-cap"></i> Mode : Questions Avancées 🎓</button>
         <button onclick="showPage('page-aprendre'); closeMenu();" class="text-left font-semibold py-2 hover:text-yellow-400 flex items-center gap-2"><i class="fas fa-balance-scale"></i> Mode : À prendre ou à laisser ⚡</button>
         <button onclick="showPage('page-classement'); closeMenu();" class="text-left font-semibold py-2 hover:text-yellow-400 flex items-center gap-2"><i class="fas fa-trophy"></i> Classement Général</button>
         <button onclick="showPage('page-avatar'); closeMenu();" class="text-left font-semibold py-2 hover:text-yellow-400 flex items-center gap-2"><i class="fas fa-user-ninja"></i> Mon Profil & Avatar</button>
@@ -60,17 +58,11 @@
                 <div class="absolute -right-4 -bottom-4 opacity-20 text-8xl"><i class="fas fa-brain"></i></div>
                 <span class="bg-yellow-400 text-indigo-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">Niveau Difficile / Examen</span>
                 <h2 class="text-2xl font-black mb-2">Bienvenue sur Quiz Mocenick !</h2>
-                <p class="text-indigo-200 text-xs mb-5">Sélectionnez votre mode de jeu :</p>
+                <p class="text-indigo-200 text-xs mb-5">Sélectionnez votre mode de jeu (30 Questions en mode Risque) :</p>
                 
                 <div class="space-y-3">
                     <button onclick="showPage('page-matieres')" class="w-full bg-yellow-400 text-indigo-950 font-black px-6 py-3.5 rounded-2xl shadow-lg hover:bg-yellow-300 transition transform active:scale-95 text-xs uppercase flex items-center justify-center gap-2">
                         <i class="fas fa-book-open"></i> Mode Matières Classiques
-                    </button>
-                    <button onclick="showPage('page-9eme')" class="w-full bg-blue-500 text-white font-black px-6 py-3.5 rounded-2xl shadow-lg hover:bg-blue-400 transition transform active:scale-95 text-xs uppercase flex items-center justify-center gap-2">
-                        <i class="fas fa-school"></i> 9ème Année (40 Questions)
-                    </button>
-                    <button onclick="showPage('page-ns4')" class="w-full bg-emerald-600 text-white font-black px-6 py-3.5 rounded-2xl shadow-lg hover:bg-emerald-500 transition transform active:scale-95 text-xs uppercase flex items-center justify-center gap-2">
-                        <i class="fas fa-user-graduate"></i> NS4 - Philo (40 Questions)
                     </button>
                     <button onclick="showPage('page-avance')" class="w-full bg-purple-500 text-white font-black px-6 py-3.5 rounded-2xl shadow-lg hover:bg-purple-400 transition transform active:scale-95 text-xs uppercase flex items-center justify-center gap-2">
                         <i class="fas fa-graduation-cap"></i> Mode Questions Avancées 🎓
@@ -100,34 +92,6 @@
             <a href="https://wa.me/50933270330?text=Bonjour%20Quiz%20Mocenick,%20j'ai%20besoin%20d'aide!" target="_blank" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-2xl shadow flex items-center justify-center gap-2 text-xs transition">
                 <i class="fab fa-whatsapp text-lg"></i> Service Client (33270330)
             </a>
-        </section>
-
-        <!-- Page 9ème Année -->
-        <section id="page-9eme" class="hidden space-y-4">
-            <div class="bg-blue-900 text-white p-5 rounded-3xl shadow-xl border border-blue-700 space-y-3 text-center">
-                <div class="w-14 h-14 mx-auto bg-yellow-400 text-indigo-950 rounded-full flex items-center justify-center text-2xl shadow-lg">
-                    <i class="fas fa-school"></i>
-                </div>
-                <h3 class="font-black text-xl">9ème Année Fondamentale</h3>
-                <p class="text-xs text-blue-200">Examen Officiel - 40 Questions disponibles :</p>
-                <button onclick="startSession('9emeAnnée', false)" class="w-full bg-yellow-400 hover:bg-yellow-300 text-indigo-950 font-black py-3.5 px-4 rounded-2xl shadow text-xs uppercase flex items-center justify-center gap-2 transition">
-                    <i class="fas fa-play"></i> Démarrer le Quiz 9ème AF
-                </button>
-            </div>
-        </section>
-
-        <!-- Page NS4 Philo -->
-        <section id="page-ns4" class="hidden space-y-4">
-            <div class="bg-emerald-900 text-white p-5 rounded-3xl shadow-xl border border-emerald-700 space-y-3 text-center">
-                <div class="w-14 h-14 mx-auto bg-yellow-400 text-indigo-950 rounded-full flex items-center justify-center text-2xl shadow-lg">
-                    <i class="fas fa-user-graduate"></i>
-                </div>
-                <h3 class="font-black text-xl">NS4 - Philosophie / Terminale</h3>
-                <p class="text-xs text-emerald-200">Examen Officiel - 40 Questions disponibles :</p>
-                <button onclick="startSession('NS4Philo', false)" class="w-full bg-yellow-400 hover:bg-yellow-300 text-indigo-950 font-black py-3.5 px-4 rounded-2xl shadow text-xs uppercase flex items-center justify-center gap-2 transition">
-                    <i class="fas fa-play"></i> Démarrer le Quiz NS4
-                </button>
-            </div>
         </section>
 
         <!-- Page Mode Questions Avancées -->
@@ -523,90 +487,6 @@
                 { q: "29. [Sciences Expérimentales] En génie biologique ou en microbiologie, qu'est-ce que la phase de latence (phase lag) dans la courbe de croissance bactérienne ?", options: ["Une phase d'adaptation où les bactéries préparent leurs enzymes", "Une phase où toutes les bactéries meurent rapidement", "Une phase où la croissance atteint son maximum", "Une phase sans aucune molécule d'eau"], answer: 0 },
                 { q: "30. [Français] Dans les écrits exigeant un haut niveau de protocole, quelle est la nuance entre un ton ironique et un ton sarcastique ?", options: ["L'ironie utilise la finesse pour suggérer le contraire, le sarcasme est plus mordant et direct", "Ce sont exactement les mêmes termes", "Le sarcasme ne s'utilise jamais dans les lettres formelles", "L'ironie est toujours plus méchante"], answer: 0 }
             ],
-            '9emeAnnée': [
-                { q: "1. [9ème AF - Haïti] En quelle année a eu lieu la découverte d'Haïti par Christophe Colomb ?", options: ["1492", "1804", "1503", "1791"], answer: 0 },
-                { q: "2. [9ème AF - Communication] Quel est le type de phrase qui exprime un ordre ou un conseil ?", options: ["Impérative", "Déclarative", "Interrogative", "Exclamative"], answer: 0 },
-                { q: "3. [9ème AF - Mathématiques] Quel est le résultat de l'opération : -15 + 8 ?", options: ["-7", "7", "-23", "23"], answer: 0 },
-                { q: "4. [9ème AF - Sciences] Quel gaz l'être humain absorbe-t-il principalement lors de la respiration ?", options: ["Oxygène", "Azote", "Dioxyde de carbone", "Hydrogène"], answer: 0 },
-                { q: "5. [9ème AF - Histoire] Qui est considéré comme le père de la patrie haïtienne et proclamateur de l'indépendance ?", options: ["Jean-Jacques Dessalines", "Toussaint Louverture", "Henri Christophe", "Alexandre Pétion"], answer: 0 },
-                { q: "6. [9ème AF - Français] Dans la phrase 'Le petit chat noir dort', quelle est la nature du mot 'noir' ?", options: ["Adjectif qualificatif", "Nom commun", "Verbe", "Adverbe"], answer: 0 },
-                { q: "7. [9ème AF - Mathématiques] Si un article coûte 500 gourdes et subit une baisse de 10%, quel est son nouveau prix ?", options: ["450 gourdes", "400 gourdes", "480 gourdes", "490 gourdes"], answer: 0 },
-                { q: "8. [9ème AF - Géographie] Quelle est la capitale politique de la République d'Haïti ?", options: ["Port-au-Prince", "Cap-Haïtien", "Les Cayes", "Gonaïves"], answer: 0 },
-                { q: "9. [9ème AF - Sciences] Quel est l'état physique de l'eau à une température de 105°C sous la pression normale ?", options: ["Gazeux", "Liquide", "Solide", "Plasma"], answer: 0 },
-                { q: "10. [9ème AF - Histoire] Quel événement historique consacre la naissance d'Haïti en tant qu'État indépendant ?", options: ["La Bataille de Vertières", "La Cérémonie de Bwa Kayiman", "La Signature du Traité de Ryswick", "L'arrivée de Christophe Colomb"], answer: 0 },
-                { q: "11. [9ème AF - Français] Quel est le synonyme du mot 'courageux' ?", options: ["Brave", "Peur", "Lâche", "Faible"], answer: 0 },
-                { q: "12. [9ème AF - Mathématiques] Calculez le périmètre d'un carré dont le côté mesure 6 cm.", options: ["24 cm", "36 cm", "12 cm", "18 cm"], answer: 0 },
-                { q: "13. [9ème AF - Géographie] Combien de départements géographiques compte officiellement la République d'Haïti ?", options: ["10 départements", "9 départements", "12 départements", "5 départements"], answer: 0 },
-                { q: "14. [9ème AF - Sciences] Quel organe du corps humain pompe le sang à travers tout l'organisme ?", options: ["Le cœur", "Les poumons", "Le cerveau", "L'estomac"], answer: 0 },
-                { q: "15. [9ème AF - Français] Donnez le pluriel du nom 'un journal'.", options: ["Des journaux", "Des journals", "Des journales", "Des journauxs"], answer: 0 },
-                { q: "16. [9ème AF - Histoire] En quelle année l'esclavage a-t-il été officiellement aboli pour la première fois dans les colonies françaises par la Convention ?", options: ["1794", "1804", "1789", "1802"], answer: 0 },
-                { q: "17. [9ème AF - Mathématiques] Résolvez l'équation simple : 2x + 4 = 12", options: ["x = 4", "x = 2", "x = 8", "x = 6"], answer: 0 },
-                { q: "18. [9ème AF - Géographie] Quel pays partage l'île d'Haïti à l'est ?", options: ["La République Dominicaine", "Cuba", "La Jamaïque", "Les Bahamas"], answer: 0 },
-                { q: "19. [9ème AF - Sciences] Comment appelle-t-on la transformation d'un liquide en gaz par chauffage ?", options: ["Vaporisation", "Fusion", "Solidification", "Condensation"], answer: 0 },
-                { q: "20. [9ème AF - Français] Quel est le temps du verbe dans la phrase : 'Demain, nous irons à l'école' ?", options: ["Futur simple", "Présent", "Passé composé", "Imparfait"], answer: 0 },
-                { q: "21. [9ème AF - Mathématiques] Quelle est l'aire d'un rectangle de longueur 8 cm et de largeur 5 cm ?", options: ["40 cm²", "26 cm²", "13 cm²", "45 cm²"], answer: 0 },
-                { q: "22. [9ème AF - Histoire] Quel général haïtien est tombé héroïquement au combat lors de la bataille de Vertières en 1803 ?", options: ["François Capois (Capois La Mort)", "Pétion", "Christophe", "Geffrard"], answer: 0 },
-                { q: "23. [9ème AF - Sciences] Quelle est la plus petite unité structurelle et fonctionnelle de la vie ?", options: ["La cellule", "L'atome", "La molécule", "L'organe"], answer: 0 },
-                { q: "24. [9ème AF - Français] Identifiez le sujet dans la phrase : 'Le vent souffle fort ce soir.'", options: ["Le vent", "fort", "ce soir", "souffle"], answer: 0 },
-                { q: "25. [9ème AF - Mathématiques] Quel est le plus grand commun diviseur (PGCD) de 12 et de 18 ?", options: ["6", "3", "2", "9"], answer: 0 },
-                { q: "26. [9ème AF - Géographie] Quel océan borde les côtes nord d'Haïti ?", options: ["Océan Atlantique", "Océan Pacifique", "Océan Indien", "Océan Arctique"], answer: 0 },
-                { q: "27. [9ème AF - Sciences] Quel type de courant électrique fournit une pile ou une batterie de téléphone ?", options: ["Courant continu", "Courant alternatif", "Courant triphasé", "Courant ondulatoire"], answer: 0 },
-                { q: "28. [9ème AF - Français] Écrivez correctement au féminin le mot 'un acteur'.", options: ["Une actrice", "Une acteuse", "Une active", "Une acteur"], answer: 0 },
-                { q: "29. [9ème AF - Mathématiques] Convertissez 3,5 mètres en centimètres.", options: ["350 cm", "35 cm", "3500 cm", "3,5 cm"], answer: 0 },
-                { q: "30. [9ème AF - Histoire] Quelle date marque la commémoration de l'indépendance d'Haïti chaque année ?", options: ["1er janvier", "18 mai", "18 novembre", "17 octobre"], answer: 0 },
-                { q: "31. [9ème AF - Sciences] Quel est le rôle principal des globules rouges dans le sang ?", options: ["Transporter l'oxygène", "Lutter contre les microbes", "Coaguler le sang", "Produire des hormones"], answer: 0 },
-                { q: "32. [9ème AF - Français] Qu'est-ce qu'un antonyme ?", options: ["Un mot de sens contraire", "Un mot de même sens", "Un mot qui se prononce pareil", "Un mot inventé"], answer: 0 },
-                { q: "33. [9ème AF - Mathématiques] Si un train roule à 60 km/h, quelle distance parcourt-il en 2 heures ?", options: ["120 km", "30 km", "60 km", "240 km"], answer: 0 },
-                { q: "34. [9ème AF - Géographie] Quel est le plus haut sommet montagneux de la République d'Haïti ?", options: ["Pic La Selle", "Morne de la Hotte", "Pic Macaya", "Morne Calcul"], answer: 0 },
-                { q: "35. [9ème AF - Sciences] Quel est le symbole chimique de l'élément eau pure ?", options: ["H₂O", "CO₂", "O₂", "NaCl"], answer: 0 },
-                { q: "36. [9ème AF - Français] Quel groupe de mots est un complément d'objet direct (COD) dans 'Marie mange une pomme' ?", options: ["une pomme", "Marie", "mange", "une"], answer: 0 },
-                { q: "37. [9ème AF - Mathématiques] Calculez 25% de 200.", options: ["50", "25", "100", "75"], answer: 0 },
-                { q: "38. [9ème AF - Histoire] Quel drapeau national a été adopté lors du Congrès de l'Arcahaie le 18 mai 1803 ?", options: ["Le Bicolore Bleu et Rouge", "Le Bicolore Noir et Rouge", "Le Drapeau unicolore blanc", "Le Drapeau espagnol"], answer: 0 },
-                { q: "39. [9ème AF - Sciences] Quel phénomène naturel provoque des secousses de la croûte terrestre ?", options: ["Un séisme (tremblement de terre)", "Un cyclone", "Une inondation", "Une sécheresse"], answer: 0 },
-                { q: "40. [9ème AF - Français] Quel est le mode du verbe dans l'ordre : 'Faites vos devoirs !' ?", options: ["Impératif", "Indicatif", "Subjonctif", "Conditionnel"], answer: 0 }
-            ],
-            'NS4Philo': [
-                { q: "1. [NS4 - Philosophie] Quel philosophe grec est considéré comme le père de la philosophie occidentale à travers la méthode maïeutique ?", options: ["Socrate", "Platon", "Aristote", "Épicure"], answer: 0 },
-                { q: "2. [NS4 - Philosophie] Que signifie la célèbre formule cartésienne 'Cogito, ergo sum' ?", options: ["Je pense, donc je suis", "Je doute, donc je souffre", "Je vis, donc j'agis", "Je crois, donc je sais"], answer: 0 },
-                { q: "3. [NS4 - Philosophie] Selon Jean-Paul Sartre, qu'est-ce qui caractérise en premier l'existence humaine par rapport à l'essence ?", options: ["L'existence précède l'essence", "L'essence précède l'existence", "L'homme est prédéterminé", "La liberté est une illusion"], answer: 0 },
-                { q: "4. [NS4 - Philosophie] Quel philosophe a développé la théorie du 'contrat social' fondant l'autorité politique sur la volonté générale ?", options: ["Jean-Jacques Rousseau", "Thomas Hobbes", "John Locke", "Montesquieu"], answer: 0 },
-                { q: "5. [NS4 - Philosophie] Comment appelle-t-on la branche de la philosophie qui étudie les valeurs morales et le bien ?", options: ["L'éthique (ou morale)", "L'épistémologie", "L'ontologie", "La logique"], answer: 0 },
-                { q: "6. [NS4 - Philosophie] Selon Emmanuel Kant, qu'est-ce que l'impératif catégorique ?", options: ["Une loi morale universelle et inconditionnelle", "Un désir personnel de bonheur", "Une règle dictée par l'État", "Une hypothèse scientifique"], answer: 0 },
-                { q: "7. [NS4 - Philosophie] Quel philosophe critique la religion en la qualifiant d' 'opium du peuple' ?", options: ["Karl Marx", "Friedrich Nietzsche", "Sigmund Freud", "Auguste Comte"], answer: 0 },
-                { q: "8. [NS4 - Philosophie] Qu'est-ce que le 'stoïcisme' prône principalement comme attitude face aux événements de la vie ?", options: ["La maîtrise de soi, la résignation face au destin et l'ataraxie", "La recherche du plaisir immédiat", "Le doute absolu de toute vérité", "La violence révolutionnaire"], answer: 0 },
-                { q: "9. [NS4 - Philosophie] Quel philosophe a introduit le concept de 'surhomme' (Übermensch) et la 'volonté de puissance' ?", options: ["Friedrich Nietzsche", "Arthur Schopenhauer", "Karl Marx", "René Descartes"], answer: 0 },
-                { q: "10. [NS4 - Philosophie] Qu'étudie l'épistémologie ?", options: ["La critique et l'étude de la validité des connaissances scientifiques", "L'origine des civilisations anciennes", "La structure intime de la matière", "Les lois juridiques de la république"], answer: 0 },
-                { q: "11. [NS4 - Haïti] Quel penseur haïtien est l'auteur de l'essai sociologique et historique majeur 'Ainsi parla l'oncle' (1928) ?", options: ["Jean Price-Mars", "Jacques Roumain", "Anténor Firmin", "Dantès Bellegarde"], answer: 0 },
-                { q: "12. [NS4 - Haïti] Quel intellectuel haïtien a rédigé l'ouvrage monumental 'De l'égalité des races humaines' en 1885 pour contrer le racisme scientifique ?", options: ["Anténor Firmin", "Hannibal Price", "Louis-Joseph Janvier", "Juste Chanlatte"], answer: 0 },
-                { q: "13. [NS4 - Philosophie] Selon Platon, dans quel célèbre mythe décrit-on des prisonniers enchaînés dans une caverne prenant des ombres pour la réalité ?", options: ["Le mythe de la caverne", "Le mythe de l'Androgyne", "Le mythe d'Er le Pamphylien", "Le mythe de Prométhée"], answer: 0 },
-                { q: "14. [NS4 - Philosophie] Qu'est-ce que le déterminisme en sciences et en philosophie ?", options: ["La doctrine selon laquelle chaque événement est causé par des lois naturelles invariables", "Le choix totalement libre de l'individu", "L'absence totale de règles dans l'univers", "La création divine spontanée"], answer: 0 },
-                { q: "15. [NS4 - Philosophie] Quel philosophe est le chef de file du courant rationaliste moderne du XVIIe siècle aux côtés de Descartes ?", options: ["Baruch Spinoza (ou Leibniz)", "John Locke", "David Hume", "Thomas Hobbes"], answer: 0 },
-                { q: "16. [NS4 - Philosophie] Qu'est-ce que l'empirisme philosophique postule concernant l'origine de nos connaissances ?", options: ["Toute connaissance provient de l'expérience sensorielle", "Les idées sont innées dans l'esprit", "La raison pure découvre seule la vérité", "La foi religieuse éclaire l'esprit"], answer: 0 },
-                { q: "17. [NS4 - Philosophie] Quel concept freudien désigne la partie inconsciente de la psyché contenant les pulsions refoulées et les désirs primitifs ?", options: ["Le Ça", "Le Surmoi", "Le Moi", "La conscience"], answer: 0 },
-                { q: "18. [NS4 - Philosophie] Qu'appelle-t-on la dialectique chez Hegel et Marx ?", options: ["Un mouvement de dépassement des contradictions par la thèse, l'antithèse et la synthèse", "Un art de la parole pour tromper l'adversaire", "Un dogme religieux figé", "Une méthode purement mathématique"], answer: 0 },
-                { q: "19. [NS4 - Philosophie] Quel philosophe politique a théorisé la séparation des pouvoirs (législatif, exécutif, judiciaire) pour garantir la liberté ?", options: ["Montesquieu", "Voltaire", "Rousseau", "Diderot"], answer: 0 },
-                { q: "20. [NS4 - Philosophie] Qu'est-ce que le nihilisme selon la philosophie du XIXe siècle ?", options: ["La négation de toutes les valeurs morales et du sens absolu de l'existence", "La croyance en plusieurs dieux", "L'amour profond de la nature", "Le progrès scientifique infini"], answer: 0 },
-                { q: "21. [NS4 - Philosophie] Selon Aristote, par quelle célèbre phrase définit-il la nature propre de l'être humain ?", options: ["L'homme est un animal politique", "L'homme est un roseau pensant", "L'homme est un loup pour l'homme", "L'homme est une machine spirituelle"], answer: 0 },
-                { q: "22. [NS4 - Philosophie] Qu'est-ce que l'existentialisme ? Un courant philosophique affirmant que...", options: ["L'homme se définit par ses actes et sa liberté radicale", "L'existence humaine n'a aucune valeur", "Dieu trace le destin de chaque homme", "La technique résout tous les problèmes"], answer: 0 },
-                { q: "23. [NS4 - Philosophie] Quel philosophe sceptique écossais a remis en cause le principe de causalité et l'induction scientifique au XVIIIe siècle ?", options: ["David Hume", "John Locke", "René Descartes", "Emmanuel Kant"], answer: 0 },
-                { q: "24. [NS4 - Philosophie] Qu'est-ce que la conscience morale selon Rousseau ?", options: ["Le juge infaillible du bien et du mal gravé au fond du cœur humain", "Une invention purement sociale et artificielle", "Le calcul mathématique de l'intérêt personnel", "Un ordre transmis par l'État"], answer: 0 },
-                { q: "25. [NS4 - Philosophie] Quel penseur est le fondateur de la sociologie positiviste et de la loi des trois états ?", options: ["Auguste Comte", "Émile Durkheim", "Max Weber", "Karl Marx"], answer: 0 },
-                { q: "26. [NS4 - Philosophie] Qu'est-ce que l'altruisme en morale ?", options: ["Le souci désintéressé du bien et du bonheur d'autrui", "L'amour exclusif de soi-même", "Le rejet de toute société humaine", "La domination des plus faibles"], answer: 0 },
-                { q: "27. [NS4 - Philosophie] Quel grand philosophe rationaliste allemand a conçu les 'Monades' et le calcul infinitésimal ?", options: ["Gottfried Wilhelm Leibniz", "Emmanuel Kant", "Baruch Spinoza", "Karl Marx"], answer: 0 },
-                { q: "28. [NS4 - Philosophie] Qu'est-ce que l'utopie en philosophie politique ?", options: ["La représentation d'une société idéale mais irréalisable en pratique", "Une dictature militaire moderne", "Un traité économique rigoureux", "Une crise financière majeure"], answer: 0 },
-                { q: "29. [NS4 - Philosophie] Quel est le sens du terme 'catharsis' en esthétique et en philosophie de l'art (notamment chez Aristote) ?", options: ["La purgation des passions et des émotions par le spectacle tragique", "La création d'une œuvre technique parfaite", "La critique de l'art abstrait", "L'immobilité de la pensée"], answer: 0 },
-                { q: "30. [NS4 - Philosophie] Selon Emmanuel Kant, comment qualifie-t-on ce qui échappe à la connaissance humaine sensible (la chose en soi) ?", options: ["Le Noumène", "Le Phénomène", "L'Empirique", "Le Logique"], answer: 0 },
-                { q: "31. [NS4 - Philosophie] Qu'est-ce que le libéralisme politique prône comme valeur fondamentale de la société ?", options: ["La protection des libertés individuelles et des droits civils contre l'arbitraire de l'État", "Le contrôle total de l'économie par le gouvernement", "L'abolition de toute propriété privée", "La soumission de l'individu au groupe"], answer: 0 },
-                { q: "32. [NS4 - Philosophie] Quel philosophe a écrit le 'Traité de la nature humaine' et des essais sur l'entendement ?", options: ["David Hume", "John Locke", "Thomas Hobbes", "Francis Bacon"], answer: 0 },
-                { q: "33. [NS4 - Philosophie] Qu'est-ce que le matérialisme historique formulé par Karl Marx ?", options: ["L'explication de l'histoire humaine à travers les luttes de classes et les conditions économiques de production", "L'idée que seules comptent les inventions techniques", "La négation de toute spiritualité dans l'art", "L'évolution biologique des espèces vivantes"], answer: 0 },
-                { q: "34. [NS4 - Philosophie] Qu'est-ce que la maïeutique pratiquée par Socrate ? L'art de...", options: ["Faire accoucher les esprits des vérités qu'ils portent en eux", "Convaincre par des discours trompeurs", "Transmettre un savoir verticalement", "Interpréter les rêves mystiques"], answer: 0 },
-                { q: "35. [NS4 - Philosophie] Quel concept désigne chez Bergson la durée vécue intérieurement par opposition au temps mécanique et spatialisé ?", options: ["La durée pure", "Le temps linéaire", "L'espace géométrique", "L'instant figé"], answer: 0 },
-                { q: "36. [NS4 - Philosophie] Qu'est-ce que le pragmatisme en philosophie américaine ?", options: ["Une doctrine qui évalue la vérité d'une idée selon son efficacité pratique et ses résultats", "La recherche de la beauté idéale", "La soumission aux traditions religieuses", "L'abandon de toute action concrète"], answer: 0 },
-                { q: "37. [NS4 - Philosophie] Quel philosophe du XVIIe siècle a été excommunié par sa communauté en raison de son panthéisme radical ('Dieu ou la Nature') ?", options: ["Baruch Spinoza", "René Descartes", "Thomas Hobbes", "John Locke"], answer: 0 },
-                { q: "38. [NS4 - Philosophie] Qu'est-ce que la liberté d'indifférence selon Descartes ?", options: ["Le plus bas degré de la liberté, un choix sans motif rationnel décisif", "La liberté politique totale dans une république", "L'absence de tout sentiment humain", "L'égalité absolue entre les citoyens"], answer: 0 },
-                { q: "39. [NS4 - Philosophie] Quel philosophe allemand a écrit 'Critique de la raison pure' pour refonder les limites du savoir humain ?", options: ["Emmanuel Kant", "Georg Wilhelm Friedrich Hegel", "Friedrich Nietzsche", "Arthur Schopenhauer"], answer: 0 },
-                { q: "40. [NS4 - Philosophie] Qu'est-ce que la justice distributive selon la philosophie d'Aristote ?", options: ["L'attribution des honneurs et des biens selon le mérite de chacun", "L'égalité stricte et aveugle entre tous les citoyens", "La réparation des délits commis", "Le partage égal de l'argent public sans effort"], answer: 0 }
-            ],
             'AvanceGroupe1': [
                 { q: "Constitution de 1801 : Quel article de la Constitution de Toussaint Louverture de 1801 le déclarait Gouverneur à vie avec le droit de choisir son successeur ?", options: ["Article 40", "Article 28", "Article 36", "Article 45"], answer: 0 },
                 { q: "Économie coloniale : À l'époque de Saint-Domingue, qui étaient les 'Affranchis', et quel était leur principal combat politique avant la Révolution ?", options: ["Les gens de couleur libres luttant pour obtenir l'égalité des droits civils et politiques", "Les esclaves ayant acheté leur liberté uniquement", "Les colons français endettés", "Les Indiens survivants de l'île"], answer: 0 },
@@ -743,12 +623,10 @@
 
         function showPage(pageId) {
             startAudioSystem();
-            ['page-accueil', 'page-matieres', 'page-9eme', 'page-ns4', 'page-quiz', 'page-classement', 'page-avatar', 'page-aprendre', 'page-avance', 'page-resultats'].forEach(id => {
-                const el = document.getElementById(id);
-                if(el) el.classList.add('hidden');
+            ['page-accueil', 'page-matieres', 'page-quiz', 'page-classement', 'page-avatar', 'page-aprendre', 'page-avance', 'page-resultats'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
             });
-            const targetEl = document.getElementById(pageId);
-            if(targetEl) targetEl.classList.remove('hidden');
+            document.getElementById(pageId).classList.remove('hidden');
             clearInterval(currentTimer);
             if (pageId === 'page-classement') renderLeaderboard();
         }
@@ -837,3 +715,169 @@
         function startQuiz() {
             if (sessionCount >= sessionQuestions.length) {
                 showResults();
+                return;
+            }
+
+            let currentQ = sessionQuestions[sessionCount];
+            sessionCount++;
+            document.getElementById('session-progress').innerText = `${sessionCount}/5`;
+
+            let displaySubName = currentSubject;
+            if(currentSubject === 'AvanceGroupe1') displaySubName = "AVANCÉ - G1";
+            if(currentSubject === 'AvanceGroupe2') displaySubName = "AVANCÉ - G2";
+            if(currentSubject === 'AvanceGroupe3') displaySubName = "AVANCÉ - G3";
+
+            document.getElementById('quiz-subject').innerText = isRiskMode ? "À PRENDRE OU LAISSER" : displaySubName;
+            document.getElementById('question-text').innerText = currentQ.q;
+            
+            const fb = document.getElementById('feedback-message');
+            fb.classList.add('hidden');
+
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            
+            let optionsWithIndex = currentQ.options.map((opt, idx) => ({ text: opt, originalIndex: idx }));
+            optionsWithIndex.sort(() => Math.random() - 0.5);
+
+            optionsWithIndex.forEach((item) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-3.5 rounded-xl border-2 border-slate-200 hover:border-indigo-600 hover:bg-indigo-50 font-semibold text-slate-700 text-xs transition";
+                btn.innerText = item.text;
+                btn.onclick = () => selectAnswer(item.originalIndex === currentQ.answer, btn);
+                container.appendChild(btn);
+            });
+
+            showPage('page-quiz');
+            startTimer();
+        }
+
+        function startTimer() {
+            timeLeft = 30; // 30 secondes
+            document.getElementById('timer').innerText = timeLeft;
+            clearInterval(currentTimer);
+            currentTimer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer').innerText = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(currentTimer);
+                    playSound('wrong');
+                    userScore = Math.max(0, userScore - 20);
+                    updateScoreDisplay();
+                    showFeedback("⏱ Temps écoulé ! (-20 pts)", false);
+                    setTimeout(() => startQuiz(), 1500);
+                }
+            }, 1000);
+        }
+
+        function selectAnswer(isCorrect, btnElement) {
+            clearInterval(currentTimer);
+            
+            const buttons = document.querySelectorAll('#options-container button');
+            buttons.forEach(b => b.disabled = true);
+
+            const points = isRiskMode ? 40 : 20;
+
+            if (isCorrect) {
+                playSound('correct');
+                btnElement.className = "w-full text-left p-3.5 rounded-xl border-2 border-green-500 bg-green-100 font-bold text-green-900 text-xs";
+                userScore += points;
+                sessionCorrectCount++;
+                showFeedback(`🎉 Excellente réponse ! (+${points} pts)`, true);
+            } else {
+                playSound('wrong');
+                btnElement.className = "w-full text-left p-3.5 rounded-xl border-2 border-red-500 bg-red-100 font-bold text-red-900 text-xs";
+                userScore = Math.max(0, userScore - 20);
+                showFeedback("❌ Mauvaise réponse. (-20 pts)", false);
+            }
+
+            updateScoreDisplay();
+
+            setTimeout(() => {
+                startQuiz();
+            }, 1600);
+        }
+
+        function skipAnswer() {
+            clearInterval(currentTimer);
+            playSound('skip');
+            userScore = Math.max(0, userScore - 10);
+            updateScoreDisplay();
+            showFeedback("⚠ Question passée (-10 pts)", false);
+            
+            setTimeout(() => {
+                startQuiz();
+            }, 1200);
+        }
+
+        function updateScoreDisplay() {
+            localStorage.setItem('qm_score', userScore);
+            document.getElementById('user-score-display').innerText = userScore + " pts";
+            updateDatabase();
+        }
+
+        function showFeedback(text, isSuccess) {
+            const fb = document.getElementById('feedback-message');
+            fb.innerText = text;
+            fb.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'border-green-300', 'bg-red-100', 'text-red-800', 'border-red-300');
+            
+            if (isSuccess) {
+                fb.classList.add('bg-green-100', 'text-green-800', 'border-green-300');
+            } else {
+                fb.classList.add('bg-red-100', 'text-red-800', 'border-red-300');
+            }
+        }
+
+        function showResults() {
+            showPage('page-resultats');
+            const accuracy = Math.round((sessionCorrectCount / 5) * 100);
+            document.getElementById('result-text').innerText = `Vous avez obtenu ${sessionCorrectCount} bonne(s) réponse(s) sur 5.`;
+            document.getElementById('result-total-score').innerText = `${userScore} pts`;
+            document.getElementById('result-accuracy').innerText = `${accuracy}%`;
+        }
+
+        function shareScoreWhatsApp() {
+            const text = encodeURIComponent(`🔥 Je viens de marquer ${userScore} points sur Quiz Mocenick ! Peux-tu faire mieux ? Teste tes connaissances dès maintenant !`);
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+        }
+
+        function renderLeaderboard() {
+            const container = document.getElementById('leaderboard-list');
+            container.innerHTML = '';
+            
+            updateDatabase();
+            let storedUsers = JSON.parse(localStorage.getItem('qm_global_users_db')) || allUsers;
+            storedUsers.sort((a, b) => b.score - a.score);
+
+            storedUsers.forEach((item, index) => {
+                let rankBadge = `<span class="font-extrabold text-slate-400 w-6 text-center text-xs">#${index + 1}</span>`;
+                if (index === 0) rankBadge = `<span class="text-base w-6 text-center">🥇</span>`;
+                if (index === 1) rankBadge = `<span class="text-base w-6 text-center">🥈</span>`;
+                if (index === 2) rankBadge = `<span class="text-base w-6 text-center">🥉</span>`;
+
+                let avatarHtml = `<i class="fas ${item.avatar}"></i>`;
+                if (item.photo) {
+                    avatarHtml = `<img src="${item.photo}" class="w-full h-full object-cover rounded-full">`;
+                }
+
+                const div = document.createElement('div');
+                div.className = `flex items-center justify-between p-3 text-xs ${item.name.toLowerCase() === userName.toLowerCase() ? 'bg-indigo-50 border-l-4 border-indigo-600 font-bold' : ''}`;
+                div.innerHTML = `
+                    <div class="flex items-center gap-2.5">
+                        ${rankBadge}
+                        <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-800 flex items-center justify-center text-sm overflow-hidden">
+                            ${avatarHtml}
+                        </div>
+                        <div>
+                            <span class="font-bold text-slate-800 block">${item.name} ${item.name.toLowerCase() === userName.toLowerCase() ? '(Vous)' : ''}</span>
+                            <span class="text-[10px] text-indigo-600 font-semibold">${item.level}</span>
+                        </div>
+                    </div>
+                    <span class="font-black text-indigo-900">${item.score} pts</span>
+                `;
+                container.appendChild(div);
+            });
+        }
+    </script>
+
+</body>
+</html>
