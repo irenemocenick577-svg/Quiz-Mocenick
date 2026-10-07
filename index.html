@@ -288,7 +288,7 @@
 
     </main>
 
-    <script>
+    <script type="module">
         let audioCtx = null;
         let isMuted = false;
         let bgInterval = null;
@@ -576,7 +576,7 @@
                 { q: "20. Que vaut le produit scalaire de deux vecteurs orthogonaux u et v ?", options: ["0", "1", "Le produit de leurs normes", "-1"], answer: 0 }
             ],
             'Physique': [
-                { q: "1. Quelle est l'expression de l'énergie cinétique d'un corps de masse m animé d'une vitesse v ?", options: ["E_c = 1/2 m v²", "E_c = m g h", "E_c = m v", "E_c = 1/2 m v"], answer: 0 },
+                { q: "1. Quel est l'expression de l'énergie cinétique d'un corps de masse m animé d'une vitesse v ?", options: ["E_c = 1/2 m v²", "E_c = m g h", "E_c = m v", "E_c = 1/2 m v"], answer: 0 },
                 { q: "2. Selon la loi de Coulomb en électrostatique, la force entre deux charges ponctuelles est inversement proportionnelle à :", options: ["Le carré de la distance les séparant (d²)", "La distance (d)", "La somme des charges", "La vitesse de propagation"], answer: 0 },
                 { q: "3. Quelle est l'unité du flux magnétique dans le Système International (SI) ?", options: ["Weber (Wb)", "Tesla (T)", "Henry (H)", "Volt (V)"], answer: 0 },
                 { q: "4. Qu'énonce le premier principe de la thermodynamique ?", options: ["La conservation de l'énergie dans un système isolé (ΔU = W + Q)", "L'augmentation inéluctable de l'entropie", "L'impossibilité d'atteindre le zéro absolu", "La conversion totale de chaleur en travail"], answer: 0 },
@@ -878,6 +878,23 @@
                 container.appendChild(div);
             });
         }
+
+        // Import Firebase SDK v10 (CDN kòrèk)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyCrc4Md-namm9ZYwfjY-bskaZXSadFmvi0",
+          authDomain: "quizmocenick.firebaseapp.com",
+          projectId: "quizmocenick",
+          storageBucket: "quizmocenick.firebasestorage.app",
+          messagingSenderId: "914022360484",
+          appId: "1:914022360484:web:56726494e29fd9bcca0d31",
+          measurementId: "G-SQJ096EHY7"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
     </script>
 </body>
 </html>
