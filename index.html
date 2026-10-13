@@ -40,10 +40,10 @@
     <!-- Menu Déroulant -->
     <div id="dropdown-menu" class="hidden bg-indigo-950 text-white flex-col space-y-2 p-4 shadow-lg border-b border-indigo-800 sticky top-16 z-40">
         <button onclick="showPage('page-accueil'); closeMenu();" class="text-left font-semibold py-2 hover:text-yellow-400 flex items-center gap-2"><i class="fas fa-gamepad"></i> Accueil</button>
-        <button onclick="showPage('page-matieres'); closeMenu();" class="text-left font-semibold py-2 hover:text-yellow-400 flex items-center gap-2"><i class="fas fa-book-open"></i> Matières Classiques (20 Questions)</button>
+        <button onclick="showPage('page-matieres'); closeMenu();" class="text-left font-semibold py-2 hover:text-yellow-400 flex items-center gap-2"><i class="fas fa-book-open"></i> Matières Classiques</button>
         <button onclick="startSession('Biologie', false); closeMenu();" class="text-left font-extrabold py-2 text-teal-300 hover:text-teal-200 flex items-center gap-2"><i class="fas fa-dna"></i> Biologie & Corps Humain</button>
-        <button onclick="startSession('9emeAnnée', false); closeMenu();" class="text-left font-extrabold py-2 text-yellow-400 hover:text-yellow-300 flex items-center gap-2"><i class="fas fa-school"></i> 9ème Année (40 Questions)</button>
-        <button onclick="startSession('NS4Philo', false); closeMenu();" class="text-left font-extrabold py-2 text-yellow-400 hover:text-yellow-300 flex items-center gap-2"><i class="fas fa-user-graduate"></i> NS4 - Philo (40 Questions)</button>
+        <button onclick="startSession('9emeAnnée', false); closeMenu();" class="text-left font-extrabold py-2 text-yellow-400 hover:text-yellow-300 flex items-center gap-2"><i class="fas fa-school"></i> Questions 9ème Année</button>
+        <button onclick="startSession('NS4Philo', false); closeMenu();" class="text-left font-extrabold py-2 text-yellow-400 hover:text-yellow-300 flex items-center gap-2"><i class="fas fa-user-graduate"></i> Questions NS4 - Philo</button>
         <button onclick="showPage('page-avance'); closeMenu();" class="text-left font-extrabold py-2 text-purple-300 hover:text-purple-200 flex items-center gap-2"><i class="fas fa-graduation-cap"></i> Mode : Questions Avancées 🎓</button>
         <button onclick="showPage('page-aprendre'); closeMenu();" class="text-left font-semibold py-2 hover:text-yellow-400 flex items-center gap-2"><i class="fas fa-balance-scale"></i> Mode : À prendre ou à laisser ⚡</button>
         <button onclick="showPage('page-classement'); closeMenu();" class="text-left font-semibold py-2 hover:text-yellow-400 flex items-center gap-2"><i class="fas fa-trophy"></i> Classement Général</button>
@@ -71,10 +71,10 @@
                         <i class="fas fa-dna"></i> Biologie & Corps Humain
                     </button>
                     <button onclick="startSession('9emeAnnée', false)" class="w-full bg-blue-500 text-white font-black px-6 py-3.5 rounded-2xl shadow-lg hover:bg-blue-400 transition transform active:scale-95 text-xs uppercase flex items-center justify-center gap-2">
-                        <i class="fas fa-school"></i> 9ème Année (40 Questions)
+                        <i class="fas fa-school"></i> Questions 9ème Année
                     </button>
                     <button onclick="startSession('NS4Philo', false)" class="w-full bg-emerald-600 text-white font-black px-6 py-3.5 rounded-2xl shadow-lg hover:bg-emerald-500 transition transform active:scale-95 text-xs uppercase flex items-center justify-center gap-2">
-                        <i class="fas fa-user-graduate"></i> NS4 - Philo (40 Questions)
+                        <i class="fas fa-user-graduate"></i> Questions NS4 - Philo
                     </button>
                     <button onclick="showPage('page-avance')" class="w-full bg-purple-500 text-white font-black px-6 py-3.5 rounded-2xl shadow-lg hover:bg-purple-400 transition transform active:scale-95 text-xs uppercase flex items-center justify-center gap-2">
                         <i class="fas fa-graduation-cap"></i> Mode Questions Avancées 🎓
@@ -140,7 +140,7 @@
                 </div>
                 <h3 class="font-black text-2xl">À prendre ou à laisser ⚡</h3>
                 <p class="text-xs text-indigo-200 leading-relaxed text-left bg-indigo-950/50 p-4 rounded-2xl border border-indigo-800">
-                    Mode indépendant axé sur la prise de risque et la culture générale (30 questions intégrées) :<br><br>
+                    Mode indépendant axé sur la prise de risque et la culture générale :<br><br>
                     • <b>Bonne réponse :</b> <span class="text-green-400 font-bold">+40 Points</span><br>
                     • <b>Mauvaise réponse :</b> <span class="text-red-400 font-bold">-20 Points</span><br>
                     • <b>Passer la question :</b> <span class="text-yellow-300 font-bold">-10 Points</span>
@@ -154,7 +154,7 @@
         <!-- Page Matières Classiques -->
         <section id="page-matieres" class="hidden space-y-4">
             <h2 class="text-lg font-black text-slate-800 border-b pb-2 flex justify-between items-center">
-                <span>Matières d'Examens (20 Questions)</span>
+                <span>Matières d'Examens</span>
                 <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full font-normal">Aléatoire 🎯</span>
             </h2>
             
@@ -836,8 +836,8 @@
             let sourcePool = questionsData[subject] || questionsData['AprendreOuLaisser'];
             let shuffledPool = [...sourcePool].sort(() => Math.random() - 0.5);
             
-            // Si se 9ème, NS4 oubyen Bioloji, pran 30-40 kesyon selon gwoup la, oubyen mete yon limit kout
-            let limit = (subject === '9emeAnnée' || subject === 'NS4Philo') ? 40 : (subject === 'Biologie' ? 30 : 5);
+            // Limit otomatik san itilizatè pa bezwen konnen kantite total la
+            let limit = (subject === '9emeAnnée' || subject === 'NS4Philo') ? 20 : (subject === 'Biologie' ? 15 : 5);
             sessionQuestions = shuffledPool.slice(0, limit);
 
             startQuiz();
